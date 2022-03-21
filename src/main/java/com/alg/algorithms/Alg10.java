@@ -51,4 +51,43 @@ public class Alg10 {
         }
         return null;
     }
+
+    /**
+     * 2.两数相加
+     * 时间复杂度：O(max(l1.size,l2.size))
+     * 空间复杂度：O(1)
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode result = new ListNode(0);
+        ListNode cursor = result;
+        //两数和的十分位的数值
+        int deciles = 0;
+        while (l1 !=null || l2 !=null || deciles !=0){
+            int l1val = l1 != null ? l1.val : 0;
+            int l2val = l2 != null ? l2.val : 0;
+            int sum = l1val + l2val + deciles;
+            //求和的新节点
+            ListNode node = new ListNode(sum % 10);
+            cursor.next = node;
+            cursor = node;
+            //计算十分位值
+            deciles = sum / 10;
+
+            if (l1 !=null) l1 = l1.next;
+            if (l2 !=null) l2 = l2.next;
+        }
+        //去除头结点
+        return result.next;
+    }
+
+    public class ListNode{
+        int val;
+        ListNode next;
+        ListNode() {}
+        ListNode(int val){this.val = val;}
+        ListNode(int val , ListNode next){this.val = val; this.next = next;}
+    }
 }
