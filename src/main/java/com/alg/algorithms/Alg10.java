@@ -215,6 +215,43 @@ public class Alg10 {
         return (int)result;
     }
 
+    /**
+     * 9.回文数
+     * @param x
+     * @return
+     */
+    public boolean isPalindrome(int x) {
+        String str = String.valueOf(x);
+        StringBuilder sb = new StringBuilder(str);
+        return sb.reverse().toString().equals(str);
+    }
+
+    /**
+     * 9.回文数
+     * 根据回文数特点，一半的数据反转等于另一半
+     * @param x
+     * @return
+     */
+    public boolean isPalindrome_2(int x) {
+        if (x<0) return false;
+        if (x!=0 && x%10==0) return false;
+        if (x==0) return true;
+
+        int temp = 0;
+        while (x!=0){
+            temp = temp*10 + x%10;
+            //奇数位判定方式
+            if (temp == x){
+                return true;
+            }
+            //偶数位判定方式
+            x=x/10;
+            if (temp == x){
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * 回文中心向两端扩散，符合条件回文串的长度
