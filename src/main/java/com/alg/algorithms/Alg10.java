@@ -1,8 +1,6 @@
 package com.alg.algorithms;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * 算法0-10
@@ -81,6 +79,30 @@ public class Alg10 {
         }
         //去除头结点
         return result.next;
+    }
+
+    /**
+     * 3.无重复字符的最长子串
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring(String s) {
+        int rk = 0; //右指针
+        int maxLength = 0;
+        //存储头指针遍历后无重复的字符
+        Set<Character> set = new HashSet<>();
+        for (int i=0; i<s.length(); i++){
+            if (i!=0){
+                set.remove(s.charAt(i-1));
+            }
+            //指针向右移动
+            while (rk<s.length() && !set.contains(s.charAt(rk))){
+                set.add(s.charAt(rk));
+                rk++;
+            }
+            maxLength = Math.max(maxLength , rk-i);
+        }
+        return maxLength;
     }
 
     public class ListNode{
