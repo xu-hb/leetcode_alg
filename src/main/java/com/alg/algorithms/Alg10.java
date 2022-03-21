@@ -127,6 +127,44 @@ public class Alg10 {
     }
 
     /**
+     * 6.Z字形变换
+     * @param s
+     * @param numRows
+     * @return
+     */
+    public String convert(String s, int numRows) {
+        if (numRows ==1 || numRows>=s.length()){
+            return s;
+        }
+        //存储各行的字符
+        StringBuffer[] buf = new StringBuffer[numRows];
+        for (int i=0; i<numRows; i++){
+            buf[i] = new StringBuffer();
+        }
+
+        int cursor=0;
+        int t = 2* numRows -2;
+        for (int i=0; i<s.length(); i++){
+            buf[cursor].append(s.charAt(i));
+            //Z字形的规律，每一个周期为2*n-2,取模后不小于n-1的为斜线上的数据
+            if (i%t < numRows-1){
+                ++cursor;
+            }else {
+                --cursor;
+            }
+        }
+
+        StringBuffer result = new StringBuffer();
+        for (StringBuffer sb : buf){
+            result.append(sb);
+        }
+
+        return result.toString();
+    }
+
+
+
+    /**
      * 回文中心向两端扩散，符合条件回文串的长度
      * @param s
      * @param left
