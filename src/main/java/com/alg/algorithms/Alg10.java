@@ -105,6 +105,42 @@ public class Alg10 {
         return maxLength;
     }
 
+    /**
+     * 5.最长回文子串
+     * @param s
+     * @return
+     */
+    public String longestPalindrome(String s) {
+        int start = 0, end=0;
+        for (int i=0; i<s.length(); i++){
+            int len1 = calculateLength(s , i ,i);
+            int len2 = calculateLength(s, i , i+1);
+            int len = Math.max(len1 , len2);
+
+            if (len > end - start) {
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
+            }
+
+        }
+        return s.substring(start, end + 1);
+    }
+
+    /**
+     * 回文中心向两端扩散，符合条件回文串的长度
+     * @param s
+     * @param left
+     * @param right
+     * @return
+     */
+    public int calculateLength(String s , int left , int right){
+        while (left>=0 && right<s.length() && s.charAt(left)==s.charAt(right)){
+            left--;
+            right++;
+        }
+        return right-left-1;
+    }
+
     public class ListNode{
         int val;
         ListNode next;
