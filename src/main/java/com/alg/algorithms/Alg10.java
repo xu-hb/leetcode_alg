@@ -182,6 +182,39 @@ public class Alg10 {
         return n;
     }
 
+    /**
+     * 8.字符串转换整数
+     * @param s
+     * @return
+     */
+    public int myAtoi(String s) {
+        //去除空格
+        s = s.trim();
+        if (s.equals("")) return 0;
+        char c0 = s.charAt(0);
+        boolean flag = !Character.isDigit(c0) && c0!='+' && c0!='-';
+        if (flag) return 0;
+
+        //负数标识
+        boolean negFlag = c0 == '-';
+        long result = 0;
+        int index = Character.isDigit(c0) ? 0: 1;
+        while (index<s.length() && Character.isDigit(s.charAt(index))){
+            result = result*10+(s.charAt(index)-'0');
+            index++;
+            //判定是否溢出
+            if (negFlag && result-1>Integer.MAX_VALUE){
+                return Integer.MIN_VALUE;
+            }
+            if (!negFlag && result>Integer.MAX_VALUE){
+                return Integer.MAX_VALUE;
+            }
+        }
+
+        result = negFlag ? -result : result;
+        return (int)result;
+    }
+
 
     /**
      * 回文中心向两端扩散，符合条件回文串的长度
