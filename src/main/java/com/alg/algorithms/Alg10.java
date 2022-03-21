@@ -162,6 +162,25 @@ public class Alg10 {
         return result.toString();
     }
 
+    /**
+     * 7.整数反转
+     * @param x
+     * @return
+     */
+    public int reverse(int x) {
+        int n=0;
+        while (x!=0){
+            int temp = n;
+            n=n*10+x%10;
+            x=x/10;
+            //判定是否溢出
+            if (n/10 != temp){
+                return 0;
+            }
+        }
+
+        return n;
+    }
 
 
     /**
