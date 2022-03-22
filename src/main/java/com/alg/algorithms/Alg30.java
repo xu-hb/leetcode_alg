@@ -84,4 +84,31 @@ public class Alg30 {
 
         return virtualHead.next;
     }
+
+    /**
+     * 24.两两交换链表中的节点
+     * 大致逻辑一致，代码更加优美
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
+     * @param head
+     * @return
+     */
+    public ListNode swapPairs_2(ListNode head) {
+        //增加个虚拟头节点
+        ListNode virtualHead = new ListNode();
+        virtualHead.next= head;
+
+        ListNode left = virtualHead;
+        while (left.next !=null && left.next.next !=null){
+            ListNode middle = left.next;
+            ListNode right = left.next.next;
+            middle.next = right.next;
+            right.next = middle;
+            left.next = right;
+
+            left = middle;
+        }
+
+        return virtualHead.next;
+    }
 }
