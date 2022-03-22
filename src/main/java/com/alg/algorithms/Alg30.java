@@ -2,6 +2,7 @@ package com.alg.algorithms;
 
 import com.alg.common.ListNode;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -110,5 +111,53 @@ public class Alg30 {
         }
 
         return virtualHead.next;
+    }
+
+    /**
+     * 26.删除有序数组中的重复项
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
+     * @param nums
+     * @return
+     */
+    public int removeDuplicates(int[] nums) {
+        int index = 0;
+        //找到第一个重复值
+        for (int i=1; i<nums.length;i++){
+            if (nums[i]==nums[i-1]){
+                index=i;
+                break;
+            }
+        }
+        //没有重复值，直接返回
+        if (index==0) return nums.length;
+
+        //继续遍历剩余，移动不重复值
+        for (int j=index+1;j<nums.length;j++){
+            if (nums[j]!=nums[j-1]){
+                nums[index]=nums[j];
+                ++index;
+            }
+        }
+        return index;
+    }
+    /**
+     * 26.删除有序数组中的重复项
+     * 代码简化
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
+     * @param nums
+     * @return
+     */
+    public int removeDuplicates_2(int[] nums) {
+        int fast =1,slow = 1;
+        while (fast<nums.length){
+            if (nums[fast-1]!=nums[fast]){
+                nums[slow] = nums[fast];
+                slow++;
+            }
+            fast++;
+        }
+        return slow;
     }
 }
