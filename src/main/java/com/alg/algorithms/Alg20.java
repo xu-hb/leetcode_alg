@@ -1,6 +1,6 @@
 package com.alg.algorithms;
 
-import com.alg.algorithms.common.ListNode;
+import com.alg.common.ListNode;
 
 import java.util.*;
 

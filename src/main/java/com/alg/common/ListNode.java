@@ -1,4 +1,4 @@
-package com.alg.algorithms.common;
+package com.alg.common;
 
 /**
  *
