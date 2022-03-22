@@ -160,4 +160,26 @@ public class Alg30 {
         }
         return slow;
     }
+
+    /**
+     * 27.移除元素
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
+     * @param nums
+     * @param val
+     * @return
+     */
+    public int removeElement(int[] nums, int val) {
+        int fast=0,slow=0;
+        while (fast<nums.length){
+            if(nums[fast]!=val){
+                nums[slow] = nums[fast];
+                slow++;
+            }
+            fast++;
+        }
+        System.out.println(Arrays.toString(Arrays.stream(nums).toArray()));
+        return slow;
+    }
+
 }
