@@ -2,12 +2,15 @@ package com.alg.algorithms;
 
 import com.alg.common.ListNode;
 
+import java.util.List;
+import java.util.Objects;
+
 /**
  * 算法21-30
  */
 public class Alg30 {
     /**
-     * 31.合并两个有序链表
+     * 21.合并两个有序链表
      * 时间复杂度：O(m+n)
      * 空间复杂度：O(1)
      * @param list1
@@ -43,5 +46,42 @@ public class Alg30 {
             listNode = listNode.next;
         }
         return result.next;
+    }
+
+    /**
+     * 24.两两交换链表中的节点
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
+     * @param head
+     * @return
+     */
+    public ListNode swapPairs(ListNode head) {
+        //增加个虚拟头节点
+        ListNode virtualHead = new ListNode();
+        virtualHead.next= head;
+
+        if (head==null || head.next==null){
+            return head;
+        }
+
+        ListNode left=virtualHead;
+        ListNode right=left.next.next;
+
+        while (right!=null){
+            ListNode middle = left.next;
+            //两节点交换
+            middle.next = right.next;
+            right.next = middle;
+            left.next = right;
+            //指针后移2个节点(交换后的middle节点实际是right位置了)
+            left = middle;
+            if (middle.next==null || middle.next.next==null){
+                break;
+            }else {
+                right = middle.next.next;
+            }
+        }
+
+        return virtualHead.next;
     }
 }
