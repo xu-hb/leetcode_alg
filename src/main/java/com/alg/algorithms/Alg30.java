@@ -182,4 +182,41 @@ public class Alg30 {
         return slow;
     }
 
+    /**
+     * 28.实现strStr()
+     * 时间复杂度：O(m*n)
+     * 空间复杂度：O(1)
+     * @param haystack
+     * @param needle
+     * @return
+     */
+    public int strStr(String haystack, String needle) {
+        if ("".equals(needle)) return 0;
+        if (needle.length()>haystack.length()) return -1;
+
+        int m= haystack.length();
+        int n = needle.length();
+        for (int i=0; i+n<=m;i++){
+            boolean flag = true;
+            for (int k=0;k<n;k++){
+                if (haystack.charAt(i+k) !=needle.charAt(k)){
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) return i;
+        }
+        return -1;
+    }
+
+    /**
+     * 28.实现strStr()
+     * KMP算法 todo
+     * @param haystack
+     * @param needle
+     * @return
+     */
+    public int strStr_2(String haystack, String needle) {
+        return -1;
+    }
 }
