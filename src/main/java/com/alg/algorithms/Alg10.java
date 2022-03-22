@@ -1,5 +1,7 @@
 package com.alg.algorithms;
 
+import com.alg.algorithms.common.ListNode;
+
 import java.util.*;
 
 /**
@@ -266,13 +268,5 @@ public class Alg10 {
             right++;
         }
         return right-left-1;
-    }
-
-    public class ListNode{
-        int val;
-        ListNode next;
-        ListNode() {}
-        ListNode(int val){this.val = val;}
-        ListNode(int val , ListNode next){this.val = val; this.next = next;}
     }
 }

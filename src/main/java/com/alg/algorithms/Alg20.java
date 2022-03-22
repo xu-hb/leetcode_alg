@@ -1,5 +1,7 @@
 package com.alg.algorithms;
 
+import com.alg.algorithms.common.ListNode;
+
 import java.util.*;
 
 /**
@@ -252,6 +254,40 @@ public class Alg20 {
             }
         }
         return result;
+    }
+
+    /**
+     * 19.删除链表的倒数第N个结点
+     * @param head
+     * @param n
+     * @return
+     */
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if (n<0) return head;
+
+        //节点的数量
+        int nodeCount = 0;
+        //游标
+        ListNode cursor = head;
+        //当前游标下倒数第N+1个节点
+        ListNode preNode = null;
+        while (Objects.nonNull(cursor)){
+            ++nodeCount;
+            //倒数第N+1个节点
+            if (nodeCount==n+1){
+                preNode=head;
+            }else if (nodeCount>n+1){
+                preNode = preNode.next;
+            }
+            cursor = cursor.next;
+        }
+        //由于preNode记录倒数N+1个节点，当节点数=N个节点的情况需要处理
+        if (nodeCount==n){
+            return head.next;
+        }
+        //删除倒数N个节点
+        preNode.next = preNode.next.next;
+        return head;
     }
 
     /**
