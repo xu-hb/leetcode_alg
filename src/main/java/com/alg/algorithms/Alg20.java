@@ -257,6 +257,32 @@ public class Alg20 {
     }
 
     /**
+     * 17.电话号码的字母组合
+     * @param digits
+     * @return
+     */
+    public List<String> letterCombinations(String digits) {
+        if (null == digits || "".equals(digits)){
+            return new ArrayList<>();
+        }
+        Map<Character , String> map = new HashMap<>();
+        map.put('2',"abc");
+        map.put('3',"def");
+        map.put('4',"ghi");
+        map.put('5',"jkl");
+        map.put('6',"mno");
+        map.put('7',"pqrs");
+        map.put('8',"tuv");
+        map.put('9',"wxyz");
+
+        StringBuilder sb = new StringBuilder();
+        List<String> result = new ArrayList<>();
+        //回溯
+        combine(map , sb , digits , 0 , result);
+        return result;
+    }
+
+    /**
      * 19.删除链表的倒数第N个结点
      * @param head
      * @param n
@@ -288,32 +314,6 @@ public class Alg20 {
         //删除倒数N个节点
         preNode.next = preNode.next.next;
         return head;
-    }
-
-    /**
-     * 17.电话号码的字母组合
-     * @param digits
-     * @return
-     */
-    public List<String> letterCombinations(String digits) {
-        if (null == digits || "".equals(digits)){
-            return new ArrayList<>();
-        }
-        Map<Character , String> map = new HashMap<>();
-        map.put('2',"abc");
-        map.put('3',"def");
-        map.put('4',"ghi");
-        map.put('5',"jkl");
-        map.put('6',"mno");
-        map.put('7',"pqrs");
-        map.put('8',"tuv");
-        map.put('9',"wxyz");
-
-        StringBuilder sb = new StringBuilder();
-        List<String> result = new ArrayList<>();
-        //回溯
-        combine(map , sb , digits , 0 , result);
-        return result;
     }
 
     /**
