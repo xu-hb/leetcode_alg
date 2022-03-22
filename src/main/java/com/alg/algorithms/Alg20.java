@@ -317,6 +317,38 @@ public class Alg20 {
     }
 
     /**
+     * 20.有效的括号
+     * @param s
+     * @return
+     */
+    public boolean isValid(String s) {
+        if (Objects.isNull(s) || "".equals(s)){
+            return Boolean.TRUE;
+        }
+        Map<Character ,Character> map = new HashMap<>();
+        map.put('(',')');
+        map.put('[',']');
+        map.put('{','}');
+
+        Stack<Character> deque = new Stack<>();
+        for (int i=0;i<s.length();i++){
+            char c = s.charAt(i);
+            if (map.containsKey(c)){
+                //左括号入栈
+                deque.push(c);
+            }else {
+                //右括号与栈顶元素匹配
+                boolean flag = deque.size()>0 && map.get(deque.pop()).equals(c);
+                if (!flag) return Boolean.FALSE;
+            }
+        }
+        //查看栈是否剩有元素
+        if (deque.size()!=0) return Boolean.FALSE;
+
+        return Boolean.TRUE;
+    }
+
+    /**
      * 回溯所有组合
      * @param map
      * @param sb
