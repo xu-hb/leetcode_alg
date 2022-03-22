@@ -185,6 +185,76 @@ public class Alg20 {
     }
 
     /**
+     * 16.最接近的三数之和
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int threeSumClosest(int[] nums, int target) {
+        Arrays.sort(nums);
+        int result=nums[0]+nums[1]+nums[2];
+
+        for (int i=0;i<nums.length;i++){
+            int left=i+1;
+            int right=nums.length-1;
+
+            //双指针移动
+            while (left<right){
+                int sum = nums[i] + nums[left] + nums[right];
+                int diff = Math.abs(target-result) - Math.abs(target-sum);
+                if (diff>0){
+                    result = sum;
+                }else if (target>sum){
+                    left++;
+                }else {
+                    right--;
+                }
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 16.最接近的三数之和
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int threeSumClosest_2(int[] nums, int target) {
+        Arrays.sort(nums);
+        int result=10000;   //题目限定-1000 <= nums[i] <= 1000
+
+        for (int i=0;i<nums.length;i++){
+            if (i>0 && nums[i-1]==nums[i]){
+                continue;
+            }
+
+            int left=i+1;
+            int right=nums.length-1;
+
+            //双指针移动
+            while (left<right){
+                int sum = nums[i] + nums[left] + nums[right];
+                int diff = Math.abs(target-sum) - Math.abs(target-result);
+                if (diff<=0){
+                    result = sum;
+                }
+
+                if (target==sum){
+                    return sum;
+                }else if (target>sum){
+                    left++;
+                    while (left<right && nums[left-1]==nums[left]) left++;
+                }else {
+                    right--;
+                    while (left<right && nums[right+1]==nums[right]) right--;
+                }
+            }
+        }
+        return result;
+    }
+
+    /**
      * 17.电话号码的字母组合
      * @param digits
      * @return
