@@ -1,9 +1,6 @@
 package com.alg.algorithms;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 算法11-20
@@ -113,6 +110,78 @@ public class Alg20 {
             }
         }
         return first;
+    }
+
+    /**
+     * 15.三数之和
+     * 时间复杂度：O(N^3)
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> threeSum(int[] nums) {
+        //避免得到重复结果，先排序
+        Arrays.sort(nums);
+
+        List<List<Integer>> result = new ArrayList<>();
+
+        for (int i=0;i<nums.length;i++){
+            if (i>0 && nums[i-1] == nums[i]){
+                continue;
+            }
+            for (int j=i+1; j< nums.length; j++){
+                if (j>i+1 && nums[j-1] == nums[j]){
+                    continue;
+                }
+                for (int k=j+1;k< nums.length;k++){
+                    if (k>j+1 && nums[k-1]==nums[k]){
+                        //相同值忽略
+                        continue;
+                    }
+                    if (nums[i]+nums[j]+nums[k]==0){
+                        result.add(Arrays.asList(nums[i],nums[j],nums[k]));
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * 15.三数之和
+     * 时间复杂度：O(N^2)
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> threeSum_2(int[] nums) {
+        //避免得到重复结果，先排序
+        Arrays.sort(nums);
+        List<List<Integer>> result = new ArrayList<>();
+
+        for (int i=0;i<nums.length;i++){
+            if (i>0 && nums[i-1]==nums[i]){
+                continue;
+            }
+            int left=i+1;
+            int right=nums.length-1;
+
+            //双指针移动
+            while (left<right){
+                int sum = nums[i] + nums[left] + nums[right];
+                if (sum ==0){
+                    result.add(Arrays.asList(nums[i],nums[left],nums[right]));
+                    //指向下一个值
+                    left++;
+                    //忽略重复值
+                    while (left<right && nums[left-1]==nums[left]) left++;
+                }else if (sum<0){
+                    left++;
+                }else {
+                    right--;
+                }
+            }
+        }
+        return result;
     }
 
     /**
