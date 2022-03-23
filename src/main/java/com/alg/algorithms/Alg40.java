@@ -40,6 +40,26 @@ public class Alg40 {
     }
 
     /**
+     * 31.下一个排列
+     * 逻辑相同，代码简化
+     * @param nums
+     */
+    public void nextPermutation_2(int[] nums) {
+        int i = nums.length - 2;
+        while (i >= 0 && nums[i] >= nums[i + 1]) {
+            i--;
+        }
+        if (i >= 0) {
+            int j = nums.length - 1;
+            while (j >= 0 && nums[i] >= nums[j]) {
+                j--;
+            }
+            swap(nums, i, j);
+        }
+        reverse(nums, i + 1);
+    }
+
+    /**
      * 反转
      * @param nums
      * @param start
