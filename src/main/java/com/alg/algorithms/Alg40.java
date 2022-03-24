@@ -67,33 +67,29 @@ public class Alg40 {
      */
     public int search(int[] nums, int target) {
         int low=0,high=nums.length-1;
-        if (nums[0]<nums[high]) return binSearch(nums , low , high , target);
 
-        //二分查找找出旋转下标
-        int index = 0;
         while (low<=high){
             int middle = (high+low)/2;
-            //第一个元素旋转后的位置
-            if(nums[middle]< nums[high] && nums[middle]<nums[low]){
-                index = middle;
-                break;
-            }else if (nums[middle] > nums[high]){
-                low = middle+1;
-            }else if (nums[middle] <nums[low]){
-                high = middle-1;
+            if (nums[middle] == target){
+                return middle;
             }
-
-
+            //必然一边有序，一边部分有序，不断循环从有序中查找
+            if (nums[middle]>=nums[low]){
+                //左半边有序
+                if (nums[low]<=target && target <=nums[middle]){
+                    high = middle-1;
+                }else {
+                    low=middle+1;
+                }
+            }else {
+                //右半边有序
+                if (nums[middle]<=target && target<=nums[high]){
+                    low = middle+1;
+                }else {
+                    high=middle-1;
+                }
+            }
         }
-
-        //从index分为两个有序数组，分别用二分查找target
-        if (target>nums[0]){
-            int res1 = binSearch(nums , 0 , index-1 , target);
-            if (res1 !=-1) return res1;
-        }
-        int res2 = binSearch(nums , index , nums.length-1,target);
-        if (res2 !=-1) return res2;
-
         return -1;
     }
 
