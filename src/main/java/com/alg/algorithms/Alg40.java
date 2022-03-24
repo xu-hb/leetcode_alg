@@ -97,6 +97,70 @@ public class Alg40 {
         return -1;
     }
 
+    /**
+     * 34.在排序数组中查找元素的第一个和最后一个位置
+     * 时间复杂度:O(N)
+     * 空间复杂度:O(1)
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int[] searchRange(int[] nums, int target) {
+        if (null==nums || nums.length==0) return new int[]{-1,-1};
+        //寻找最左/最右右两个值，返回下标
+        int firstIndex = findFirst(nums , target);
+        if (firstIndex==-1) return new int[]{-1,-1};
+        int lastIndex = findLast(nums , target);
+
+        return new int[]{firstIndex , lastIndex};
+    }
+
+    /**
+     * 查找第一个下标
+     * @param nums
+     * @param target
+     * @return
+     */
+    private int findFirst(int[] nums , int target){
+        int low=0,high=nums.length-1;
+        //最左的符合条件的值
+        while (low<high){
+            int middle = (low+high)/2;
+            if (nums[middle]==target){
+                high=middle;
+            }else if (nums[middle]<target){
+                low=middle+1;
+            }else {
+                high=middle-1;
+            }
+        }
+        if (nums[low]==target) return low;
+        return -1;
+    }
+
+    /**
+     * 查找最后一个下标
+     * @param nums
+     * @param target
+     * @return
+     */
+    private int findLast(int[] nums , int target){
+        int low=0,high=nums.length-1;
+        while (low<high){
+            //最右一个符合条件的值,+1使相邻时不会左滑
+            int middle = (low+high+1)/2;
+            if (nums[middle]==target){
+                low=middle;
+            }else if (nums[middle]<target){
+                low=middle+1;
+            }else {
+                high=middle-1;
+            }
+        }
+        if (nums[high]==target) return high;
+        return -1;
+    }
+
     private int binSearch(int[] nums , int low,int high, int target){
         while (low<=high){
             int middle = (low+high)/2;
