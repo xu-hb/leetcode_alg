@@ -1,5 +1,8 @@
 package com.alg.algorithms;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 算法31-40
  */
@@ -109,6 +112,79 @@ public class Alg40 {
         int lastIndex = findLast(nums , target);
 
         return new int[]{firstIndex , lastIndex};
+    }
+
+    /**
+     * 36.有效的数独
+     * @param board
+     * @return
+     */
+    public boolean isValidSudoku(char[][] board) {
+        //校验小数独
+        for (int i=1;i<=9;i+=3){
+            for (int j=1;j<=9;j+=3){
+                boolean flag = validateSmallSudo(board , i,i+2,j,j+2);
+                if (!flag) return false;
+            }
+        }
+        //校验大数独
+        return validateBigSudo(board , 1,9,1,9);
+    }
+
+    /**
+     * 校验小数独
+     * @param board
+     * @param rowStart
+     * @param rowEnd
+     * @param colStart
+     * @param colEnd
+     * @return
+     */
+    private boolean validateSmallSudo(char[][] board , int rowStart , int rowEnd , int colStart , int colEnd) {
+        Set<Character> set = new HashSet<>();
+        //检查行
+        for (int rowIndex = rowStart - 1; rowIndex < rowEnd; rowIndex++) {
+            for (int k = colStart - 1; k < colEnd; k++) {
+                char c = board[rowIndex][k];
+                if (c == '.') continue;
+                if (set.contains(c)) return false;
+                else set.add(c);
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 校验大数独
+     * @param board
+     * @param rowStart
+     * @param rowEnd
+     * @param colStart
+     * @param colEnd
+     * @return
+     */
+    private boolean validateBigSudo(char[][] board , int rowStart , int rowEnd , int colStart , int colEnd){
+        //检查行
+        for (int rowIndex=rowStart-1;rowIndex<rowEnd;rowIndex++){
+            Set<Character> set = new HashSet<>();
+            for (int k=colStart-1;k<colEnd;k++){
+                char c = board[rowIndex][k];
+                if (c=='.') continue;
+                if (set.contains(c)) return false;
+                else set.add(c);
+            }
+        }
+        //检查列
+        for (int colIndex=colStart-1;colIndex<colEnd;colIndex++){
+            Set<Character> set = new HashSet<>();
+            for (int k=rowStart-1;k<rowEnd;k++){
+                char c = board[k][colIndex];
+                if (c=='.') continue;
+                if (set.contains(c)) return false;
+                else set.add(c);
+            }
+        }
+        return true;
     }
 
     /**
