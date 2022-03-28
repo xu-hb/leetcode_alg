@@ -132,6 +132,35 @@ public class Alg40 {
     }
 
     /**
+     * 36.有效的数独
+     * 空间复杂度：O(1)
+     * 时间复杂度：O(1)
+     * @param board
+     * @return
+     */
+    public boolean isValidSudoku_2(char[][] board) {
+        int[][] row = new int[9][9];
+        int[][] col = new int[9][9];
+        int[][][] subBox = new int[3][3][9];
+        for (int i=0;i<9;i++){
+            for (int k=0;k<9;k++){
+                char c = board[i][k];
+                if (c!='.'){
+                    int index = c-'0'-1;
+                    row[i][index]++;
+                    col[k][index]++;
+                    subBox[i/3][k/3][index]++;
+
+                    if (row[i][index]>1 || col[k][index]>1 || subBox[i/3][k/3][index]>1){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
      * 校验小数独
      * @param board
      * @param rowStart
