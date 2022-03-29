@@ -161,6 +161,36 @@ public class Alg40 {
     }
 
     /**
+     * 38.外观数列
+     * @param n
+     * @return
+     */
+    public String countAndSay(int n) {
+        StringBuilder sb = new StringBuilder("1");
+        if (n==1) return sb.toString();
+        n=n-1;
+        for (int i=0;i<n;i++){
+            String str = sb.toString();
+            //重置上一轮结果
+            sb = new StringBuilder();
+
+            for (int k=0;k<str.length();){
+                char c = str.charAt(k);
+                int count=1;
+                while (k+count<str.length() && c==str.charAt(k+count)){
+                    ++count;
+                }
+                //拼接结果
+                sb.append(count);
+                sb.append(c);
+                //遍历前进count
+                k+=count;
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
      * 校验小数独
      * @param board
      * @param rowStart
