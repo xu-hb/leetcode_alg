@@ -162,6 +162,8 @@ public class Alg40 {
 
     /**
      * 38.外观数列
+     * 空间复杂度：O(M),M为结果中的最长值
+     * 时间复杂度：O(N*M),N为n
      * @param n
      * @return
      */
@@ -186,6 +188,36 @@ public class Alg40 {
                 //遍历前进count
                 k+=count;
             }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 38.外观数列
+     * 递归方式
+     * 空间复杂度：O(M),M为结果中的最长值
+     * 时间复杂度：O(N*M),N为n
+     * @param n
+     * @return
+     */
+    public String countAndSay_2(int n){
+        if (n==1) return "1";
+        //递归:fn=f(fn-1)
+        String str = countAndSay_2(n-1);
+
+        StringBuilder sb = new StringBuilder();
+        int k=0;
+        while (k<str.length()){
+            char c = str.charAt(k);
+            int count=1;
+            while (k+count<str.length() && c==str.charAt(k+count)){
+                ++count;
+            }
+            //拼接结果
+            sb.append(count);
+            sb.append(c);
+            //遍历前进count
+            k+=count;
         }
         return sb.toString();
     }
