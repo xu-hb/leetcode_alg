@@ -1,4 +1,4 @@
-package com.alg.algorithms;
+package com.alg.algorithms.alg100;
 
 import com.alg.common.ListNode;
 
