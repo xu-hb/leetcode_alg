@@ -3,6 +3,8 @@ package com.alg.algorithms.alg900;
 public class Alg850 {
     /**
      * 844.比较含退格的字符串
+     * 时间复杂度:O(m+n)
+     * 空间复杂度:O(1)
      * @param s
      * @param t
      * @return
