@@ -3,6 +3,8 @@ package com.alg.algorithms.alg1000;
 public class Alg980 {
     /**
      * 977.有序的数组的平方
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
      * @param nums
      * @return
      */
