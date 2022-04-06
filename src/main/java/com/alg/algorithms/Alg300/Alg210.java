@@ -1,6 +1,31 @@
 package com.alg.algorithms.Alg300;
 
+import com.alg.common.ListNode;
+
 public class Alg210 {
+    /**
+     * 203.移除链表的元素
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
+     * @param head
+     * @param val
+     * @return
+     */
+    public ListNode removeElements(ListNode head, int val) {
+        if (head==null) return head;
+        ListNode virtualHead = new ListNode();
+        virtualHead.next = head;
+        ListNode lastNode = virtualHead;
+        while (lastNode.next !=null){
+            if (lastNode.next.val==val){
+                lastNode.next = lastNode.next.next;
+            }else {
+                lastNode = lastNode.next;
+            }
+        }
+        return virtualHead.next;
+    }
+
     /**
      * 209.长度最小的子数组
      * 暴力求解
