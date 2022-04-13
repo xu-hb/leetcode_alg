@@ -30,4 +30,25 @@ public class Alg1050 {
         }
         return str;
     }
+
+    /**
+     * 1047.删除字符串中的所有相邻重复项 2
+     * 数组+指针
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(N)
+     * @param s
+     * @return
+     */
+    public String removeDuplicates_2(String s){
+        char[] arr = new char[s.length()];
+        int cursor = -1;
+        for (char c : s.toCharArray()){
+            if (cursor>=0 && arr[cursor]==c){
+                --cursor;
+            }else {
+                arr[++cursor]=c;
+            }
+        }
+        return String.valueOf(arr, 0, cursor + 1);
+    }
 }
