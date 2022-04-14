@@ -59,4 +59,32 @@ public class Alg150 {
         }
         return result;
     }
+
+    /**
+     * 145.二叉树的后序遍历
+     * @param root
+     * @return
+     */
+    public List<Integer> postorderTraversal(TreeNode root) {
+        if(Objects.isNull(root)){
+            return Collections.emptyList();
+        }
+        List<Integer> list = new ArrayList<>();
+        //递归遍历
+        posTraversal(root , list);
+        return list;
+    }
+
+    /**
+     * 后序遍历
+     * @param node
+     * @param list
+     */
+    public void posTraversal(TreeNode node, List<Integer> list) {
+        if (node==null) return;
+        //左节点
+        posTraversal(node.left,list);
+        posTraversal(node.right , list);
+        list.add(node.val);
+    }
 }
