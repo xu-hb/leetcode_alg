@@ -71,4 +71,34 @@ public class Alg110 {
         }
         return resList;
     }
+
+    /**
+     * 107.二叉树的层序遍历two
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> resList = new ArrayList<>();
+        if (null==root){
+            return resList;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (! queue.isEmpty()){
+            List<Integer> list = new ArrayList<>();
+            //后来居上
+            resList.add(0,list);
+            int len = queue.size();
+            //遍历同一层级
+            while (len>0){
+                TreeNode node = queue.poll();
+                list.add(node.val);
+                if (null != node.left) queue.add(node.left);
+                if (null != node.right) queue.add(node.right);
+                len--;
+            }
+        }
+        return resList;
+    }
 }
