@@ -8,6 +8,47 @@ import java.util.List;
 import java.util.Objects;
 
 public class Alg100 {
+    List<String> ipStrList = new ArrayList<>();
+    List<String> tempList = new ArrayList<>();
+    int len;
+    int minCursor;
+    /**
+     * 93.复原IP地址
+     * @param s
+     * @return
+     */
+    public List<String> restoreIpAddresses(String s) {
+        len=s.length();
+        minCursor = len/4-1;
+        dfsPartition(s,0);
+        return ipStrList;
+    }
+
+    private void dfsPartition(String s , int size){
+        if (size==len){
+            ipStrList.add(String.join(".",tempList));
+            return;
+        }
+        for (int i=minCursor;i<Math.min(s.length(),4);i++){
+            String str = s.substring(0,i+1);
+            if (validateIp(str)){
+                tempList.add(str);
+                String rightStr = s.substring(i+1);
+                dfsPartition(rightStr,size+str.length());
+                tempList.remove(tempList.size()-1);
+            }
+        }
+    }
+
+    /**
+     * 校验是否为合法ip
+     * @param str
+     * @return
+     */
+    private boolean validateIp(String str) {
+        return Long.parseLong(str)<=255;
+    }
+
     /**
      * 94.二叉树的中序遍历
      * 递归
