@@ -256,6 +256,39 @@ public class Alg40 {
         return resultList;
     }
 
+    /**
+     * 40.组合总和II（good）
+     * 回溯
+     * @param candidates
+     * @param target
+     * @return
+     */
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        dfsSum2(candidates,0,target);
+        return resultList;
+    }
+
+
+    private void dfsSum2(int[] candidates, int start, int target){
+        if (0==target){
+            resultList.add(new ArrayList<>(list));
+        }
+        for (int j=start;j<candidates.length;j++){
+            //和前值相同时，跳过（巧妙的跳过方式）
+            if (j>start && candidates[j]==candidates[j-1])
+                continue;
+            if (target-candidates[j]>=0){
+                list.add(candidates[j]);
+                dfsSum2(candidates,j+1,target-candidates[j]);
+                list.remove(list.size()-1);
+            }else {
+                //剪枝：当前值和已经超过target,后续不可能有结果，直接跳过
+                break;
+            }
+        }
+    }
+
     private void dfsSum(int[] candidates, int start, int target){
         if (0==target){
             resultList.add(new ArrayList<>(list));
@@ -267,12 +300,6 @@ public class Alg40 {
             dfsSum(candidates,j,target-candidates[j]);
             list.remove(list.size()-1);
         }
-    }
-
-    private int sum(List<Integer> list) {
-        if (null==list || list.size()==0)
-            return 0;
-        return list.stream().mapToInt(Integer::intValue).sum();
     }
 
     /**
