@@ -6,6 +6,9 @@ import java.util.*;
  * 算法31-40
  */
 public class Alg40 {
+    List<List<Integer>> resultList = new ArrayList<>();
+    List<Integer> list = new ArrayList<>();
+
     /**
      * 31.下一个排列
      * 时间复杂度:O(N)
@@ -237,6 +240,39 @@ public class Alg40 {
         Deque<Integer> path = new ArrayDeque<>();
         dfs(candidates, 0, len, target, path, res);
         return res;
+    }
+
+    /**
+     * 39.组合总和
+     * 回溯
+     * 时间复杂度：O()
+     * 空间复杂度：O(target)
+     * @param candidates
+     * @param target
+     * @return
+     */
+    public List<List<Integer>> combinationSum_2(int[] candidates, int target){
+        dfsSum(candidates , 0 , target);
+        return resultList;
+    }
+
+    private void dfsSum(int[] candidates, int start, int target){
+        if (0==target){
+            resultList.add(new ArrayList<>(list));
+        }else if (target<0){
+            return;
+        }
+        for (int j=start;j< candidates.length;j++){
+            list.add(candidates[j]);
+            dfsSum(candidates,j,target-candidates[j]);
+            list.remove(list.size()-1);
+        }
+    }
+
+    private int sum(List<Integer> list) {
+        if (null==list || list.size()==0)
+            return 0;
+        return list.stream().mapToInt(Integer::intValue).sum();
     }
 
     /**
