@@ -20,21 +20,25 @@ public class Alg100 {
     public List<String> restoreIpAddresses(String s) {
         len=s.length();
         minCursor = len/4-1;
-        dfsPartition(s,0);
+        dfsPartition(s,0,1);
         return ipStrList;
     }
 
-    private void dfsPartition(String s , int size){
+    private void dfsPartition(String s , int size,int depth){
         if (size==len){
-            ipStrList.add(String.join(".",tempList));
-            return;
+            if (depth==5){
+                ipStrList.add(String.join(".",tempList));
+                return;
+            }else {
+                return;
+            }
         }
-        for (int i=minCursor;i<Math.min(s.length(),4);i++){
+        for (int i=0;i<Math.min(s.length(),3);i++){
             String str = s.substring(0,i+1);
-            if (validateIp(str)){
+            if (validateIp(str)&&depth<=4){
                 tempList.add(str);
                 String rightStr = s.substring(i+1);
-                dfsPartition(rightStr,size+str.length());
+                dfsPartition(rightStr,size+str.length(),depth+1);
                 tempList.remove(tempList.size()-1);
             }
         }
@@ -46,7 +50,8 @@ public class Alg100 {
      * @return
      */
     private boolean validateIp(String str) {
-        return Long.parseLong(str)<=255;
+        boolean flag = Long.parseLong(str)<=255;
+        return flag && ((str.length()>1 && !str.startsWith("0"))||str.length()==1);
     }
 
     /**
