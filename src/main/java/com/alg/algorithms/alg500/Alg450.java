@@ -1,5 +1,6 @@
 package com.alg.algorithms.alg500;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,5 +37,27 @@ public class Alg450 {
         }
 
         return result;
+    }
+
+    /**
+     * 455.分发饼干
+     * 贪心算法
+     * 时间复杂度：O(mLogM+nlogN) 快排的复杂度
+     * 空间复杂度：O(logM+logN)
+     * @param g
+     * @param s
+     * @return
+     */
+    public int findContentChildren(int[] g, int[] s) {
+        Arrays.sort(g);
+        Arrays.sort(s);
+
+        //孩子、饼干游标
+        int child = 0;
+        int cookie = 0;
+        for (;cookie<s.length && child<g.length;cookie++){
+            if (s[cookie]>=g[child]) child++;
+        }
+        return child;
     }
 }
