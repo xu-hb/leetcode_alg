@@ -21,6 +21,40 @@ public class Alg80 {
         return result;
     }
 
+    /**
+     * 78.子集
+     * 回溯
+     * 时间复杂度：O(n*2^n)
+     * 空间复杂度：O(N)
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> subsets(int[] nums) {
+        for (int i=0;i<=nums.length;i++){
+            dfsSub(nums,0,i);
+        }
+        return result;
+    }
+
+    /**
+     * 子集(78)的dfs
+     * @param nums
+     * @param start
+     * @param depth
+     */
+    private void dfsSub(int[] nums, int start , int depth) {
+        if (depth==0){
+            result.add(new ArrayList<>(list));
+            return;
+        }
+        //遍历
+        for (int k=start;k<nums.length;k++){
+            list.add(nums[k]);
+            dfsSub(nums , k+1,depth-1);
+            list.remove(list.size()-1);
+        }
+    }
+
     public void reverse(int start , int n , int k){
         if (k==0){
             result.add(new ArrayList<>(list));
