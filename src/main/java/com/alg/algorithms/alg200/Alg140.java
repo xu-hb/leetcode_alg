@@ -20,6 +20,30 @@ public class Alg140 {
     }
 
     /**
+     * 134.加油站
+     * 贪心算法
+     * @param gas
+     * @param cost
+     * @return
+     */
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        int curSum = 0;
+        int totalSum = 0;
+        int index = 0;
+        for (int i = 0; i < gas.length; i++) {
+            curSum += gas[i] - cost[i];
+            totalSum += gas[i] - cost[i];
+            //贪心：当前累加值大于0局部最优（小于0则从当前起点开始寻找新的局部最优）
+            if (curSum < 0) {
+                index = (i + 1) % gas.length ;
+                curSum = 0;
+            }
+        }
+        if (totalSum < 0) return -1;
+        return index;
+    }
+
+    /**
      * 分割回文串dfs
      * @param s
      * @param size
