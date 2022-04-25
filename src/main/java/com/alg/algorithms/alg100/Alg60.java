@@ -23,4 +23,25 @@ public class Alg60 {
         }
         return max;
     }
+
+    /**
+     * 55.跳跃游戏
+     * @param nums
+     * @return
+     */
+    public boolean canJump(int[] nums) {
+        if (nums.length==1){
+            return true;
+        }
+        int maxJumpStep = 0;
+        for (int i=0;i<=maxJumpStep;i++){
+            //贪心：贪心局部能到达的最远距离，总体是否最远距离可达最后节点
+            //nums[i]+i：当前值能到达的最远距离
+            maxJumpStep = Math.max(maxJumpStep , nums[i]+i);
+            if (maxJumpStep>=nums.length-1){
+                return true;
+            }
+        }
+        return false;
+    }
 }
