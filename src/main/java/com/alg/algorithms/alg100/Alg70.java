@@ -23,4 +23,24 @@ public class Alg70 {
         return ans;
     }
 
+    /**
+     * 70.爬楼梯
+     * DP
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
+     * @param n
+     * @return
+     */
+    public int climbStairs(int n) {
+        if (n<=2) return n;
+        int F1=1;
+        int F2=2;
+        int sum=0;
+        for (int i=3;i<=n;i++){
+            sum = F1+F2;
+            F1=F2;
+            F2=sum;
+        }
+        return sum;
+    }
 }
