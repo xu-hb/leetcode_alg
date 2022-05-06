@@ -37,17 +37,17 @@ public class Alg60 {
         }
         //dp：下标i的最子数组之和
         int[] dp = new int[nums.length];
-        int sum = 0;
-        for (int i=0;i<nums.length;i++){
-            if (sum>0){
-                sum+=nums[i];
+        dp[0] = nums[0];
+        for (int i=1;i<nums.length;i++){
+            if (dp[i-1]>0){
+                //递推公式：
+                dp[i]=dp[i-1]+nums[i];
             }else {
-                sum=nums[i];
+                dp[i]=nums[i];
             }
-            //遍历顺序，正常遍历
-            dp[i]=sum;
         }
-        //递推公司：Max(dp[i])
+
+        //选出最大值
         int max=dp[0];
         for (int i=0;i<dp.length;i++){
             max = Math.max(max,dp[i]);
