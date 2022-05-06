@@ -14,12 +14,43 @@ public class Alg60 {
         int max = nums[0];
         int sum = nums[0];
         for (int i=1;i<nums.length;i++){
-            sum+=nums[i];
-            max=Math.max(max,sum);
             //贪心，负值只会拉低最大值。贪心每次的和>0
-            if (sum<0){
-                sum=0;
+            if (sum>0){
+                sum+=nums[i];
+            }else {
+                sum=nums[i];
             }
+            max=Math.max(max,sum);
+        }
+        return max;
+    }
+
+    /**
+     * 53.最大子数组之和
+     * DP
+     * @param nums
+     * @return
+     */
+    public int maxSubArray_2(int[] nums) {
+        if (nums.length==1){
+            return nums[0];
+        }
+        //dp：下标i的最子数组之和
+        int[] dp = new int[nums.length];
+        int sum = 0;
+        for (int i=0;i<nums.length;i++){
+            if (sum>0){
+                sum+=nums[i];
+            }else {
+                sum=nums[i];
+            }
+            //遍历顺序，正常遍历
+            dp[i]=sum;
+        }
+        //递推公司：Max(dp[i])
+        int max=dp[0];
+        for (int i=0;i<dp.length;i++){
+            max = Math.max(max,dp[i]);
         }
         return max;
     }
