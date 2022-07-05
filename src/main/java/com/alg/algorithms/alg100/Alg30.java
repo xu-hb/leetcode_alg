@@ -5,6 +5,7 @@ import com.alg.common.ListNode;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.PriorityQueue;
 
 /**
  * 算法21-30
@@ -47,6 +48,39 @@ public class Alg30 {
             listNode = listNode.next;
         }
         return result.next;
+    }
+
+    /**
+     * 23.合并K个升序链表
+     * @param lists
+     * @return
+     */
+    public ListNode mergeKLists(ListNode[] lists) {
+        if (null == lists || lists.length==0){
+            return null;
+        }
+        ListNode dummyHead = new ListNode();
+        ListNode curHead = dummyHead;
+
+        PriorityQueue<ListNode> queue = new PriorityQueue<>(lists.length,(a,b)->a.val-b.val);
+        for (ListNode head : lists){
+            if (head !=null){
+                queue.add(head);
+            }
+        }
+
+        while (! queue.isEmpty()){
+            ListNode node = queue.poll();
+            //加入节点
+            curHead.next = node;
+            curHead = curHead.next;
+            //下一个节点入栈
+            ListNode next = node.next;
+            if (next !=null){
+                queue.add(next);
+            }
+        }
+        return dummyHead.next;
     }
 
     /**
