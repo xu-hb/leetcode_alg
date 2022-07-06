@@ -6,6 +6,22 @@ import java.util.List;
 import java.util.Set;
 
 public class Alg350 {
+
+    /**
+     * 344.反转字符串
+     * @param s
+     */
+    public void reverseString(char[] s) {
+        int left=0,right=s.length-1;
+        while (left<right){
+            char temp = s[left];
+            s[left] = s[right];
+            s[right] = temp;
+            left++;
+            right--;
+        }
+    }
+
     /**
      * 349.两个数组的交集
      * 时间复杂度：O(n+m)
