@@ -70,4 +70,33 @@ public class Alg50 {
         }
         return steps;
     }
+
+    /**
+     * 48.旋转图像 Good
+     * 通过对折快速旋转
+     * @param matrix
+     */
+    public void rotate(int[][] matrix) {
+        //斜对线对折
+        for (int i=0;i<matrix.length;i++){
+            for (int j=i;j<matrix[i].length;j++){
+                if (i !=j){
+                    int temp = matrix[i][j];
+                    matrix[i][j] = matrix[j][i];
+                    matrix[j][i] = temp;
+                }
+            }
+        }
+        //竖线对折
+        for (int i=0;i< matrix.length;i++){
+            int left=0,right=matrix[i].length-1;
+            while (left<right){
+                int temp = matrix[i][left];
+                matrix[i][left] = matrix[i][right];
+                matrix[i][right] = temp;
+                left++;
+                right--;
+            }
+        }
+    }
 }
