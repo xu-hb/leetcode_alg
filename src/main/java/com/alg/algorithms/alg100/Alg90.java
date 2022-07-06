@@ -12,6 +12,28 @@ public class Alg90 {
     List<List<Integer>> result = new ArrayList<>();
 
     /**
+     * 83.删除排序链表中的重复元素
+     * @param head
+     * @return
+     */
+    public ListNode deleteDuplicates(ListNode head) {
+        if(null == head)
+            return head;
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast !=null){
+            //不等时，直接指向fast
+            if (slow.val != fast.val){
+                slow.next=fast;
+                slow=slow.next;
+            }
+            fast = fast.next;
+        }
+        slow.next=null;
+        return head;
+    }
+
+    /**
      * 86.分隔链表
      * 时间复杂度：O(N)
      * 空间复杂度：O(1)
