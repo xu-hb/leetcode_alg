@@ -117,6 +117,69 @@ public class Alg40 {
     }
 
     /**
+     * 34.在排序数组中查找元素的第一个和最后一个位置
+     * 使用标准的二分查找统一
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int[] searchRange_2(int[] nums, int target) {
+        if (null==nums || nums.length==0) return new int[]{-1,-1};
+        int leftIndex = findLeft(nums , target);
+        if (leftIndex==-1) return new int[]{-1,-1};
+        int rightIndex = findRight(nums , target);
+
+        return new int[]{leftIndex , rightIndex};
+    }
+
+    /**
+     * 二分查找--左边界--标准
+     * @param nums
+     * @param target
+     * @return
+     */
+    private int findLeft(int[] nums, int target) {
+        int low=0,high=nums.length-1;
+        while (low<=high){
+            int middle = low+ (high-low)/2;
+            if (nums[middle]==target){
+                high=middle-1;
+            }else if (nums[middle]>target){
+                high=middle-1;
+            }else {
+                low=middle+1;
+            }
+        }
+        if (low>= nums.length) return -1;
+        return nums[low]==target?low:-1;
+    }
+
+    /**
+     * 二分查找--右边界--标准
+     * @param nums
+     * @param target
+     * @return
+     */
+    private int findRight(int[] nums, int target) {
+        int low=0,high=nums.length-1;
+        while (low<=high){
+            int middle = low+ (high-low)/2;
+            if (nums[middle]==target){
+                low=middle+1;
+            }else if (nums[middle]>target){
+                high=middle-1;
+            }else {
+                low=middle+1;
+            }
+        }
+
+        // 此时 left - 1 索引越界
+        if (high>= nums.length) return -1;
+        // 判断一下 nums[left] 是不是 target
+        return nums[high] == target ? (high) : -1;
+    }
+
+    /**
      * 36.有效的数独
      * @param board
      * @return
