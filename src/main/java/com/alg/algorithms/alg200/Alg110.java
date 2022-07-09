@@ -73,6 +73,21 @@ public class Alg110 {
     }
 
     /**
+     * 104.二叉树的最大深度
+     * @param root
+     * @return
+     */
+    public int maxDepth(TreeNode root) {
+        if (root==null)
+            return 0;
+        //后序遍历
+        int depthLeft = maxDepth(root.left);
+        int depthRight = maxDepth(root.right);
+        return Math.max(depthLeft , depthRight)+1;
+    }
+
+
+    /**
      * 107.二叉树的层序遍历two
      * @param root
      * @return
