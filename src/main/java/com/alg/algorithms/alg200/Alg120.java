@@ -37,6 +37,30 @@ public class Alg120 {
     }
 
     /**
+     * 116.填充每个节点的下一个右侧节点指针 2
+     * 递归
+     * @param root
+     * @return
+     */
+    public Node connect_2(Node root){
+        if (null==root){
+            return root;
+        }
+        traverser(root.left , root.right);
+        return root;
+    }
+
+    public void traverser(Node node1 , Node node2){
+        if (node1==null || node2==null){
+            return;
+        }
+        node1.next = node2;
+        traverser(node1.left,node1.right);
+        traverser(node2.left,node2.right);
+        traverser(node1.right,node2.left);
+    }
+
+    /**
      * 118.杨辉三角
      * DP
      * @param numRows
