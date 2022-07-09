@@ -1,10 +1,48 @@
 package com.alg.algorithms.alg200;
 
 import com.alg.common.Node;
+import com.alg.common.TreeNode;
 
 import java.util.*;
 
 public class Alg120 {
+
+    /**
+     * 114.二叉树展开为链表
+     * @param root
+     */
+    public void flatten(TreeNode root) {
+        if (null==root)
+            return;
+        rebuildNode(root);
+    }
+
+    /**
+     * 树转单链表
+     * @param root
+     */
+    private void rebuildNode(TreeNode root){
+        if (root==null)
+            return;
+
+        //后序遍历
+        rebuildNode(root.left);
+        rebuildNode(root.right);
+        //记录旧节点
+        TreeNode oldR = root.right;
+        TreeNode oldL = root.left;
+
+        //左树置为右树的前驱结点
+        root.right = oldL;
+        root.left=null;
+
+        //原右子树置为新右子树的右节点
+        TreeNode temp = root;
+        while (temp.right !=null){
+            temp = temp.right;
+        }
+        temp.right=oldR;
+    }
 
     /**
      * 116.填充每个节点的下一个右侧节点指针
