@@ -1,11 +1,41 @@
 package com.alg.algorithms.alg200;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import com.alg.common.Node;
+
+import java.util.*;
 
 public class Alg120 {
+
+    /**
+     * 116.填充每个节点的下一个右侧节点指针
+     * @param root
+     * @return
+     */
+    public Node connect(Node root) {
+        if (null == root)
+            return root;
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()){
+            int len = queue.size();
+            while (len>0){
+                Node node = queue.poll();
+                Node next = queue.peek();
+                if (null != next && len>1){
+                    //同层最后一个元素指向null
+                    node.next=next;
+                }else {
+                    node.next=null;
+                }
+
+                if (node.left !=null) queue.add(node.left);
+                if (node.right !=null) queue.add(node.right);
+                len--;
+            }
+        }
+        return root;
+    }
+
     /**
      * 118.杨辉三角
      * DP
