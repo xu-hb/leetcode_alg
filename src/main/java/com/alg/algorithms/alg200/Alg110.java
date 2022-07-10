@@ -138,6 +138,7 @@ public class Alg110 {
 
     /**
      * 105.从前序与中序遍历序列构造二叉树 2.0
+     * map替代for提高效率
      * @param preorder
      * @param inorder
      * @return
@@ -172,10 +173,10 @@ public class Alg110 {
         int pStart_1=pStart+1;  //从跟节点下一个开始
         int pEnd_1=pStart_1+(iEnd_1-iStart_1);  //左子树的数量在先序和中序中的数量都是一致的
         //构建左子树
-        root.left = buildTreeByOrder(pStart_1,pEnd_1,iStart_1,iEnd_1);
+        root.left = buildTreeByOrder_2(pStart_1,pEnd_1,iStart_1,iEnd_1);
         //--2.构建右子树
         //先序中左子树后一个节点开始就是右子树；中序则是左子树后再去除一个根节点后开始为右子树
-        root.right = buildTreeByOrder(pEnd_1+1,pEnd,iEnd_1+1+1,iEnd);
+        root.right = buildTreeByOrder_2(pEnd_1+1,pEnd,iEnd_1+1+1,iEnd);
 
         return root;
     }
