@@ -2,10 +2,7 @@ package com.alg.algorithms.alg200;
 
 import com.alg.common.TreeNode;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class Alg110 {
     /**
@@ -148,8 +145,15 @@ public class Alg110 {
     public TreeNode buildTree_2(int[] preorder, int[] inorder) {
         this.preorder = preorder;
         this.inorder = inorder;
+        //初始化
+        inorderMap = new HashMap<>(inorder.length);
+        for (int i=0;i<inorder.length;i++){
+            inorderMap.put(inorder[i],i);
+        }
         return buildTreeByOrder_2(0,preorder.length-1 , 0 , inorder.length-1);
     }
+    //存储中序遍历结果和序列号映射
+    Map<Integer,Integer> inorderMap = null;
 
     private TreeNode buildTreeByOrder_2(int pStart, int pEnd , int iStart , int iEnd) {
         if (pStart>pEnd || iStart>iEnd)
@@ -162,12 +166,8 @@ public class Alg110 {
         //--1.构建左子树
         //找到左子树的节点：中序遍历结果的根节点之前的值为左子树
         int iStart_1=iStart;
-        int iEnd_1=0;
-        for (int i=iStart;i<=iEnd;i++){
-            iEnd_1=i;
-            if (inorder[i] ==rootVal)
-                break;
-        }
+        //取消for循环，用map替代提高效率
+        int iEnd_1 = inorderMap.get(rootVal);
         iEnd_1-=1; //根节点前一个节点为终止节点
         int pStart_1=pStart+1;  //从跟节点下一个开始
         int pEnd_1=pStart_1+(iEnd_1-iStart_1);  //左子树的数量在先序和中序中的数量都是一致的
