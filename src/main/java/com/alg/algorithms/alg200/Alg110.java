@@ -86,6 +86,59 @@ public class Alg110 {
         return Math.max(depthLeft , depthRight)+1;
     }
 
+    /**
+     * 105.从前序与中序遍历序列构造二叉树
+     * @param preorder
+     * @param inorder
+     * @return
+     */
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        this.preorder = preorder;
+        this.inorder = inorder;
+        return buildTreeByOrder(0,preorder.length-1 , 0 , inorder.length-1);
+    }
+    //先序遍历
+    int[] preorder = null;
+    //中序遍历
+    int[] inorder = null;
+
+    /**
+     * 从先序和中序中构建二叉树
+     * @param pStart 先序开始
+     * @param pEnd 先序结束
+     * @param iStart 中序开始
+     * @param iEnd 中序结束
+     * @return
+     */
+    private TreeNode buildTreeByOrder(int pStart, int pEnd , int iStart , int iEnd) {
+        if (pStart>pEnd || iStart>iEnd)
+            return null;
+
+        //先序遍历的第一个节点为根节点
+        int rootVal = preorder[pStart];
+        TreeNode root = new TreeNode(rootVal);
+
+        //--1.构建左子树
+        //找到左子树的节点：中序遍历结果的根节点之前的值为左子树
+        int iStart_1=iStart;
+        int iEnd_1=0;
+        for (int i=iStart;i<=iEnd;i++){
+            iEnd_1=i;
+            if (inorder[i] ==rootVal)
+                break;
+        }
+        iEnd_1-=1; //根节点前一个节点为终止节点
+        int pStart_1=pStart+1;  //从跟节点下一个开始
+        int pEnd_1=pStart_1+(iEnd_1-iStart_1);  //左子树的数量在先序和中序中的数量都是一致的
+        //构建左子树
+        root.left = buildTreeByOrder(pStart_1,pEnd_1,iStart_1,iEnd_1);
+        //--2.构建右子树
+        //先序中左子树后一个节点开始就是右子树；中序则是左子树后再去除一个根节点后开始为右子树
+        root.right = buildTreeByOrder(pEnd_1+1,pEnd,iEnd_1+1+1,iEnd);
+
+        return root;
+    }
+
 
     /**
      * 107.二叉树的层序遍历two
