@@ -35,6 +35,36 @@ public class Alg660 {
     }
 
     /**
+     * 652.寻找重复的子树 2.0
+     * 由于key过长，导致时间复杂度升高，故使用唯一标识做替换
+     * @param root
+     * @return
+     */
+    public List<TreeNode> findDuplicateSubtrees_2(TreeNode root) {
+        countMap = new HashMap<>();
+        result = new ArrayList<>();
+        t=1;
+        trees = new HashMap<>();
+        collect_2(root);
+        return result;
+    }
+    int t;
+    Map<String,Integer> trees;
+    Map<Integer,Integer> countMap;
+    private int collect_2(TreeNode node){
+        if (null== node)
+            return 0;
+        String key = node.val+","+collect_2(node.left)+","+collect_2(node.right);
+        //使用uid替换key，缩短长度
+        int uid = trees.computeIfAbsent(key,x->t++);
+        countMap.put(uid,countMap.getOrDefault(uid,0)+1);
+        if (countMap.get(uid)==2){
+            result.add(node);
+        }
+        return uid;
+    }
+
+    /**
      * 654.最大二叉树
      * @param nums
      * @return
