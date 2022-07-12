@@ -25,25 +25,20 @@ public class Alg500 {
 
     /**
      * 493.翻转对 2.0
+     * 归并排序
      * @param nums
      * @return
      */
     public int reversePairs_2(int[] nums) {
-        count = new int[nums.length];
-        temps = new Pair[nums.length];
-
-        Pair[] arr = new Pair[nums.length];
-        for (int i=0;i< nums.length;i++){
-            temps[i]=new Pair(nums[i],i);
-        }
-        sort(arr , 0 , nums.length-1);
-        return Arrays.stream(count).sum();
+        temps = new int[nums.length];
+        sort(nums , 0 , nums.length-1);
+        return count;
     }
 
-    int[] count =null;
-    Pair[] temps = null;
+    int count=0;
+    int[] temps = null;
 
-    private void sort(Pair[] arr, int start, int end) {
+    private void sort(int[] arr, int start, int end) {
         if (start==end)
             return;
         int middle = (end-start)/2 + start;
@@ -51,7 +46,31 @@ public class Alg500 {
         sort(arr,middle+1,end);
         merge(arr,start,middle,end);
     }
-    private void merge(Pair[] arr, int start, int middle, int end){
+    private void merge(int[] arr, int start, int middle, int end){
+        for (int i=start;i<=end;i++){
+            temps[i]=arr[i];
+        }
 
+        //计算
+        int lastCur=middle+1;
+        for (int i=start;i<=middle;i++){
+            while (lastCur<=end && (long)arr[i] > (long)arr[lastCur] * 2){
+                lastCur++;
+            }
+            count +=lastCur-(middle+1);
+        }
+
+        int i=start,j=middle+1;
+        for (int p=start;p<=end;p++){
+            if (i==middle+1){
+                arr[p]=temps[j++];
+            }else if (j==end+1){
+                arr[p]=temps[i++];
+            }else if (temps[i]>temps[j]){
+                arr[p]=temps[j++];
+            }else {
+                arr[p]=temps[i++];
+            }
+        }
     }
 }
