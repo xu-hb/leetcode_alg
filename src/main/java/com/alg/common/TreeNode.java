@@ -36,4 +36,57 @@ public class TreeNode {
         }
         return sb.toString();
     }
+
+    static private int index=-1;
+
+    /**
+     * 序列化-前序
+     * @return
+     */
+    public String serializePre() {
+        StringBuilder sb = new StringBuilder();
+        serializePre(this , sb);
+        String result = sb.toString();
+        //去除第一个逗号
+        if (result.startsWith(",")){
+            return result.substring(1);
+        }
+        return result;
+    }
+    public void serializePre(TreeNode root , StringBuilder sb){
+        if (null==root){
+            sb.append(",").append("#");
+            return;
+        }
+        sb.append(",").append(root.val);
+
+        serializePre(root.left , sb);
+        serializePre(root.right , sb);
+    }
+
+    /**
+     * 反序列化--前序
+     * @param data
+     * @return
+     */
+    public static TreeNode deserializePre(String data) {
+        if (null==data || data.equals(""))
+            return null;
+        String[] origin = data.split(",");
+        return deserializePre(origin , 0);
+    }
+    private static TreeNode deserializePre(String[] origin, int start) {
+        if (start> origin.length-1){
+            return null;
+        }
+        index++;
+        String rootVal = origin[start];
+        if ("#".equals(rootVal))
+            return null;
+
+        TreeNode root = new TreeNode(Integer.parseInt(rootVal));
+        root.left = deserializePre(origin , start+1);
+        root.right = deserializePre(origin,index+1);
+        return root;
+    }
 }
