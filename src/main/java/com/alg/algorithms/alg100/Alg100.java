@@ -82,4 +82,31 @@ public class Alg100 {
         //右节点
         traversal(node.right , list);
     }
+
+    /**
+     * 98.验证BST
+     * @param root
+     * @return
+     */
+    public boolean isValidBST(TreeNode root) {
+        validBST(root);
+        return result;
+    }
+
+    boolean result = true;
+    long preVal= Long.MIN_VALUE;    //前一个节点的值
+
+    private void validBST(TreeNode root){
+        if (root==null || !result)
+            return;
+        validBST(root.left);
+        //中序遍历，当期值应该>preVal
+        if (root.val<=preVal){
+            result=false;
+            return;
+        }
+        //赋予当期节点值
+        preVal= root.val;
+        validBST(root.right);
+    }
 }
