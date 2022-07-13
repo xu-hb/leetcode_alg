@@ -56,6 +56,7 @@ public class Alg230 {
         count++;
         if (count==k){
             result = root.val;
+            return;
         }
         midTraverse(root.right);
     }
