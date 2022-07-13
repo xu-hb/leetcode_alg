@@ -31,4 +31,33 @@ public class Alg230 {
         turn(node.left);
         turn(node.right);
     }
+
+    /**
+     * 230.二叉树中的第k小的元素
+     * 中序遍历
+     * @param root
+     * @param k
+     * @return
+     */
+    public int kthSmallest(TreeNode root, int k) {
+        //中序遍历
+        this.k = k;
+        midTraverse(root);
+        return result;
+    }
+
+    int count=0;
+    int k;
+    int result=0;
+    private void midTraverse(TreeNode root) {
+        if (root==null || count>k)
+            return;
+        midTraverse(root.left);
+        count++;
+        if (count==k){
+            result = root.val;
+        }
+        midTraverse(root.right);
+    }
+
 }
