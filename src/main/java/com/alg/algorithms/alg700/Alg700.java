@@ -27,4 +27,20 @@ public class Alg700 {
             search(root.left,val);
         }
     }
+
+    /**
+     * 700.BST中的搜索 2.0
+     * 递归
+     * @param root
+     * @param val
+     * @return
+     */
+    public TreeNode searchBST_2(TreeNode root, int val) {
+        if (root==null) return null;
+
+        if (val== root.val){
+            return root;
+        }
+        return searchBST_2(val>root.val?root.right:root.left , val);
+    }
 }
