@@ -34,21 +34,27 @@ public class Alg220 {
 
     /**
      * 215.数组中的第K个最大元素
-     * 快速排序
+     * 快速选择，快排进行优化
      * @param nums
      * @param k
      * @return
      */
     public int findKthLargest(int[] nums, int k) {
-        quickSort(nums , 0 , nums.length-1);
-        return nums[nums.length-k];
+        this.k = nums.length-k;
+        return quickSort(nums , 0 , nums.length-1);
     }
-
-    private void quickSort(int[] nums, int l, int r) {
-        if (l<r){
-            int p = partition(nums , l , r);
-            quickSort(nums , l , p);
-            quickSort(nums , p+1,r);
+    int k=0;
+    private int quickSort(int[] nums, int l, int r) {
+        if (l==r){
+            return nums[l];
+        }
+        int p = partition(nums , l , r);
+        if (p==k){
+            return nums[k];
+        }else if (p>k){
+            return quickSort(nums , l , p);
+        }else {
+            return quickSort(nums , p+1,r);
         }
     }
 
