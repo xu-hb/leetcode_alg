@@ -1,6 +1,7 @@
 package com.alg.algorithms.Alg300;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Alg220 {
@@ -30,6 +31,40 @@ public class Alg220 {
         }
         return z;
     }
+
+    /**
+     * 215.数组中的第K个最大元素
+     * 快速排序
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int findKthLargest(int[] nums, int k) {
+        quickSort(nums , 0 , nums.length-1);
+        return nums[nums.length-k];
+    }
+
+    private void quickSort(int[] nums, int l, int r) {
+        if (l<r){
+            int p = partition(nums , l , r);
+            quickSort(nums , l , p);
+            quickSort(nums , p+1,r);
+        }
+    }
+
+    private int partition(int[] nums, int l, int r) {
+        int pivot = nums[l];
+        while (l<r){
+            while (l<r && nums[r]>=pivot) r--;
+            nums[l] = nums[r];
+
+            while (l<r && nums[l]<=pivot) l++;
+            nums[r]=nums[l];
+        }
+        nums[l]=pivot;
+        return l;
+    }
+
 
     /**
      * 216.组合总和III
