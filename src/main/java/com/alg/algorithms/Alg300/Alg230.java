@@ -26,6 +26,30 @@ public class Alg230 {
     }
 
     /**
+     * 222.完全二叉树的节点个数 2.0
+     * 时间复杂度:O(log^2 N)
+     * @param root
+     * @return
+     */
+    public int countNodes_2(TreeNode root) {
+        TreeNode l = root , r = root;
+        int lCount = 0,rCount=0;
+        while (l!=null){
+            l=l.left;
+            lCount++;
+        }
+        while (r!=null){
+            r=r.right;
+            rCount++;
+        }
+
+        if (lCount==rCount){
+            return (int)Math.pow(2,lCount)-1;
+        }
+        return 1+countNodes_2(root.left)+countNodes_2(root.right);
+    }
+
+    /**
      * 226.翻转二叉树
      * 时间复杂度：O(N)
      * 空间复杂度：O(N)
