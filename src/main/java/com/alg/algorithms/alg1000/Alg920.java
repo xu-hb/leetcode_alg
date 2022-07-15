@@ -1,5 +1,7 @@
 package com.alg.algorithms.alg1000;
 
+import java.util.Random;
+
 public class Alg920 {
     /**
      * 912.排序数组
@@ -49,4 +51,34 @@ public class Alg920 {
         }
     }
 
+    /**
+     * 912.排序数组 2.0
+     * 快排
+     * @param nums
+     * @return
+     */
+    public int[] sortArray_2(int[] nums) {
+        quickSort(nums , 0 , nums.length-1);
+        return nums;
+    }
+
+    private void quickSort(int[] nums, int l, int r) {
+        if (l<r){
+            int p = partition(nums , l , r);
+            quickSort(nums , l , p);
+            quickSort(nums , p+1 , r);
+        }
+    }
+
+    private int partition(int[] nums, int l, int r) {
+        int pivot = nums[l];
+        while (l<r){
+            while (l<r && nums[r]>=pivot) r--;
+            nums[l] = nums[r];
+            while (l<r && nums[l]<=pivot) l++;
+            nums[r]=nums[l];
+        }
+        nums[l]=pivot;
+        return l;
+    }
 }
