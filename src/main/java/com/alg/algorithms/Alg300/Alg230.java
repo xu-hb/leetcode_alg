@@ -5,6 +5,26 @@ import com.alg.common.TreeNode;
 
 
 public class Alg230 {
+
+    /**
+     * 222.完全二叉树的节点个数
+     * 时间复杂度:O(N)
+     * @param root
+     * @return
+     */
+    public int countNodes(TreeNode root) {
+        calculate(root);
+        return count;
+    }
+
+    int count=0;
+    private void calculate(TreeNode root) {
+        if (root==null) return;
+        count++;
+        calculate(root.left);
+        calculate(root.right);
+    }
+
     /**
      * 226.翻转二叉树
      * 时间复杂度：O(N)
