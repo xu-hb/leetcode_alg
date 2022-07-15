@@ -1,6 +1,7 @@
 package com.alg.algorithms.alg200;
 
 import com.alg.common.TreeNode;
+import com.alg.design.LRUCache;
 
 import java.util.*;
 
@@ -74,6 +75,23 @@ public class Alg150 {
         posTraversal(root , list);
         return list;
     }
+
+    /**
+     * 146.LRU缓存
+     * @see LRUCache
+     * @param capacity
+     */
+    public void LRUCache(int capacity){
+        cache = new LRUCache(capacity);
+    }
+    public int get(int key){
+        return cache.get(key);
+    }
+    public void put(int key , int val){
+        cache.put(key , val);
+    }
+    private LRUCache cache = null;
+
 
     /**
      * 150.逆波兰表达式求值

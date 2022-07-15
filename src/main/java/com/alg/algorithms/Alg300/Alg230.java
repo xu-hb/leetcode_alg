@@ -17,10 +17,10 @@ public class Alg230 {
         return count;
     }
 
-    int count=0;
+    int count2=0;
     private void calculate(TreeNode root) {
         if (root==null) return;
-        count++;
+        count2++;
         calculate(root.left);
         calculate(root.right);
     }
