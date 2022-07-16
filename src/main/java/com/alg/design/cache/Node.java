@@ -8,6 +8,8 @@ public class Node<K,V> {
     public V val;
     //前驱、后继指针
     public Node<K,V> prev,next;
+    //LFU--频次
+    int freq = 1;
 
     public Node(K key , V val){
         this.key = key;
