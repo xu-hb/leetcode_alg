@@ -92,6 +92,15 @@ public class Alg150 {
     }
     private LRUCache cache = null;
 
+    /**
+     * 146.LRU缓存 2.0
+     * 自定义实现
+     * @param capacity
+     */
+    public void LRUCache_2(int capacity){
+        com.alg.design.cache.LRUCache cache = new com.alg.design.cache.LRUCache(capacity);
+    }
+
 
     /**
      * 150.逆波兰表达式求值
