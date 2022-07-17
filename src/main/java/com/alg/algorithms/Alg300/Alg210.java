@@ -1,6 +1,7 @@
 package com.alg.algorithms.Alg300;
 
 import com.alg.common.ListNode;
+import com.alg.design.tree.Trie;
 
 public class Alg210 {
     /**
@@ -24,6 +25,14 @@ public class Alg210 {
             }
         }
         return virtualHead.next;
+    }
+
+    /**
+     * 208.实现Trie(前缀树)
+     */
+    public void Trie(){
+        Trie trie = new Trie();
+        trie.insert("apple");
     }
 
     /**
