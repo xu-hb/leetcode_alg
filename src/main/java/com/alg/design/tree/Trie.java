@@ -36,7 +36,11 @@ public class Trie {
         return prefixNode !=null;
     }
 
-    private TrieNode<Character> getPrefix(String prefix){
+    protected TrieNode<Character> getNode(){
+        return node;
+    }
+
+    protected TrieNode<Character> getPrefix(String prefix){
         if (null==prefix)
             return null;
         TrieNode<Character> cur = node;

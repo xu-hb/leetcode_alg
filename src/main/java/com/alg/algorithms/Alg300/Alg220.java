@@ -1,5 +1,7 @@
 package com.alg.algorithms.Alg300;
 
+import com.alg.design.dict.WordDictionary;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,6 +9,15 @@ import java.util.List;
 public class Alg220 {
     List<List<Integer>> resultList = new ArrayList<>();
     List<Integer> list = new ArrayList<>();
+
+    /**
+     * 211.添加与搜索单词-数据结构设计
+     * @see WordDictionary
+     */
+    public void WordDictionary() {
+        WordDictionary dictionary = new WordDictionary();
+        dictionary.addWord("app");
+    }
 
     /**
      * 213.打家劫舍II
