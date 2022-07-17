@@ -36,6 +36,30 @@ public class Trie {
         return prefixNode !=null;
     }
 
+    /**
+     * word在字典中的最短头匹配值
+     * @param word
+     * @return
+     */
+    public String minStartString(String word){
+        StringBuilder sb = new StringBuilder();
+        TrieNode<Character> cur = node;
+        for (char c : word.toCharArray()){
+            int index = c - 'a';
+            TrieNode<Character> next = cur.next[index];
+            if (next==null)
+                return null;
+
+            sb.append(next.val);
+            if (next.isEnd){
+                //最小匹配
+                return sb.toString();
+            }
+            cur = cur.next[index];
+        }
+        return null;
+    }
+
     protected TrieNode<Character> getNode(){
         return node;
     }
