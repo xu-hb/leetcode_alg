@@ -2,6 +2,7 @@ package com.alg.algorithms.alg400;
 
 import com.alg.common.TreeNode;
 
+import java.util.Arrays;
 
 
 public class Alg300 {
@@ -63,5 +64,28 @@ public class Alg300 {
         root.left = deserializePre(origin , start+1);
         root.right = deserializePre(origin,index+1);
         return root;
+    }
+
+    /**
+     * 300.最长递增子序列
+     * dp
+     * @param nums
+     * @return
+     */
+    public int lengthOfLIS(int[] nums) {
+        int[] dp = new int[nums.length];
+        Arrays.fill(dp, 1);
+        for (int i = 0; i < dp.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+        }
+        int res = 0;
+        for (int i = 0; i < dp.length; i++) {
+            res = Math.max(res, dp[i]);
+        }
+        return res;
     }
 }
