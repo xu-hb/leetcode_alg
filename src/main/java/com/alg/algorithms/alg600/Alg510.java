@@ -31,4 +31,33 @@ public class Alg510 {
         return fib_2(n-1)+fib_2(n-2);
     }
 
+    /**
+     * 509.斐波那契数列 3.0
+     * 记忆化递归;二叉树转为线性
+     * 时间复杂度：O(N)
+     * 空间复杂度:O(N)
+     * @param n
+     * @return
+     */
+    public int fib_3(int n) {
+        //初始化记忆数组
+        mem = new int[n+1];
+        for (int i=2;i<n+1;i++){
+            mem[i] = -2;
+        }
+        return memRecursion(n);
+    }
+    //记忆数组
+    int[] mem;
+    private int memRecursion(int n){
+        if (n<2) return n;
+        //取出记录结果（剪枝）
+        if (mem[n] != -2) return mem[n];
+
+        int res = memRecursion(n-1)+memRecursion(n-2);
+        //记录结果，防止重复计算
+        mem[n]=res;
+        return res;
+    }
+
 }
