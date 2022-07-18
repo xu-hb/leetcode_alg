@@ -19,5 +19,16 @@ public class Alg510 {
         return result;
     }
 
+    /**
+     * 509.斐波那契数列 2.0
+     * 暴力递归
+     * 时间复杂度:O(2^N)
+     * @param n
+     * @return
+     */
+    public int fib_2(int n) {
+        if (n<2) return n;
+        return fib_2(n-1)+fib_2(n-2);
+    }
 
 }
