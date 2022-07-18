@@ -2,7 +2,10 @@ package com.alg.algorithms.alg600;
 
 public class Alg510 {
     /**
-     * 509.斐波那契数列
+     * 509.斐波那契数列 5.0
+     * 4.0基础上简化dp数组多余空间
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
      * @param n
      * @return
      */
