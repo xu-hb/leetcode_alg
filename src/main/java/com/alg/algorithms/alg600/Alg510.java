@@ -60,4 +60,29 @@ public class Alg510 {
         return res;
     }
 
+    /**
+     * 509.斐波那契数列 4.0
+     * 递归转迭代
+     * 时间复杂度：O(N)
+     * 空间复杂度:O(N)
+     * @param n
+     * @return
+     */
+    public int fib_4(int n) {
+        if (n<2) return n;
+        dp = new int[n+1];
+        dp[0]=0;
+        dp[1]=1;
+        return calculate(n);
+    }
+    //记忆化数组
+    int[] dp;
+    private int calculate(int n){
+        if (n<2) return dp[n];
+        //将3.0的线性递归优化为线性迭代
+        for (int i=2;i<=n;i++){
+            dp[i] = dp[i-1]+dp[i-2];
+        }
+        return dp[n];
+    }
 }
