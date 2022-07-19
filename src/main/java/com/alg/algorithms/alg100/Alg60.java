@@ -1,5 +1,7 @@
 package com.alg.algorithms.alg100;
 
+import java.util.Arrays;
+
 public class Alg60 {
     /**
      * 53.最大子数组之和
@@ -26,7 +28,7 @@ public class Alg60 {
     }
 
     /**
-     * 53.最大子数组之和
+     * 53.最大子数组之和 2.0
      * DP
      * @param nums
      * @return
@@ -53,6 +55,45 @@ public class Alg60 {
             max = Math.max(max,dp[i]);
         }
         return max;
+    }
+
+    /**
+     * 53.最大子数组之和 3.0
+     * DP
+     * @param nums
+     * @return
+     */
+    public int maxSubArray_3(int[] nums){
+        if (nums.length==1){
+            return nums[0];
+        }
+        int[] dp = new int[nums.length];
+        dp[0] = nums[0];
+        int result = dp[0];
+        for (int i=1;i< nums.length;i++){
+            dp[i] = dp[i-1]>0 ? dp[i-1]+nums[i] : nums[i];
+            result = Math.max(result , dp[i]);
+        }
+        return result;
+    }
+
+    /**
+     * 53.最大子数组之和 4.0
+     * DP :dp数组空间优化:O(N)->O(1)
+     * @param nums
+     * @return
+     */
+    public int maxSubArray_4(int[] nums){
+        if (nums.length==1){
+            return nums[0];
+        }
+        int dp = nums[0];
+        int result = dp;
+        for (int i=1;i< nums.length;i++){
+            dp = dp >0 ? dp+nums[i] : nums[i];
+            result = Math.max(result , dp);
+        }
+        return result;
     }
 
     /**
