@@ -28,6 +28,31 @@ public class Alg440 {
     }
 
     /**
+     * 435.无重叠区间 2.0
+     * @param intervals
+     * @return
+     */
+    public int eraseOverlapIntervals_2(int[][] intervals) {
+        int n = intervals.length;
+        //按end升序排序
+        Arrays.sort(intervals , (o1, o2) -> {return o1[1]-o2[1];});
+
+        int[]dp = new int[n];
+        dp[0]=0;
+        int lastEnd = intervals[0][1];
+        for (int i=1;i<n;i++){
+            int start = intervals[i][0];
+            if (start>=lastEnd){
+                dp[i]=dp[i-1];
+                lastEnd = intervals[i][1];
+            }else {
+                dp[i] = 1+dp[i-1];
+            }
+        }
+        return dp[n-1];
+    }
+
+    /**
      * 438.找到字符串中所有字母异位词
      * @param s
      * @param p
