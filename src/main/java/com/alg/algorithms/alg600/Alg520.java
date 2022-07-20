@@ -41,4 +41,24 @@ public class Alg520 {
         //字符串&字符串翻转，转换为最长公共子序列问题
         return new Alg1150().longestCommonSubsequence(s , sb.toString());
     }
+
+    /**
+     * 518.零钱兑换II
+     * DP
+     * @param amount
+     * @param coins
+     * @return
+     */
+    public int change(int amount, int[] coins) {
+        //i:金额,V:可以凑成金额的组合数
+        int[] dp = new int[amount+1];
+        dp[0] = 1;
+
+        for (int coin : coins){
+            for (int i=coin;i<=amount;i++){
+                dp[i] += dp[i-coin];
+            }
+        }
+        return dp[amount];
+    }
 }
