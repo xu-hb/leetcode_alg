@@ -22,4 +22,21 @@ public class Alg820 {
         if (rightVal) root.right=null;
         return leftVal && rightVal && root.val==0;
     }
+
+    /**
+     * 814.二叉树剪枝 2.0
+     * @param root
+     * @return
+     */
+    public TreeNode pruneTree_2(TreeNode root){
+        if (root == null) {
+            return null;
+        }
+        root.left = pruneTree(root.left);
+        root.right = pruneTree(root.right);
+        if (root.left == null && root.right == null && root.val == 0) {
+            return null;
+        }
+        return root;
+    }
 }
