@@ -81,4 +81,24 @@ public class Alg920 {
         nums[l]=pivot;
         return l;
     }
+
+    /**
+     * 915.分割数组
+     * 时间复杂度：O(N^2) 时间超时
+     * @param nums
+     * @return
+     */
+    public int partitionDisjoint(int[] nums) {
+        int n = nums.length;
+        int leftMax = nums[0];
+        for (int i=0;i<n;i++){
+            leftMax = Math.max(leftMax,nums[i]);
+            int l=0,r=n-1;
+            while (l<r && nums[r]>=leftMax) r--;
+            if (r>i) continue;
+            //i为分割点
+            return i+1;
+        }
+        return -1;
+    }
 }
