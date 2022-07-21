@@ -53,7 +53,7 @@ public class TreeNode {
         }
         return result;
     }
-    public void serializePre(TreeNode root , StringBuilder sb){
+    private void serializePre(TreeNode root , StringBuilder sb){
         if (null==root){
             sb.append(",").append("#");
             return;

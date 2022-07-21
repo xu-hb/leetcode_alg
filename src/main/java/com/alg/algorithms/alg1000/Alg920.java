@@ -112,7 +112,7 @@ public class Alg920 {
         int n = nums.length;
         int leftMax = nums[0];
         int curMax = nums[0];
-        int pos = -1;
+        int pos = 0;
 
         for (int i=0;i<n;i++){
             curMax = Math.max(curMax , nums[i]);
