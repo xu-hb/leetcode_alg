@@ -93,12 +93,34 @@ public class Alg920 {
         int leftMax = nums[0];
         for (int i=0;i<n;i++){
             leftMax = Math.max(leftMax,nums[i]);
-            int l=0,r=n-1;
-            while (l<r && nums[r]>=leftMax) r--;
+            int r=n-1;
+            while (i<r && nums[r]>=leftMax) r--;
             if (r>i) continue;
             //i为分割点
             return i+1;
         }
         return -1;
+    }
+
+    /**
+     * 915.分割数组
+     * 时间复杂度:O(N)
+     * @param nums
+     * @return
+     */
+    public int partitionDisjoint_2(int[] nums) {
+        int n = nums.length;
+        int leftMax = nums[0];
+        int curMax = nums[0];
+        int pos = -1;
+
+        for (int i=0;i<n;i++){
+            curMax = Math.max(curMax , nums[i]);
+            if (nums[i]<leftMax){
+                leftMax = curMax;
+                pos=i;
+            }
+        }
+        return pos+1;
     }
 }
