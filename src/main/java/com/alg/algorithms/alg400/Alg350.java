@@ -8,6 +8,26 @@ import java.util.Set;
 public class Alg350 {
 
     /**
+     * 343.整数拆分
+     * DP
+     * @param n
+     * @return
+     */
+    public int integerBreak(int n) {
+        int[] dp = new int[n+1];
+        dp[2]=1;
+
+        for (int i=3;i<=n;i++){
+            for (int j=1;j<i;j++){
+                //dp[i]来源有两种：1.拆分为2个：j*(i-j);2.拆分为2个以上:j*dp[i-j]
+                dp[i] = Math.max(dp[i] , Math.max(j*dp[i-j] , j*(i-j)));
+            }
+        }
+
+        return dp[n];
+    }
+
+    /**
      * 344.反转字符串
      * @param s
      */
