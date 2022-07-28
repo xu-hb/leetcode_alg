@@ -35,4 +35,43 @@ public class Alg420 {
         }
         return dp[nums.length][sum];
     }
+
+    /**
+     * 416.分割等和子集 2.0
+     * @param nums
+     * @return
+     */
+    public boolean canPartition_2(int[] nums) {
+        int sum = Arrays.stream(nums).sum();
+        //奇数，不可能等分
+        if (sum%2==1) return false;
+
+        return bag01(nums , sum/2);
+    }
+
+    /**
+     * 01背包
+     * @param nums
+     * @return
+     */
+    private boolean bag01(int[] nums, int sum) {
+        int n=nums.length;
+        //i：0~i的物品；j：背包空间；v:是否装满
+        boolean[][] dp = new boolean[n+1][sum+1];
+        for (int i=0;i<dp.length;i++){
+            dp[i][0] = true;
+        }
+
+        for (int i=1;i<dp.length;i++){
+            for (int j=1;j<=sum;j++){
+                if (j-nums[i-1]>=0){
+                    dp[i][j] = dp[i-1][j] || dp[i-1][j-nums[i-1]];
+                }else {
+                    dp[i][j] = dp[i-1][j];
+                }
+            }
+        }
+
+        return dp[n][sum];
+    }
 }
