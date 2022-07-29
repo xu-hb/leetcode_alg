@@ -1,8 +1,6 @@
 package com.alg.algorithms.alg200;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Alg140 {
     List<List<String>> resultList = new ArrayList<>();
@@ -99,5 +97,24 @@ public class Alg140 {
         }
         //一个元素
         return nums[nums.length-1];
+    }
+
+    /**
+     * 136.只出现一次的数字 2.0
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
+     * @param nums
+     * @return
+     */
+    public int singleNumber_2(int[] nums) {
+        HashSet<Integer> set = new HashSet<>();
+        for (int n : nums){
+            if (set.contains(n)){
+                set.remove(n);
+            }else {
+                set.add(n);
+            }
+        }
+        return set.iterator().next();
     }
 }
