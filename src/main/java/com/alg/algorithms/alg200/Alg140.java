@@ -1,6 +1,7 @@
 package com.alg.algorithms.alg200;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Alg140 {
@@ -80,5 +81,23 @@ public class Alg140 {
            high--;
         }
         return low >= high;
+    }
+
+    /**
+     * 136.只出现一次的数字
+     * @param nums
+     * @return
+     */
+    public int singleNumber(int[] nums) {
+        if (nums.length==1)
+            return nums[0];
+
+        Arrays.sort(nums);
+        for (int i=0;i<nums.length;i++){
+            if (i%2==0) continue;
+            if (nums[i] !=nums[i-1]) return nums[i-1];
+        }
+        //一个元素
+        return nums[nums.length-1];
     }
 }
