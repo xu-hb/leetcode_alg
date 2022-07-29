@@ -1,6 +1,7 @@
 package com.alg.algorithms.alg1100;
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -74,5 +75,27 @@ public class Alg1050 {
             }
         }
         return String.valueOf(arr, 0, cursor + 1);
+    }
+
+    /**
+     * 1049.最后一块石头的重量II
+     * 01背包
+     * @param stones
+     * @return
+     */
+    public int lastStoneWeightII(int[] stones) {
+        int sum = Arrays.stream(stones).sum();
+        int target = sum>>1;
+
+        //i:背包容量；v：价值(重量)
+        int[]dp = new int[target+1];
+        dp[0] = 0;
+
+        for (int i=0;i<stones.length;i++){
+            for (int j=target;j>=stones[i];j--){
+                dp[j] = Math.max(dp[j],dp[j-stones[i]]+stones[i]);
+            }
+        }
+        return sum-dp[target]*2;
     }
 }
