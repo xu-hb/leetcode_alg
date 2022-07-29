@@ -1,8 +1,32 @@
 package com.alg.algorithms.alg1100;
 
 import java.util.ArrayDeque;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 public class Alg1050 {
+
+    /**
+     * 1046.最后一块石头的重量
+     * @param stones
+     * @return
+     */
+    public int lastStoneWeight(int[] stones) {
+        //降序
+        PriorityQueue<Integer> queue = new PriorityQueue<>((a,b)->b-a);
+        for (int s : stones){
+            queue.add(s);
+        }
+        while (queue.size()>1){
+            int a = queue.poll();
+            int b = queue.poll();
+            if (a!=b){
+                queue.offer(a-b);
+            }
+        }
+        return queue.isEmpty()?0:queue.poll();
+    }
+
     /**
      * 1047. 删除字符串中的所有相邻重复项
      * 栈
