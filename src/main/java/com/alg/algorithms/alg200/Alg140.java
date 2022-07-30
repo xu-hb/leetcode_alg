@@ -133,4 +133,25 @@ public class Alg140 {
         }
         return res;
     }
+
+    /**
+     * 137.只出现一次的数字 II
+     * @param nums
+     * @return
+     */
+    public int singleNumber_7(int[] nums) {
+        int res = 0;
+        for (int i=0;i<32;i++){
+            int msk = 1<<i;
+            int cnt = 0;
+            for (int j=0;j<nums.length;j++){
+                if ((nums[j] & msk) !=0)
+                    cnt++;
+            }
+            if (cnt % 3 !=0){
+                res |= msk;
+            }
+        }
+        return res;
+    }
 }
