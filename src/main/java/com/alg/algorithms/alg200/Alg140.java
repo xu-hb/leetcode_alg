@@ -117,4 +117,20 @@ public class Alg140 {
         }
         return set.iterator().next();
     }
+
+    /**
+     * 136.只出现一次的数字 3.0
+     * 使用异或（异或满足交换律；0^n=n; n^n=0）
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
+     * @param nums
+     * @return
+     */
+    public int singleNumber_3(int[] nums) {
+        int res = 0;
+        for (int n :nums){
+            res ^= n;
+        }
+        return res;
+    }
 }
