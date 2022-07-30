@@ -25,4 +25,24 @@ public class Alg1550 {
         }
         return false;
     }
+
+    /**
+     * 1550.存在连续三个奇数的数组
+     * 代码优化
+     * @param arr
+     * @return
+     */
+    public boolean threeConsecutiveOdds_2(int[] arr) {
+        byte mask = 1;
+        int cnt = 0;
+        for (int n : arr){
+            if ((n & mask) ==1)
+                cnt++;
+            else
+                cnt=0;
+            if (cnt==3)
+                return true;
+        }
+        return false;
+    }
 }
