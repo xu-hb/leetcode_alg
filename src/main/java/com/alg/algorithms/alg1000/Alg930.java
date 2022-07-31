@@ -29,4 +29,27 @@ public class Alg930 {
         }
         return nums;
     }
+
+    /**
+     * 922.按奇偶排序数组II 2.0
+     * 逻辑优化&代码简化
+     * @param nums
+     * @return
+     */
+    public int[] sortArrayByParityII_2(int[] nums) {
+        int evenIdx=0;//偶数索引
+        //遍历奇数位
+        for (int i=1;i<nums.length;i+=2){
+            if ((nums[i]&1)==0){
+                while ((nums[evenIdx]&1)==0){
+                    //寻找偶数位为奇数的索引
+                    evenIdx+=2;
+                }
+                int temp = nums[i];
+                nums[i] = nums[evenIdx];
+                nums[evenIdx] = temp;
+            }
+        }
+        return nums;
+    }
 }
