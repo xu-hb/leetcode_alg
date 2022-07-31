@@ -68,4 +68,28 @@ public class Alg910 {
         }
         return ans;
     }
+
+    /**
+     * 905.按奇偶排序数组
+     * @param nums
+     * @return
+     */
+    public int[] sortArrayByParity(int[] nums) {
+        int n = nums.length;
+        int low=0,high=n-1;
+        while (low<high){
+            if ((nums[low]&1)==1){
+                while (high>low && (nums[high]&1)==1){
+                    high--;
+                }
+                int temp = nums[low];
+                nums[low] = nums[high];
+                nums[high] = temp;
+
+                high--;
+            }
+            low++;
+        }
+        return nums;
+    }
 }
