@@ -22,4 +22,14 @@ public class ListNode {
         }
         return virtualNode.next;
     }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        ListNode cursor = this;
+        while (cursor !=null){
+            sb.append(cursor.val).append(",");
+            cursor = cursor.next;
+        }
+        return sb.toString();
+    }
 }

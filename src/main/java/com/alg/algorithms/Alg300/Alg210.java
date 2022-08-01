@@ -3,6 +3,8 @@ package com.alg.algorithms.Alg300;
 import com.alg.common.ListNode;
 import com.alg.design.tree.Trie;
 
+import java.util.Stack;
+
 public class Alg210 {
     /**
      * 203.移除链表的元素
@@ -25,6 +27,33 @@ public class Alg210 {
             }
         }
         return virtualHead.next;
+    }
+
+    /**
+     * 206.反转链表
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(N)
+     * @param head
+     * @return
+     */
+    public ListNode reverseList(ListNode head) {
+        Stack<ListNode> stack = new Stack<>();
+        ListNode cursor = head;
+        while (cursor !=null){
+            stack.push(cursor);
+            cursor = cursor.next;
+        }
+        int n = stack.size();
+        cursor = head;
+        for (int i=0;i<n/2;i++){
+            ListNode last = stack.pop();
+            int temp = cursor.val;
+            cursor.val = last.val;
+            last.val = temp;
+
+            cursor=cursor.next;
+        }
+        return head;
     }
 
     /**
