@@ -50,6 +50,35 @@ public class Alg100 {
     }
 
     /**
+     * 92.反转链表 II
+     * advance:一次遍历
+     * @param head
+     * @param left
+     * @param right
+     * @return
+     */
+    public ListNode reverseBetween_2(ListNode head, int left, int right){
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode pre=dummy;
+        //定位到left
+        for (int i=0;i<left-1;i++){
+            pre = pre.next;
+        }
+
+        ListNode cur = pre.next;
+        ListNode next;
+        //头插法
+        for (int i=0;i<right-left;i++){
+            next = cur.next;
+            cur.next = next.next;
+            next.next = pre.next;
+            pre.next = next;
+        }
+        return dummy.next;
+    }
+
+    /**
      * 93.复原IP地址
      * @param s
      * @return
