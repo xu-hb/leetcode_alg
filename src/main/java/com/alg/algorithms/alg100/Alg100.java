@@ -1,5 +1,6 @@
 package com.alg.algorithms.alg100;
 
+import com.alg.common.ListNode;
 import com.alg.common.TreeNode;
 
 import java.util.ArrayList;
@@ -12,6 +13,42 @@ public class Alg100 {
     List<String> tempList = new ArrayList<>();
     int len;
     int minCursor;
+
+    /**
+     * 92.反转链表 II
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
+     * @param head
+     * @param left
+     * @param right
+     * @return
+     */
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        if (head.next==null || left==right)
+            return head;
+
+        ListNode dummy = new ListNode();
+        dummy.next = head;
+        ListNode preLeft=dummy,leftNode=dummy.next;
+        //定位到left
+        for (int i=2;i<=left;i++){
+            preLeft = leftNode;
+            leftNode = leftNode.next;
+        }
+        //left~right开始反转
+        ListNode cursor = leftNode.next,preCursor = leftNode;
+        for (int i=left+1;i<=right;i++){
+            ListNode temp = cursor.next;
+            cursor.next = preCursor;
+            preCursor=cursor;
+            cursor = temp;
+        }
+        //拼接后续
+        preLeft.next.next=cursor;
+        preLeft.next=preCursor;
+        return dummy.next;
+    }
+
     /**
      * 93.复原IP地址
      * @param s
