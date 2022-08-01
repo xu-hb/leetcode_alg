@@ -57,6 +57,37 @@ public class Alg210 {
     }
 
     /**
+     * 206.反转链表 2.0
+     * 递归
+     * @param head
+     * @return
+     */
+    public ListNode reverseList_2(ListNode head) {
+        this.head = head;
+        reverse(head , 0);
+        return head;
+    }
+
+    int count = 0;
+    ListNode head;
+
+    private void reverse(ListNode root , int n) {
+        if (root ==null)
+            return;
+        count++;
+        reverse(root.next , n+=1);
+        if (n<=count/2){
+            return;
+        }
+
+        int temp = root.val;
+        root.val = head.val;
+        head.val=temp;
+
+        head = head.next;
+    }
+
+    /**
      * 208.实现Trie(前缀树)
      */
     public void Trie(){
