@@ -107,6 +107,22 @@ public class Alg210 {
     }
 
     /**
+     * 206.反转链表 4.0
+     * 递归，指针反转
+     * @param head
+     * @return
+     */
+    public ListNode reverseList_4(ListNode head) {
+        if (null==head || null==head.next){
+            return head;
+        }
+        ListNode newHead = reverseList_4(head.next);
+        head.next.next=head;
+        head.next=null;
+        return newHead;
+    }
+
+    /**
      * 208.实现Trie(前缀树)
      */
     public void Trie(){
