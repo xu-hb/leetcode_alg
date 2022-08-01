@@ -20,4 +20,23 @@ public class Alg1380 {
         }
         return sb.toString();
     }
+
+    /**
+     * 1374.生成每种字符都是奇数个的字符串 2.0
+     * 代码优化
+     * @param n
+     * @return
+     */
+    public String generateTheString_2(int n){
+        StringBuilder sb = new StringBuilder();
+        for (int i=0;i<n-1;i++){
+            sb.append("a");
+        }
+        if ((n&1)==0){
+            sb.append("b");
+        }else {
+            sb.append("a");
+        }
+        return sb.toString();
+    }
 }
