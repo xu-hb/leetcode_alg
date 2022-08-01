@@ -57,6 +57,25 @@ public class Alg210 {
     }
 
     /**
+     * 206.反转链表 3.0
+     * 直接反转指针：1->2->3->null;  null<-1<-2<-3
+     * @param head
+     * @return
+     */
+    public ListNode reverseList_3(ListNode head) {
+        ListNode cur=head,pre=null;
+        while (cur !=null){
+            ListNode temp = cur.next;
+            cur.next = pre;
+
+            pre=cur;
+            cur=temp;
+        }
+
+        return pre;
+    }
+
+    /**
      * 206.反转链表 2.0
      * 递归
      * @param head
