@@ -5,6 +5,7 @@ import com.alg.design.cache.Node;
 
 /**
  * 622.循环队列
+ * 基于链表
  */
 public class MyCircularQueue {
     //容量
