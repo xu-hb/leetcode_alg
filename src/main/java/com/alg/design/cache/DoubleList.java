@@ -33,6 +33,21 @@ public class DoubleList<K,V> {
     }
 
     /**
+     * 新增节点到队尾
+     * @param node
+     * @return
+     */
+    public Node<K,V> addLast(Node<K,V> node){
+        node.prev = tail.prev;
+        tail.prev.next=node;
+        node.next = tail;
+        tail.prev=node;
+
+        size++;
+        return node;
+    }
+
+    /**
      * 移除
      * @param node
      * @return
@@ -43,6 +58,27 @@ public class DoubleList<K,V> {
         size--;
         return node;
     }
+
+    /**
+     * 获取第一个元素
+     * @return
+     */
+    public Node<K,V> getFirst(){
+        Node<K,V> first = head.next;
+        if (first ==null || first==tail) return null;
+        return first;
+    }
+
+    /**
+     * 获取最后一个元素
+     * @return
+     */
+    public Node<K,V> getLast(){
+        Node<K,V> last = tail.prev;
+        if (last ==null || last==head) return null;
+        return last;
+    }
+
 
     /**
      * 移除最后一个节点
