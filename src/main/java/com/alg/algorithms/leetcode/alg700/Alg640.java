@@ -91,4 +91,32 @@ public class Alg640 {
 
         return root;
     }
+
+    /**
+     * 632.在二叉树中增加一行 3.0
+     * DFS
+     * @param root
+     * @param val
+     * @param depth
+     * @return
+     */
+    public TreeNode addOneRow_3(TreeNode root, int val, int depth){
+        if (depth==1){
+            return new TreeNode(val , root , null);
+        }
+        this.val = val;
+        this.depth = depth;
+        dfs(root,1);
+        return root;
+    }
+    private int val,depth;
+    private void dfs(TreeNode root , int d) {
+        if (root==null) return;
+        if (d==depth-1){
+            root.left = new TreeNode(val , root.left , null);
+            root.right = new TreeNode(val , null , root.right);
+        }
+        dfs(root.left,d+1);
+        dfs(root.right,d+1);
+    }
 }
