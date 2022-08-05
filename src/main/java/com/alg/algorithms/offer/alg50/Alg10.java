@@ -80,4 +80,29 @@ public class Alg10 {
         }
         return -1;
     }
+
+    /**
+     * 4.二维数组中的查找
+     * 时间复杂度:O(n+m)
+     * 空间复杂度：O(1)
+     * @param matrix
+     * @param target
+     * @return
+     */
+    public boolean findNumberIn2DArray(int[][] matrix, int target) {
+        int n = matrix.length;
+        if (n==0) return false;
+        int m = matrix[0].length;
+        int i=0,j=m-1;
+        //旋转45°，转换成平衡二叉树
+        while (i<n && j>=0){
+            if (matrix[i][j]==target) return true;
+            if (matrix[i][j]<target){
+                i++;
+            }else {
+                j--;
+            }
+        }
+        return false;
+    }
 }
