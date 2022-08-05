@@ -3,6 +3,7 @@ package com.alg.algorithms.leetcode.alg700;
 import com.alg.common.TreeNode;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class Alg640 {
@@ -57,5 +58,37 @@ public class Alg640 {
             }
         }
         return dummyNode.left;
+    }
+
+    /**
+     * 632.在二叉树中增加一行 2.0
+     * BFS：优化
+     * @param root
+     * @param val
+     * @param depth
+     * @return
+     */
+    public TreeNode addOneRow_2(TreeNode root, int val, int depth){
+        if (depth==1){
+            return new TreeNode(val , root , null);
+        }
+
+        List<TreeNode> list = new LinkedList<>();
+        list.add(root);
+        for (int i=1;i<depth-1;i++){
+            List<TreeNode> sunNodes = new LinkedList<>();
+            for (TreeNode node : list){
+                if (node.left !=null) sunNodes.add(node.left);
+                if (node.right !=null) sunNodes.add(node.right);
+                list = sunNodes;
+            }
+        }
+
+        for (TreeNode node : list){
+            node.left = new TreeNode(val , node.left ,null);
+            node.right = new TreeNode(val , null, node.right);
+        }
+
+        return root;
     }
 }
