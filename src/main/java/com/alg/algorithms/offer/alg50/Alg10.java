@@ -1,5 +1,7 @@
 package com.alg.algorithms.offer.alg50;
 
+import com.alg.common.ListNode;
+
 import java.util.*;
 
 /**
@@ -120,5 +122,28 @@ public class Alg10 {
                 sb.append(s.charAt(i));
         }
         return sb.toString();
+    }
+
+    /**
+     * 6.从尾到头打印链表
+     * 栈：不改变链表
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(N)
+     * @param head
+     * @return
+     */
+    public int[] reversePrint(ListNode head) {
+        Stack<Integer> stack = new Stack<>();
+        ListNode cur = head;
+        while (cur !=null){
+            stack.push(cur.val);
+            cur = cur.next;
+        }
+        int[] val = new int[stack.size()];
+        int idx=0;
+        while (! stack.isEmpty()){
+            val[idx++] = stack.pop();
+        }
+        return val;
     }
 }
