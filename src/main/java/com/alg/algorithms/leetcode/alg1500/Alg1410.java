@@ -99,28 +99,20 @@ public class Alg1410 {
 
     /**
      * 1408.数组中的字符串匹配
-     * 时间复杂度：O(N^2)
+     * 时间复杂度：O(N^2*L^2)
      * 空间复杂度：O(1)
      * @param words
      * @return
      */
     public List<String> stringMatching(String[] words) {
-        String F = "A";
-        List<String> result = new ArrayList<>();
-
-        for (int i=0;i< words.length;i++){
-            String wi = words[i];
-            if (F==wi) continue;
-            for (int j=0;j< words.length;j++){
-                String wj = words[j];
-                if (F==wj) continue;
-
-                if (wi.length()>wj.length() && wi.contains(wj)){
-                    result.add(wj);
-                    words[j]=F;
+        List<String> res = new ArrayList<String>();
+        for (int i = 0; i < words.length; i++) {
+            for (int j = 0; j < words.length; j++) {
+                if (i != j && words[j].contains(words[i])) {
+                    ret.add(words[i]);
+                    break;
                 }
             }
         }
-        return result;
     }
 }
