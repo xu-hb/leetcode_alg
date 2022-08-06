@@ -146,4 +146,33 @@ public class Alg10 {
         }
         return val;
     }
+
+    /**
+     * 6.从尾到头打印链表 2.0
+     * 链表反转
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
+     * @param head
+     * @return
+     */
+    public int[] reversePrint_2(ListNode head) {
+        int count = 0;
+        ListNode pre = null,cur = head;
+        while (cur !=null){
+            count++;
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+
+        int idx = 0;
+        int[] res = new int[count];
+        while (pre !=null){
+            res[idx++] = pre.val;
+            pre = pre.next;
+        }
+
+        return res;
+    }
 }
