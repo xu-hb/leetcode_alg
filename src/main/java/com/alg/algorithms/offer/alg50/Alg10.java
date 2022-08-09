@@ -2,6 +2,7 @@ package com.alg.algorithms.offer.alg50;
 
 import com.alg.common.ListNode;
 import com.alg.common.TreeNode;
+import com.alg.design.queue.CQueue;
 
 import java.util.*;
 
@@ -225,5 +226,18 @@ public class Alg10 {
         root.right = build(pEnd_1+1,pEnd,iIdx+1,iEnd);
 
         return root;
+    }
+
+    /**
+     * 9.用两个栈实现队列
+     * @see CQueue
+     * @return
+     */
+    private CQueue cQueue(){
+        CQueue queue = new CQueue();
+        queue.appendTail(5);
+        queue.deleteHead();
+        queue.deleteHead();
+        return queue;
     }
 }
