@@ -114,5 +114,6 @@ public class Alg1410 {
                 }
             }
         }
+        return res;
     }
 }
