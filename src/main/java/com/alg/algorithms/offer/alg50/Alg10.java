@@ -1,6 +1,7 @@
 package com.alg.algorithms.offer.alg50;
 
 import com.alg.common.ListNode;
+import com.alg.common.TreeNode;
 
 import java.util.*;
 
@@ -174,5 +175,55 @@ public class Alg10 {
         }
 
         return res;
+    }
+
+    /**
+     * 7.重建二叉树
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(N)
+     * @param preorder
+     * @param inorder
+     * @return
+     */
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if (preorder==null)
+            return null;
+
+        this.preorder = preorder;
+        this.inorder = inorder;
+        //存储中序val-idx
+        inMap = new HashMap<>(inorder.length);
+        for (int i=0;i<inorder.length;i++){
+            inMap.put(inorder[i], i);
+        }
+
+        return build(0,preorder.length-1,0,inorder.length-1);
+    }
+    Map<Integer,Integer> inMap;
+    int[] preorder;
+    int[] inorder;
+
+    private TreeNode build(int pStart,int pEnd,int iStart,int iEnd){
+        if (pStart>pEnd || iStart>iEnd){
+            return null;
+        }
+
+        //根节点
+        int rootVal = preorder[pStart];
+        TreeNode root = new TreeNode(rootVal);
+
+        int iIdx = inMap.get(rootVal);
+        int size = (iIdx-1)-iStart;
+
+        int pStart_1=pStart+1;
+        int pEnd_1=pStart_1+size;
+        int iStart_1=iStart;
+        int iEnd_1=iIdx-1;
+        //1.构建左子树--
+        root.left = build(pStart_1,pEnd_1,iStart_1,iEnd_1);
+        //2.构建右子树--
+        root.right = build(pEnd_1+1,pEnd,iIdx+1,iEnd);
+
+        return root;
     }
 }
