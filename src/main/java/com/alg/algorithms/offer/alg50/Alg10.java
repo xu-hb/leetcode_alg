@@ -240,4 +240,22 @@ public class Alg10 {
         queue.deleteHead();
         return queue;
     }
+
+    /**
+     * 10.斐波那契数列
+     * @param n
+     * @return
+     */
+    public int fib(int n) {
+        if (n<2){
+            return n;
+        }
+        int f0=0,f1=1;
+        for (int i=2;i<=n;i++){
+            int fn = (f0+f1)%1000000007;
+            f0 = f1;
+            f1 = fn;
+        }
+        return f1;
+    }
 }
