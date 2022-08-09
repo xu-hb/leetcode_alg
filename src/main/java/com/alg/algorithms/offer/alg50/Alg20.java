@@ -40,4 +40,49 @@ public class Alg20 {
         }
         return numbers[r];
     }
+
+    /**
+     * 12.矩阵中的路径
+     * @param board
+     * @param word
+     * @return
+     */
+    public boolean exist(char[][] board, String word) {
+        this.board = board;
+        this.word = word;
+        for (int i=0;i<board.length;i++){
+            for (int j=0;j<board[i].length;j++){
+                if (exist(i,j,0))
+                    return true;
+            }
+        }
+        return false;
+    }
+    char[][] board;
+    String word;
+    private boolean exist(int rowIdx , int lineIdx , int strIdx) {
+        if (strIdx>word.length()-1){
+            return true;
+        }
+        if (rowIdx<0 || rowIdx>board.length-1 || lineIdx<0 || lineIdx>board[0].length-1){
+            return false;
+        }
+        if (board[rowIdx][lineIdx]=='1'){
+            return false;
+        }
+        char w = word.charAt(strIdx);
+
+        if (board[rowIdx][lineIdx]==w){
+            board[rowIdx][lineIdx]='1';
+            boolean res = exist(rowIdx,lineIdx+1,strIdx+1) ||
+                    exist(rowIdx+1,lineIdx,strIdx+1) ||
+                    exist(rowIdx,lineIdx-1,strIdx+1) ||
+                    exist(rowIdx-1,lineIdx,strIdx+1);
+            if (! res)
+                board[rowIdx][lineIdx]=w;
+            return res;
+        }else {
+            return false;
+        }
+    }
 }
