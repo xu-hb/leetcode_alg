@@ -258,4 +258,40 @@ public class Alg10 {
         }
         return f1;
     }
+
+    /**
+     * 10-II.青蛙跳台阶问题
+     * dp
+     * @param n
+     * @return
+     */
+    public int numWays(int n) {
+        if (n==0) return 1;
+        //k:1~k个台阶；v:跳法
+        int[] dp = new int[n+1];
+        dp[0]=1;
+        dp[1]=1;
+        for (int i=2;i<=n;i++){
+            dp[i] = (dp[i-1]+dp[i-2])%1000000007;
+        }
+        return dp[n];
+    }
+
+    /**
+     * 10-II.青蛙跳台阶问题 2.0
+     * 空间优化
+     * @param n
+     * @return
+     */
+    public int numWays_2(int n) {
+        if (n==0) return 1;
+        //k:1~k个台阶；v:跳法
+        int a0=1,a1=1;
+        for (int i=2;i<=n;i++){
+            int temp = (a0+a1)%1000000007;
+            a0=a1;
+            a1=temp;
+        }
+        return a1;
+    }
 }
