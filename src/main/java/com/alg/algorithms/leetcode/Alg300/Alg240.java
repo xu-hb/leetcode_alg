@@ -4,6 +4,24 @@ import com.alg.common.TreeNode;
 
 public class Alg240 {
     /**
+     * 231.2的幂
+     * @param n
+     * @return
+     */
+    public boolean isPowerOfTwo(int n) {
+        if (n<0) return false;
+
+        int cnt=0;
+        while (n!=0){
+            cnt++;
+            //(n-1)&n会将最后一个1置为0
+            n = (n-1) & n;
+        }
+        //计算n的二进制中1的个数
+        return cnt==1;
+    }
+
+    /**
      * 235.二叉搜索时的最近公共祖先
      * @param root
      * @param p
