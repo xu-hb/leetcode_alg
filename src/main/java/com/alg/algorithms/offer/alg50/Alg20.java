@@ -120,4 +120,35 @@ public class Alg20 {
         }
         return cnt;
     }
+
+    /**
+     * 16.数值的整数次方
+     * @param x
+     * @param n
+     * @return
+     */
+    public double myPow(double x, int n) {
+        if (x==0)
+            return 0;
+        double res = 1;
+        long b=n;
+        long len = Math.abs(b);
+        long i=1;
+        while (i<=len){
+            int t=1;
+            double temp = x;
+            while (i+2*t<len && t<Integer.MAX_VALUE/2){
+                temp *= temp;
+                t *= 2;
+            }
+            res *=temp;
+            i+=t;
+        }
+
+        if (n>=0)
+            return res;
+        else
+            return 1/res;
+    }
+
 }
