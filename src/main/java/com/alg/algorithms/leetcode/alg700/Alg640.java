@@ -148,4 +148,92 @@ public class Alg640 {
         return res;
     }
 
+    /**
+     * 640.求解方程
+     * @param equation
+     * @return
+     */
+    public String solveEquation(String equation) {
+        char defSym = '+';
+        char var = 'x';
+
+        //最开始和'='的后一位增加符合位：len+2
+        char[] arr = new char[equation.length()+2];
+        int idx=0;
+        //初始化
+        for (int i=0;i<equation.length();i++,idx++){
+            char c = equation.charAt(i);
+            if (i==0 && c!='+' && c!='-'){
+                arr[idx]=defSym;
+                ++idx;
+                arr[idx] = c;
+            }else if (c=='=' && equation.charAt(i+1) !='+' && equation.charAt(i+1) !='-'){
+                arr[idx] = c;
+                arr[++idx] = defSym;
+            }else {
+                arr[idx] = c;
+            }
+        }
+
+        int leftFlag = -1;   //左侧倍数
+        int v = 0;  //数值
+        int leftVal = 0,rightVal=0;
+        boolean varFlag=false;
+        int times=1;
+
+        for (int i=arr.length-1;i>=0;i--){
+            if (arr[i]=='='){
+                //到达左侧
+                leftFlag = 1;
+                continue;
+            }
+            //1.符号
+            if (arr[i]=='+' || arr[i]=='-'){
+                int tep = transferVar(arr[i]);
+                //兼容数值1x写为x的情况
+                int val = v==0 ? 1 : v;
+                if (varFlag){
+                    //计算左侧变量
+                    leftVal += tep * leftFlag * val;
+                }else {
+                    //计算右侧值
+                    rightVal += -1 * tep * leftFlag * val;
+                }
+                varFlag=false;
+                times=1;
+                v=0;
+            }
+            //2.常数
+            if (arr[i]>='0' && arr[i]<='9'){
+                v+=(arr[i]-'0')*times;
+                times*=10;
+            }
+            //3.变量
+            if (arr[i]==var){
+                varFlag=true;
+            }
+        }
+
+        //对比结果
+        if (leftVal==0 && rightVal==0)
+            //无限解
+            return "Infinite solutions";
+
+        if (leftVal==0 && rightVal !=0)
+            //无解
+            return "No solution";
+
+        //只有一个解
+        int temp = rightVal / leftVal;
+        return "x="+temp;
+    }
+
+    /**
+     * 运算符转换
+     * @param c
+     * @return
+     */
+    private int transferVar(char c){
+        return c=='+' ? 1 : -1;
+    }
 }
