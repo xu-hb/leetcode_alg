@@ -10,6 +10,7 @@ import java.util.Queue;
 public class Alg200 {
     /**
      * 191.二进制中1的个数
+     * 时间复杂度：O(N) N为n的二进制位数
      * @param n
      * @return
      */
@@ -21,6 +22,22 @@ public class Alg200 {
                 cnt++;
             }
             k<<=1;
+        }
+        return cnt;
+    }
+
+    /**
+     * 191.二进制中1的个数 2.0
+     * 时间复杂度：O(M),M为n中1的个数
+     * @param n
+     * @return
+     */
+    public int hammingWeight_2(int n) {
+        int cnt=0;
+        while (n!=0){
+            cnt++;
+            //(n-1)&n会将最后一个1置为0
+            n = (n-1) & n;
         }
         return cnt;
     }
