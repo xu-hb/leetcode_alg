@@ -151,4 +151,34 @@ public class Alg20 {
             return 1/res;
     }
 
+    /**
+     * 16.数值的整数次方 2.0
+     * 快速幂 good
+     * 时间复杂度：O(logN)
+     * 空间复杂度:O(1)
+     * @param x
+     * @param n
+     * @return
+     */
+    public double myPow_2(double x, int n){
+        //x^n可表示为：x^a*x^b..*x^c = x^(a+b+..+c)
+        //即：n=a+b+..+c，这与n的二进制位中1的位置一致
+        //如：x^15=x^1*x^2*x^4*x^8=x^(1+2+4+8),n=15。15的二进制位：0000 0000 0000 1111,即15=2^0+2^1+2^2+2^3=1+2+4+8
+        if (n==0) return 1;
+        if (n==1) return x;
+
+        double res = 1;   //结果
+        long b=n;   //防止负数转正数溢出
+        long absN = Math.abs(b);
+        while (absN>0){
+            if ((absN & 1)==1){
+                res *= x;
+            }
+            x*=x;
+            absN >>= 1;
+        }
+
+        return n>0 ? res : 1/res;
+    }
+
 }
