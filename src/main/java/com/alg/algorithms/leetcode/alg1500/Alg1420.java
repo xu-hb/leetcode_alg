@@ -58,4 +58,41 @@ public class Alg1420 {
         }
         return sb.toString();
     }
+
+    /**
+     * 1417.重新格式化字符串 2.0
+     * 代码优化
+     * @param s
+     * @return
+     */
+    public String reformat_2(String s) {
+        int sumDigit = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (Character.isDigit(c)) {
+                sumDigit++;
+            }
+        }
+        int sumAlpha = s.length() - sumDigit;
+        if (Math.abs(sumDigit - sumAlpha) > 1) {
+            return "";
+        }
+        boolean flag = sumDigit > sumAlpha;
+        char[] arr = s.toCharArray();
+        for (int i = 0, j = 1; i < s.length(); i += 2) {
+            if (Character.isDigit(arr[i]) != flag) {
+                while (Character.isDigit(arr[j]) != flag) {
+                    j += 2;
+                }
+                swap(arr, i, j);
+            }
+        }
+        return new String(arr);
+    }
+
+    public void swap(char[] arr, int i, int j) {
+        char c = arr[i];
+        arr[i] = arr[j];
+        arr[j] = c;
+    }
 }
