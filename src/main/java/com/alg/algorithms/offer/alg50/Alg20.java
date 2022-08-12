@@ -1,5 +1,8 @@
 package com.alg.algorithms.offer.alg50;
 
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
 public class Alg20 {
     /**
      * 11.旋转数组的最小数字
@@ -181,4 +184,17 @@ public class Alg20 {
         return n>0 ? res : 1/res;
     }
 
+    /**
+     * 17.打印从1到最大的n位数
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
+     * @param n
+     * @return
+     */
+    public int[] printNumbers(int n) {
+        int base=10;
+        int max = (int) (Math.pow(base,n)-1);
+        IntStream stream = IntStream.iterate(1,x->x+1).limit(max);
+        return stream.toArray();
+    }
 }
