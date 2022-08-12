@@ -40,4 +40,34 @@ public class Alg1300 {
         });
         return resList;
     }
+
+    /**
+     * 1282.用户分组 2.0
+     * 代码优化
+     * @param groupSizes
+     * @return
+     */
+    public List<List<Integer>> groupThePeople_2(int[] groupSizes){
+        Map<Integer,List<Integer>> groups = new HashMap<>();
+        for (int i=0;i< groupSizes.length;i++){
+            groups.putIfAbsent(groupSizes[i], new ArrayList<>());
+            groups.get(groupSizes[i]).add(i);
+        }
+
+        List<List<Integer>> resList = new ArrayList<>(groupSizes.length);
+        for (Map.Entry<Integer,List<Integer>> entry : groups.entrySet()){
+            List<Integer> people = entry.getValue();
+            int size = entry.getKey();
+            int count = people.size() / size;
+            for (int i=0;i<count;i++){
+                List<Integer> group = new ArrayList<>(size);
+                int start = i * size;
+                for (int j = 0; j < size; j++) {
+                    group.add(people.get(start + j));
+                }
+                resList.add(group);
+            }
+        }
+        return resList;
+    }
 }
