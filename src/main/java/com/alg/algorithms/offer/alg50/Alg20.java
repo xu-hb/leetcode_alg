@@ -1,5 +1,7 @@
 package com.alg.algorithms.offer.alg50;
 
+import com.alg.common.ListNode;
+
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -196,5 +198,28 @@ public class Alg20 {
         int max = (int) (Math.pow(base,n)-1);
         IntStream stream = IntStream.iterate(1,x->x+1).limit(max);
         return stream.toArray();
+    }
+
+    /**
+     * 18.删除链表的节点
+     * @param head
+     * @param val
+     * @return
+     */
+    public ListNode deleteNode(ListNode head, int val) {
+        if (head==null)
+            return null;
+        ListNode dummyNode = new ListNode(-val);
+        dummyNode.next=head;
+
+        ListNode cursor = dummyNode;
+        while (cursor.next !=null){
+            if (cursor.next.val==val){
+                cursor.next = cursor.next.next;
+                return dummyNode.next;
+            }
+            cursor = cursor.next;
+        }
+        return dummyNode.next;
     }
 }
