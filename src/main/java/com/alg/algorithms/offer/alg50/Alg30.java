@@ -131,4 +131,23 @@ public class Alg30 {
         }
         return false;
     }
+
+    /**
+     * 26.树的结构 2.0
+     * 代码简化
+     * @param A
+     * @param B
+     * @return
+     */
+    public boolean isSubStructure_2(TreeNode A, TreeNode B){
+        return (A!=null && B!=null) && (recur(A,B) || isSubStructure_2(A.left,B) || isSubStructure_2(A.right,B));
+    }
+
+    private boolean recur(TreeNode A, TreeNode B) {
+        if (B==null) return true;
+        if (A==null || A.val!=B.val) return false;
+        return recur(A.left,B.left) && recur(A.right,B.right);
+    }
+
+
 }
