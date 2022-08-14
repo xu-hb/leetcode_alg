@@ -1,11 +1,30 @@
 package com.alg.algorithms.leetcode.alg200;
 
+import com.alg.common.ListNode;
 import com.alg.common.TreeNode;
 import com.alg.design.LRUCache;
 
 import java.util.*;
 
 public class Alg150 {
+
+    /**
+     * 141.环形链表
+     * @param head
+     * @return
+     */
+    public boolean hasCycle(ListNode head) {
+        ListNode fast=head,slow=head;
+        while (fast!=null && fast.next!=null){
+           slow = slow.next;
+           fast = fast.next.next;
+           if (slow==fast){
+               return true;
+           }
+       }
+        return false;
+    }
+
     /**
      * 144.二叉树的前序遍历
      * 递归
