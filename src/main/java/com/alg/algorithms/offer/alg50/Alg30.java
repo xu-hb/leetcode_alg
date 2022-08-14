@@ -3,6 +3,7 @@ package com.alg.algorithms.offer.alg50;
 import com.alg.common.ListNode;
 import com.alg.common.TreeNode;
 
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -209,5 +210,35 @@ public class Alg30 {
         if (root1==null || root2==null)
             return false;
         return root1.val == root2.val && isSymmetric(root1.left,root2.right) && isSymmetric(root1.right,root2.left);
+    }
+
+    /**
+     * 28.对称的二叉树 2.0
+     * 迭代
+     * @param root
+     * @return
+     */
+    public boolean isSymmetric_2(TreeNode root) {
+        if (root==null)
+            return true;
+        Deque<TreeNode> deque = new LinkedList<>();
+        TreeNode r1=root,r2=root;
+        deque.push(r1);
+        deque.push(r2);
+
+        while (! deque.isEmpty()){
+            r2 = deque.poll();
+            r1 = deque.poll();
+            if (r1==null && r2==null)
+                continue;
+            if (r1==null || r2==null || r2.val!=r1.val)
+                return false;
+            deque.push(r1.left);
+            deque.push(r2.right);
+
+            deque.push(r1.right);
+            deque.push(r2.left);
+        }
+        return true;
     }
 }
