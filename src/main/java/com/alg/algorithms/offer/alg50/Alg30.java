@@ -3,6 +3,10 @@ package com.alg.algorithms.offer.alg50;
 import com.alg.common.ListNode;
 import com.alg.common.TreeNode;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 public class Alg30 {
     /**
      * 22.链表中倒数第k个节点
@@ -164,6 +168,29 @@ public class Alg30 {
         mirrorTree(root.left);
         mirrorTree(root.right);
 
+        return root;
+    }
+
+    /**
+     * 27.二叉树的镜像 2.0
+     * 迭代
+     * @param root
+     * @return
+     */
+    public TreeNode mirrorTree_2(TreeNode root){
+        if (root==null)
+            return null;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (! queue.isEmpty()){
+            TreeNode node = queue.poll();
+            TreeNode temp = node.left;
+            node.left = node.right;
+            node.right = temp;
+
+            if (node.left !=null) queue.add(node.left);
+            if (node.right !=null) queue.add(node.right);
+        }
         return root;
     }
 }
