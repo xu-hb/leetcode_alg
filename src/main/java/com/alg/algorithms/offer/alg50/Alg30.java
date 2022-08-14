@@ -1,6 +1,7 @@
 package com.alg.algorithms.offer.alg50;
 
 import com.alg.common.ListNode;
+import com.alg.common.TreeNode;
 
 public class Alg30 {
     /**
@@ -98,5 +99,36 @@ public class Alg30 {
             l2.next = mergeTwoLists_2(l1,l2.next);
             return l2;
         }
+    }
+
+    /**
+     * 26.树的子结构
+     * @param A
+     * @param B
+     * @return
+     */
+    public boolean isSubStructure(TreeNode A, TreeNode B) {
+        if (B==null || A==null)
+            return false;
+        //先序
+        boolean res = judgeEqu(A,B);
+        if (! res){
+            res = isSubStructure(A.left,B);
+        }
+        if (! res){
+            res = isSubStructure(A.right,B);
+        }
+        return res;
+    }
+
+    private boolean judgeEqu(TreeNode A, TreeNode B){
+        if (B==null)
+            return true;
+        if (A==null)
+            return false;
+        if (A.val==B.val) {
+            return judgeEqu(A.left, B.left) && judgeEqu(A.right, B.right);
+        }
+        return false;
     }
 }
