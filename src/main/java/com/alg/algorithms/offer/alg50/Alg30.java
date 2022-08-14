@@ -2,6 +2,7 @@ package com.alg.algorithms.offer.alg50;
 
 import com.alg.common.ListNode;
 import com.alg.common.TreeNode;
+import com.alg.design.stack.MinStack;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -240,5 +241,16 @@ public class Alg30 {
             deque.push(r2.left);
         }
         return true;
+    }
+
+    /**
+     * 30.包含min函数的栈
+     * @see MinStack
+     * @return
+     */
+    public MinStack MinStack(){
+        MinStack stack = new MinStack();
+        stack.push(-1);
+        return stack;
     }
 }
