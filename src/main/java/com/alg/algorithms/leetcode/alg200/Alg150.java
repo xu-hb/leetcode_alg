@@ -26,6 +26,29 @@ public class Alg150 {
     }
 
     /**
+     * 142.环形链表II good
+     * @param head
+     * @return
+     */
+    public ListNode detectCycle(ListNode head) {
+        ListNode fast=head,slow=head;
+        ListNode cur=head;
+        while (fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow==fast){
+                //存在环,相遇点到环点的距离与头节点到环点距离相同
+                while (cur !=slow){
+                    cur = cur.next;
+                    slow = slow.next;
+                }
+                return cur;
+            }
+        }
+        return null;
+    }
+
+    /**
      * 144.二叉树的前序遍历
      * 递归
      * 时间复杂度：O(N)
