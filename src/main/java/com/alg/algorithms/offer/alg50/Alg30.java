@@ -29,4 +29,22 @@ public class Alg30 {
         }
         return slow;
     }
+
+    /**
+     * 24.反转链表
+     * @param head
+     * @return
+     */
+    public ListNode reverseList(ListNode head) {
+        ListNode cur=head,pre=null;
+        while (cur !=null){
+            ListNode temp = cur.next;
+            cur.next = pre;
+
+            pre=cur;
+            cur=temp;
+        }
+
+        return pre;
+    }
 }
