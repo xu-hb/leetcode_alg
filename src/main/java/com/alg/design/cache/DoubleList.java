@@ -18,6 +18,18 @@ public class DoubleList<K,V> {
     }
 
     /**
+     * 添加节点
+     * @param k
+     * @param v
+     * @return
+     */
+    public Node<K,V> addFirst(K k , V v){
+        Node<K,V> node = createNode(k,v);
+        return addFirst(node);
+    }
+
+
+    /**
      * 新增节点到第一个节点
      * @param node
      * @return
@@ -30,6 +42,10 @@ public class DoubleList<K,V> {
 
         size++;
         return node;
+    }
+
+    public Node<K,V> addLast(K k, V v){
+        return addLast(createNode(k,v));
     }
 
     /**
@@ -79,6 +95,11 @@ public class DoubleList<K,V> {
         return last;
     }
 
+    public Node<K,V> removeFirst(){
+        Node<K,V> first = getFirst();
+        if (first ==null || first==head) return null;
+        return remove(first);
+    }
 
     /**
      * 移除最后一个节点
@@ -98,4 +119,13 @@ public class DoubleList<K,V> {
         return size;
     }
 
+    /**
+     * 创建node
+     * @param k
+     * @param v
+     * @return
+     */
+    private Node<K,V> createNode(K k, V v) {
+        return new Node<>(k,v);
+    }
 }

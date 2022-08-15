@@ -1,10 +1,22 @@
 package com.alg.algorithms.leetcode.alg700;
 
+import com.alg.design.deque.MyCircularDeque;
 import com.alg.design.tree.Trie;
 
 import java.util.List;
 
 public class Alg650 {
+    /**
+     * 641.设计循环双端队列
+     * @see MyCircularDeque
+     * @return
+     */
+    public MyCircularDeque circularDeque(){
+        MyCircularDeque circularDeque = new MyCircularDeque(5);
+        circularDeque.insertFront(4);
+        return circularDeque;
+    }
+
     /**
      * 648.单词替换
      * @param dictionary
