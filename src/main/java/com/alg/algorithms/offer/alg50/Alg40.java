@@ -185,4 +185,44 @@ public class Alg40 {
         recursion(list,root.left,depth);
         recursion(list,root.right,depth);
     }
+
+    /**
+     * 34.二叉树中和为某一值得路径
+     * @param root
+     * @param target
+     * @return
+     */
+    public List<List<Integer>> pathSum(TreeNode root, int target) {
+        res = new ArrayList<>();
+        pathSum(root,new ArrayList<Integer>(),target);
+        return res;
+    }
+
+    List<List<Integer>> res;
+
+    private void pathSum(TreeNode root, ArrayList<Integer> integers, int target) {
+        if (root==null){
+            return;
+        }
+        integers.add(root.val);
+        target-=root.val;
+
+        if (root.left==null && root.right==null){
+            //叶子节点
+            if (target==0){
+                res.add(new ArrayList<>(integers));
+            }
+            return;
+        }
+
+        if (root.left !=null){
+            pathSum(root.left,integers,target);
+            integers.remove(integers.size()-1);
+        }
+        if (root.right !=null){
+            pathSum(root.right,integers,target);
+            integers.remove(integers.size()-1);
+        }
+    }
+
 }
