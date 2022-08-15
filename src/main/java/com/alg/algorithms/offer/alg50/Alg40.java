@@ -241,4 +241,15 @@ public class Alg40 {
         integers.remove(integers.size()-1);
     }
 
+    /**
+     * 39.数组中出现次数超过一半的数字
+     * 时间复杂度：O(NlogN)
+     * 空间复杂度：O(1)
+     * @param nums
+     * @return
+     */
+    public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length/2];
+    }
 }
