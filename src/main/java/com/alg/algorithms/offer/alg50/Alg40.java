@@ -1,8 +1,9 @@
 package com.alg.algorithms.offer.alg50;
 
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.Stack;
+import com.alg.common.TreeNode;
+
+import java.util.*;
+import java.util.function.IntFunction;
 
 public class Alg40 {
     /**
@@ -70,4 +71,33 @@ public class Alg40 {
         }
         return idxM== popped.length;
     }
+
+    /**
+     * 32-I.从上到下打印树
+     * @param root
+     * @return
+     */
+    public int[] levelOrder(TreeNode root) {
+        if (root==null)
+            return new int[]{};
+        List<Integer> values = new ArrayList<>(1001);
+        Queue<TreeNode> deque = new LinkedList<>();
+        deque.add(root);
+        while (! deque.isEmpty()){
+            TreeNode node = deque.poll();
+            values.add(node.val);
+            if (node.left !=null)
+                deque.add(node.left);
+            if (node.right !=null)
+                deque.add(node.right);
+        }
+        int idx=0;
+        int[] res = new int[values.size()];
+        for (int n : values){
+            res[idx]=n;
+            idx++;
+        }
+        return res;
+    }
+
 }
