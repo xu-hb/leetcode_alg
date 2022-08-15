@@ -135,4 +135,19 @@ public class Alg40 {
         dfs(root.left,depth+1);
         dfs(root.right,depth+1);
     }
+
+    /**
+     * 32-II.从上到下打印二叉树II
+     * BFS
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder_3(TreeNode root) {
+        if (root==null)
+            return new ArrayList<>();
+        cnt=0;
+        map = new HashMap<>();
+        dfs(root,0);
+        return new ArrayList<>(map.values());
+    }
 }
