@@ -74,6 +74,7 @@ public class Alg40 {
 
     /**
      * 32-I.从上到下打印树
+     * BFS
      * @param root
      * @return
      */
@@ -100,4 +101,38 @@ public class Alg40 {
         return res;
     }
 
+    /**
+     * 32-I.从上到下打印树 2.0
+     * DFS
+     * @param root
+     * @return
+     */
+    public int[] levelOrder_2(TreeNode root){
+        if (root==null)
+            return new int[]{};
+        cnt=0;
+        map = new HashMap<>();
+        dfs(root,0);
+        int idx=0;
+        int[] res = new int[cnt];
+        for (List<Integer> list : map.values()){
+            for (int n : list){
+                res[idx++] = n;
+            }
+        }
+        return res;
+    }
+    Map<Integer,List<Integer>> map;
+    //数量
+    int cnt;
+    private void dfs(TreeNode root , int depth){
+        if (root==null)
+            return;
+        cnt++;
+        List<Integer> list = map.getOrDefault(depth,new ArrayList<>());
+        list.add(root.val);
+        map.put(depth, list);
+        dfs(root.left,depth+1);
+        dfs(root.right,depth+1);
+    }
 }
