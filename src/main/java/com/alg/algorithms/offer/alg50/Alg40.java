@@ -150,4 +150,39 @@ public class Alg40 {
         dfs(root,0);
         return new ArrayList<>(map.values());
     }
+
+    /**
+     * 32-III.从上到下打印二叉树III
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder_4(TreeNode root) {
+        if (root==null)
+            return new ArrayList<>();
+        List<List<Integer>> list = new ArrayList<>();
+        recursion(list,root,0);
+        return list;
+    }
+
+    private void recursion(List<List<Integer>> list, TreeNode root, int depth) {
+        if (root==null)
+            return;
+        ++depth;
+        List<Integer> line;
+        if (list.size()<depth){
+            line = new LinkedList<>();
+            list.add(line);
+        }else {
+            line = list.get(depth-1);
+        }
+        if ((depth&1)==1){
+            line.add(root.val);
+        }else {
+            //偶数行，逆序
+            line.add(0, root.val);
+        }
+
+        recursion(list,root.left,depth);
+        recursion(list,root.right,depth);
+    }
 }
