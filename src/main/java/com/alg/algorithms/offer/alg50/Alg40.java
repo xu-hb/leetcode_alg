@@ -225,4 +225,20 @@ public class Alg40 {
         }
     }
 
+    //2.0：代码简化
+    private void pathSum_2(TreeNode root, ArrayList<Integer> integers, int target) {
+        if (root==null){
+            return;
+        }
+        integers.add(root.val);
+        target-=root.val;
+
+        if (root.left==null && root.right==null && target==0){
+            res.add(new ArrayList<>(integers));
+        }
+        pathSum(root.left,integers,target);
+        pathSum(root.right,integers,target);
+        integers.remove(integers.size()-1);
+    }
+
 }
