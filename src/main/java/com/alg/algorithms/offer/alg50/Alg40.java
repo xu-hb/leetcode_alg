@@ -252,4 +252,31 @@ public class Alg40 {
         Arrays.sort(nums);
         return nums[nums.length/2];
     }
+
+    /**
+     * 39.数组中出现次数超过一半的数字 2.0
+     * 消除
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
+     * @param nums
+     * @return
+     */
+    public int majorityElement_2(int[] nums) {
+        int l=0,r=nums.length-1;
+        int cnt=0;
+        //消除：两个不同的数消除，最后剩下的则是结果
+        while (l<r){
+            if (nums[l]==nums[r]){
+                cnt++;
+            }else {
+                if (cnt>0){
+                    cnt--;
+                }else {
+                    l++;
+                }
+            }
+            r--;
+        }
+        return nums[l];
+    }
 }
