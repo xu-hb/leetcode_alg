@@ -299,6 +299,50 @@ public class Alg40 {
     }
 
     /**
+     * 35.复杂链表的复制 3.0
+     * 不使用辅助空间
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
+     * @param head
+     * @return
+     */
+    public Node copyRandomList_3(Node head){
+        if (head==null)
+            return null;
+
+        Node cur = head;
+        //链表节点复制
+        while (cur !=null){
+            //克隆节点插入到原节点后
+            Node clone = new Node(cur.val);
+            clone.next=cur.next;
+            cur.next=clone;
+            cur=clone.next;
+        }
+        //随机指针复制
+        cur=head;
+        while (cur!=null){
+            if (cur.random !=null){
+                cur.next.random=cur.random.next;
+            }
+            cur=cur.next.next;
+        }
+        //分离原链表和克隆链表
+        Node root = head.next;
+        cur=head;
+        Node copy = root;
+        while (cur !=null){
+            cur.next=cur.next.next;
+            cur = cur.next;
+            if (copy.next !=null){
+                copy.next=copy.next.next;
+                copy = copy.next;
+            }
+        }
+        return root;
+    }
+
+    /**
      * 39.数组中出现次数超过一半的数字
      * 时间复杂度：O(NlogN)
      * 空间复杂度：O(1)
