@@ -1,6 +1,7 @@
 package com.alg.algorithms.offer.alg50;
 
 import com.alg.common.TreeNode;
+import com.alg.design.list.MyList;
 
 import java.util.*;
 import java.util.function.IntFunction;
@@ -340,6 +341,16 @@ public class Alg40 {
             }
         }
         return root;
+    }
+
+    /**
+     * 36.二叉搜索树与双向链表
+     * @see MyList
+     * @param root
+     * @return
+     */
+    public MyList.Node treeToDoublyList(MyList.Node root) {
+        return new MyList().treeToDoublyList(root);
     }
 
     /**
