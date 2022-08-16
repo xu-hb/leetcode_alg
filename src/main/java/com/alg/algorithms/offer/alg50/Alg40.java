@@ -242,6 +242,41 @@ public class Alg40 {
     }
 
     /**
+     * 35.复杂链表的复制
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(N)
+     * @param head
+     * @return
+     */
+    public Node copyRandomList(Node head) {
+        if (head==null)
+            return null;
+        Node dummyNode = new Node(-1);
+        Node curRoot = dummyNode;
+        Node curHead = head;
+        Map<Node,Node> map = new HashMap<>();
+        while (curHead !=null){
+            Node newNode = copy(curHead);
+            map.put(curHead,newNode);
+            curRoot.next=newNode;
+            curHead=curHead.next;
+            curRoot=curRoot.next;
+        }
+        curRoot = dummyNode.next;
+        curHead = head;
+        while (curRoot !=null){
+            curRoot.random = curHead.random==null ? null : map.getOrDefault(curHead.random,null);
+            curHead=curHead.next;
+            curRoot=curRoot.next;
+        }
+        return dummyNode.next;
+    }
+    private Node copy(Node node){
+        return new Node(node.val);
+    }
+
+
+    /**
      * 39.数组中出现次数超过一半的数字
      * 时间复杂度：O(NlogN)
      * 空间复杂度：O(1)
@@ -278,5 +313,17 @@ public class Alg40 {
             r--;
         }
         return nums[l];
+    }
+}
+
+class Node {
+    int val;
+    Node next;
+    Node random;
+
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.random = null;
     }
 }
