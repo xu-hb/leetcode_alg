@@ -7,39 +7,30 @@ public class MyList {
     public Node treeToDoublyList(Node root) {
         if (root==null)
             return null;
-        //获取最右节点
-        Node cur = root;
-        while (cur.right != null){
-            cur=cur.right;
-        }
-        tail=cur;
         //递归：树转链表
         dfs(root);
-        //头、尾节点指针连接
-        head.left=tail;
-        tail.right=head;
-
+        //头、尾节点指针连接(中序遍历完,prev就是最后一个节点)
+        head.left=prev;
+        prev.right=head;
         return head;
     }
     Node head;
-    Node tail;
-    private Node dfs(Node root){
+    Node prev;
+    private void dfs(Node root){
         if (root==null)
-            return null;
-        Node prev = dfs(root.left);
-        if (prev !=null){
+            return;
+        //中序遍历
+        dfs(root.left);
+        if (prev==null){
+            //保存头节点
+            head=root;
+        }else {
+            //链表指针
             prev.right=root;
             root.left=prev;
         }
-        //最左端节点
-        head= head==null ? prev==null?root:prev : head;
-
-        Node next = dfs(root.right);
-        if (next!=null){
-            next.left=root;
-            root.right=next;
-        }
-        return next==null?root:next;
+        prev=root;
+        dfs(root.right);
     }
 
 
