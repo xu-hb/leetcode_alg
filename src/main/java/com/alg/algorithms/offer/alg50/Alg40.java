@@ -416,6 +416,40 @@ public class Alg40 {
         }
         return res;
     }
+
+    /**
+     * 40.最小的k个数 2.0
+     * 堆排序
+     * 时间复杂度：NlogK
+     * 空间复杂度：O(k)
+     * @param arr
+     * @param k
+     * @return
+     */
+    public int[] getLeastNumbers_2(int[] arr, int k){
+        if (k==0 || arr.length==0){
+            return new int[0];
+        }
+        //默认小根堆，修改为大根堆
+        Queue<Integer> queue = new PriorityQueue<>((v1,v2)-> v2-v1);
+        for (int n : arr){
+            if (queue.size()<k){
+                //容量未达到k,直接加入堆
+                queue.offer(n);
+            }else if (n<queue.peek()){
+                //达到最大容量k，当前值<堆顶值，则新值入堆，旧堆顶值退出
+                queue.poll();
+                queue.offer(n);
+            }
+        }
+
+        int[] ret = new int[k];
+        int idx=0;
+        for (int n : queue){
+            ret[idx++] = n;
+        }
+        return ret;
+    }
 }
 
 class Node {
