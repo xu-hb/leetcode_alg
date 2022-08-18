@@ -4,7 +4,6 @@ import com.alg.common.TreeNode;
 import com.alg.design.list.MyList;
 
 import java.util.*;
-import java.util.function.IntFunction;
 
 public class Alg40 {
     /**
@@ -450,6 +449,49 @@ public class Alg40 {
         }
         return ret;
     }
+
+    /**
+     * 40.最小的k个数 3.0
+     * 快速排序优化，快速选择
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
+     * @param arr
+     * @param k
+     * @return
+     */
+    public int[] getLeastNumbers_3(int[] arr, int k){
+        if (k==0 || arr.length==0){
+            return new int[0];
+        }
+        this.k=k;
+        int l=0,r=arr.length-1;
+        quickSort(arr,l,r);
+        return Arrays.copyOf(arr,k);
+    }
+    int k;
+    private void quickSort(int[]nums,int l,int r){
+        if (l<r){
+            int q = partition(nums , l ,r);
+            //快速选择
+            if (k<=q){
+                quickSort(nums,l,q);
+            }else {
+                quickSort(nums,q+1,r);
+            }
+        }
+    }
+    private int partition(int[]nums, int l, int r){
+        int q = nums[l];
+        while (l<r){
+            while (l<r && nums[r]>=q) r--;
+            nums[l]=nums[r];
+            while (l<r && nums[l]<=q) l++;
+            nums[r]=nums[l];
+        }
+        nums[l]=q;
+        return l;
+    }
+
 }
 
 class Node {
