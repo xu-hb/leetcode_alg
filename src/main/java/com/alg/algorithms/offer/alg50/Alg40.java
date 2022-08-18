@@ -391,6 +391,31 @@ public class Alg40 {
         }
         return nums[l];
     }
+
+    /**
+     * 40.最小的k个数
+     * 计数排序
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(M)
+     * @param arr
+     * @param k
+     * @return
+     */
+    public int[] getLeastNumbers(int[] arr, int k) {
+        int[] sorted = new int[10001];
+        for (int n :arr){
+            sorted[n]++;
+        }
+        int[] res = new int[k];
+        int idx=0;
+        for (int i=0;i< sorted.length && idx<k;i++){
+            while (sorted[i]>0 && idx<k){
+                res[idx++] = i;
+                sorted[i]--;
+            }
+        }
+        return res;
+    }
 }
 
 class Node {
