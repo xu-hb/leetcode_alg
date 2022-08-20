@@ -5,6 +5,8 @@ import com.alg.design.list.MyList;
 import com.alg.design.tree.Codec;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Alg40 {
     /**
@@ -387,6 +389,35 @@ public class Alg40 {
             if (visited[i]) continue;
             visited[i]=true;
             dfs(arr[i]+res , visited);
+            visited[i]=false;
+        }
+    }
+
+    /**
+     * 38.字符串的排列 2.0
+     * 剪枝
+     * @param s
+     * @return
+     */
+    public String[] permutation_2(String s) {
+        set = new HashSet<>();
+        arr = s.toCharArray();
+        //排序
+        Arrays.sort(arr);
+        boolean[] visited = new boolean[arr.length];
+        dfs_2("" , visited);
+        return set.toArray(new String[0]);
+    }
+    private void dfs_2(String res , boolean[] visited){
+        if (res.length()==arr.length){
+            set.add(res);
+            return;
+        }
+        for (int i=0;i<arr.length;i++){
+            //剪枝：!visited[i-1] 防止递归中影响后续决策
+            if (visited[i] || (i>0 && !visited[i-1] && arr[i]==arr[i-1])) continue;
+            visited[i]=true;
+            dfs_2(arr[i]+res , visited);
             visited[i]=false;
         }
     }
