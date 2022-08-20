@@ -2,6 +2,7 @@ package com.alg.algorithms.offer.alg50;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Objects;
 
 public class Alg50 {
     /**
@@ -39,5 +40,26 @@ public class Alg50 {
         for(String s : strs)
             res.append(s);
         return res.toString();
+    }
+
+    /**
+     * 50.第一个只出现一次的字符
+     * @param s
+     * @return
+     */
+    public char firstUniqChar(String s) {
+        if (Objects.equals(s, "")){
+            return ' ';
+        }
+
+        int[] cnt = new int[26];
+        for (int i=0;i<s.length();i++){
+            cnt[s.charAt(i)-'a']++;
+        }
+        for (int i=0;i<s.length();i++){
+            if (cnt[s.charAt(i)-'a']==1)
+                return s.charAt(i);
+        }
+        return ' ';
     }
 }
