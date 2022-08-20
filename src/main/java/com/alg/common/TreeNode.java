@@ -1,5 +1,7 @@
 package com.alg.common;
 
+import com.alg.design.tree.Codec;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -53,6 +55,15 @@ public class TreeNode {
         }
         return result;
     }
+
+    /**
+     * 序列化-BFS
+     * @return
+     */
+    public String serializeBFS(){
+        return new Codec().serialize(this);
+    }
+
     private void serializePre(TreeNode root , StringBuilder sb){
         if (null==root){
             sb.append(",").append("#");
@@ -75,6 +86,16 @@ public class TreeNode {
         String[] origin = data.split(",");
         return deserializePre(origin , 0);
     }
+
+    /**
+     * 反序列化--BFS
+     * @param data
+     * @return
+     */
+    public static TreeNode deserializeBFS(String data){
+        return new Codec().deserialize(data);
+    }
+
     private static TreeNode deserializePre(String[] origin, int start) {
         if (start> origin.length-1){
             return null;
