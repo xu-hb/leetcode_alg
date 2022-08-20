@@ -2,6 +2,7 @@ package com.alg.algorithms.offer.alg50;
 
 import com.alg.common.TreeNode;
 import com.alg.design.list.MyList;
+import com.alg.design.tree.Codec;
 
 import java.util.*;
 
@@ -350,6 +351,15 @@ public class Alg40 {
      */
     public MyList.Node treeToDoublyList(MyList.Node root) {
         return new MyList().treeToDoublyList(root);
+    }
+
+    /**
+     * 37.序列化二叉树
+     * @see Codec
+     * @return
+     */
+    public Codec codec(){
+        return new Codec();
     }
 
     /**

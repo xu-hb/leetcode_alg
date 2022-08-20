@@ -8,6 +8,7 @@ import java.util.Arrays;
 public class Alg300 {
     /**
      * 297.二叉树的序列化和反序列化
+     * @see com.alg.design.tree.Codec#serialize(TreeNode) BFS
      * @param root
      * @return
      */
