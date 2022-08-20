@@ -363,6 +363,35 @@ public class Alg40 {
     }
 
     /**
+     * 38.字符串的排列
+     * 时间复杂度：O(N*n!)
+     * 空间复杂度：O(N)
+     * @param s
+     * @return
+     */
+    public String[] permutation(String s) {
+        set = new HashSet<>();
+        arr = s.toCharArray();
+        boolean[] visited = new boolean[arr.length];
+        dfs("" , visited);
+        return set.toArray(new String[0]);
+    }
+    Set<String> set;
+    char[] arr;
+    private void dfs(String res , boolean[] visited){
+        if (res.length()==arr.length){
+            set.add(res);
+            return;
+        }
+        for (int i=0;i<arr.length;i++){
+            if (visited[i]) continue;
+            visited[i]=true;
+            dfs(arr[i]+res , visited);
+            visited[i]=false;
+        }
+    }
+
+    /**
      * 39.数组中出现次数超过一半的数字
      * 时间复杂度：O(NlogN)
      * 空间复杂度：O(1)
