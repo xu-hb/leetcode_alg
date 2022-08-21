@@ -212,4 +212,29 @@ public class Alg60 {
         flag &= Math.abs(r-l)<=1;
         return Math.max(r,l)+1;
     }
+
+    /**
+     * 55-II.平衡二叉树 2.0
+     * 代码优化
+     * @param root
+     * @return
+     */
+    public boolean isBalanced_2(TreeNode root){
+        if (root==null) return true;
+        return getDepth(root) !=-1;
+    }
+
+    /**
+     * 获取深度，使用-1统一标识错误和结果
+     * @param root
+     * @return
+     */
+    private int getDepth(TreeNode root){
+        if (root==null) return 0;
+        int l = getDepth(root.left);
+        if (l==-1) return -1;
+        int r = getDepth(root.right);
+        if (r==-1) return -1;
+        return Math.abs(r-l)>1 ? -1 : Math.max(r,l)+1;
+    }
 }
