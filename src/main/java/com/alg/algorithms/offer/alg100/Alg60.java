@@ -1,6 +1,7 @@
 package com.alg.algorithms.offer.alg100;
 
 import com.alg.common.ListNode;
+import com.alg.common.TreeNode;
 
 public class Alg60 {
     /**
@@ -109,5 +110,30 @@ public class Alg60 {
             }
         }
         return l;
+    }
+
+    /**
+     * 54.二叉搜索树的第K大节点
+     * @param root
+     * @param k
+     * @return
+     */
+    public int kthLargest(TreeNode root, int k) {
+        if (k==0) return root.val;
+        ans=0;
+        cnt=0;
+        dfs(root,k);
+        return ans;
+    }
+    int ans,cnt;
+    private void dfs(TreeNode root, int k) {
+        if (root==null || ans !=0) return;
+
+        dfs(root.right,k);
+        if (++cnt==k){
+            ans=root.val;
+            return;
+        }
+        dfs(root.left,k);
     }
 }
