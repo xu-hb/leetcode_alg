@@ -69,6 +69,25 @@ public class Alg50 {
     }
 
     /**
+     * 44.数字序列中某一位的数字
+     * @param n
+     * @return
+     */
+    public int findNthDigit(int n) {
+        int digit = 1; //位数
+        long start = 1;//开始范围第一个数
+        long total = 9; //占用总位数
+        while (n>total){
+            n-=total;
+            digit++;
+            start*=10;
+            total = digit * start * 9;
+        }
+        long num = start + (n-1)/digit;
+        return String.valueOf(num).charAt((n-1)%digit)-'0';
+    }
+
+    /**
      * 45.把数组排成最小的数
      * 时间复杂度：O(NlogN)
      * 空间复杂度：O(N)
