@@ -192,6 +192,36 @@ public class Alg50 {
     }
 
     /**
+     * 48.最长不含重复字符的子字符串
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(M)
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring(String s) {
+        if (s=="" || s==null)
+            return 0;
+        int l=0,r=0;
+        int maxLen = 0;
+        int[] window = new int[128];
+        while (r<s.length()){
+            char c = s.charAt(r);
+            if (window[c]==0){
+                window[c]++;
+                maxLen = Math.max(maxLen , r-l+1);
+                r++;
+                continue;
+            }
+
+            while (l<r && window[c]>0){
+                window[s.charAt(l)]--;
+                l++;
+            }
+        }
+        return maxLen;
+    }
+
+    /**
      * 50.第一个只出现一次的字符
      * @param s
      * @return
