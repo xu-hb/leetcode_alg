@@ -25,6 +25,29 @@ public class Alg50 {
     }
 
     /**
+     * 43.1~n整数中1出现的次数
+     * 超时
+     * @param n
+     * @return
+     */
+    public int countDigitOne(int n) {
+        int prevCnt = 1;
+        for (int i=2;i<=n;i++){
+            prevCnt = prevCnt + number(i);
+        }
+        return prevCnt;
+    }
+    private int number(int n){
+        int cnt = 0;
+        while (n!=0){
+            if (n%10==1)
+                cnt++;
+            n=n/10;
+        }
+        return cnt;
+    }
+
+    /**
      * 45.把数组排成最小的数
      * 时间复杂度：O(NlogN)
      * 空间复杂度：O(N)
