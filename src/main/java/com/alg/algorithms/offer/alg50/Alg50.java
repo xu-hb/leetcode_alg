@@ -168,6 +168,30 @@ public class Alg50 {
     }
 
     /**
+     * 47.礼物的最大价值 2.0
+     * 滚动数组优化
+     * 时间复杂度：O(N*M)
+     * 空间复杂度：O(N)
+     * @param grid
+     * @return
+     */
+    public int maxValue_2(int[][] grid) {
+        int n = grid.length;
+        int m = grid[0].length;
+        //多一行、列，方便处理边界问题
+        int[]dp = new int[m+1];
+        //初始化边界行
+        Arrays.fill(dp, 0);
+
+        for (int i=0;i<n;i++){
+            for (int j=0;j<m;j++){
+                dp[j+1] = Math.max(dp[j+1] , dp[j]) + grid[i][j];
+            }
+        }
+        return dp[m];
+    }
+
+    /**
      * 50.第一个只出现一次的字符
      * @param s
      * @return
