@@ -191,4 +191,25 @@ public class Alg60 {
         }
         return depth;
     }
+
+    /**
+     * 55-II.平衡二叉树
+     * @param root
+     * @return
+     */
+    public boolean isBalanced(TreeNode root) {
+        if (root==null) return true;
+        depth(root);
+        return flag;
+    }
+    boolean flag=true;
+    private int depth(TreeNode root){
+        if (root==null || !flag) return 0;
+        int l = depth(root.left);
+        if (!flag) return 0;
+        int r = depth(root.right);
+        if (!flag) return 0;
+        flag &= Math.abs(r-l)<=1;
+        return Math.max(r,l)+1;
+    }
 }
