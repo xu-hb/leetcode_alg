@@ -63,4 +63,32 @@ public class Alg60 {
         }
         return curA;
     }
+
+    /**
+     * 53-I.在排序数组中查找数字 I
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int search(int[] nums, int target) {
+        if (null==nums || nums.length==0) return 0;
+        int cnt = 0;
+
+        int l=0,r=nums.length-1;
+        while (l<r){
+            int middle = l + (r-l)/2;
+            if (target>nums[middle]){
+                l=middle+1;
+            }else if (target<nums[middle]){
+                r=middle-1;
+            }else {
+                r=middle;
+            }
+        }
+        while (l< nums.length && nums[l]==target){
+            cnt++;
+            l++;
+        }
+        return cnt;
+    }
 }
