@@ -136,4 +136,31 @@ public class Alg60 {
         }
         dfs(root.left,k);
     }
+
+    /**
+     * 54.二叉搜索树的第K大节点 2.0
+     * 递减
+     * @param root
+     * @param k
+     * @return
+     */
+    public int kthLargest_2(TreeNode root, int k) {
+        if (root==null) return 0;
+        ans=0;cnt=k;
+        dfs_2(root);
+        return ans;
+    }
+    private void dfs_2(TreeNode root){
+        if (root==null) return;
+
+        //二叉搜索树的中序遍历是递增数列
+        //中序的逆序即为递减序列：右、中、左
+        dfs_2(root.right);
+        if (cnt==0) return;
+        if (--cnt==0) {
+            ans=root.val;
+            return;
+        }
+        dfs_2(root.left);
+    }
 }
