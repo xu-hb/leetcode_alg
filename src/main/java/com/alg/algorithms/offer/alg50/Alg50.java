@@ -106,6 +106,41 @@ public class Alg50 {
     }
 
     /**
+     * 46.把数字翻译成字符串
+     * dp
+     * @param num
+     * @return
+     */
+    public int translateNum(int num) {
+        char[] arr = String.valueOf(num).toCharArray();
+        if (arr.length<2){
+            return arr.length;
+        }
+        //dp数组：v-最多多少中方法
+        int[] dp = new int[arr.length+1];
+        dp[1] = 1;
+        dp[2] = 2;
+        if (! isLetter(arr[0],arr[1])){
+            dp[2] = 1;
+        }
+        for (int i=3;i<=arr.length;i++){
+            int idx = i-1;
+            if (isLetter(arr[idx-1],arr[idx])){
+                dp[i] = dp[i-1] + dp[i-2];
+            }else {
+                dp[i] = dp[i-1];
+            }
+        }
+        return dp[arr.length];
+    }
+    private boolean isLetter(char prev, char last){
+        if (prev=='0'){
+            return false;
+        }
+        return (prev-'0')*10 + (last-'0') <= 25;
+    }
+
+    /**
      * 50.第一个只出现一次的字符
      * @param s
      * @return
