@@ -5,11 +5,13 @@ import com.alg.common.ListNode;
 public class Alg60 {
     /**
      * 52.两个链表的第一个公共节点
+     * 时间复杂度：O(Max(M,N))
+     * 空间复杂度：O(1)
      * @param headA
      * @param headB
      * @return
      */
-    ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         if (headA==null || headB==null) return null;
         int lenA=0,lenB=0;
         ListNode curA = headA,curB=headB;
@@ -41,5 +43,24 @@ public class Alg60 {
             lenA--;
         }
         return null;
+    }
+
+    /**
+     * 52.两个链表的第一个公共节点 2.0
+     * 代码简化
+     * 时间复杂度：O(n+m)
+     * @param headA
+     * @param headB
+     * @return
+     */
+    public ListNode getIntersectionNode_2(ListNode headA, ListNode headB){
+        if (null==headA || null==headB) return null;
+
+        ListNode curA = headA,curB=headB;
+        while (curA !=curB){
+            curA = curA==null ? headB : curA.next;
+            curB = curB==null ? headA : curB.next;
+        }
+        return curA;
     }
 }
