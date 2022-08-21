@@ -3,6 +3,10 @@ package com.alg.algorithms.offer.alg100;
 import com.alg.common.ListNode;
 import com.alg.common.TreeNode;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 public class Alg60 {
     /**
      * 52.两个链表的第一个公共节点
@@ -162,5 +166,29 @@ public class Alg60 {
             return;
         }
         dfs_2(root.left);
+    }
+
+    /**
+     * 55-I.二叉树的深度
+     * BFS
+     * @param root
+     * @return
+     */
+    public int maxDepth(TreeNode root) {
+        if (root==null) return 0;
+
+        int depth = 0;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (! queue.isEmpty()){
+            int size = queue.size();
+            for (int i=1;i<=size;i++){
+                TreeNode node = queue.poll();
+                if (node.left !=null) queue.add(node.left);
+                if (node.right !=null) queue.add(node.right);
+            }
+            depth++;
+        }
+        return depth;
     }
 }
