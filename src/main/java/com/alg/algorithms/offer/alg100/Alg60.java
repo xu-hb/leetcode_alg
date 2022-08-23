@@ -267,6 +267,27 @@ public class Alg60 {
     }
 
     /**
+     * 56-II.数组中数字出现的次数 II
+     * @param nums
+     * @return
+     */
+    public int singleNumber(int[] nums) {
+        int ret = 0;
+        for (int i=0;i<32;i++){
+            int cnt=0;
+            int msk = 1<<i;
+            //计算1的总和
+            for (int n: nums){
+                if ((n&msk) !=0) cnt++;
+            }
+            if (cnt%3 !=0){
+                ret |=msk;
+            }
+        }
+        return ret;
+    }
+
+    /**
      * 57.和为s的两个数字
      * 时间复杂度：O(N)
      * 空间复杂度：O(1)
