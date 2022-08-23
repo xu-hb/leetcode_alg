@@ -387,4 +387,19 @@ public class Alg60 {
             fast--;
         }
     }
+
+    /**
+     * 58-II.左旋转字符串 2.0
+     * 使用辅助空间
+     * @param s
+     * @param n
+     * @return
+     */
+    public String reverseLeftWords_2(String s, int n){
+        StringBuilder sb = new StringBuilder();
+        for (int i=n;i<s.length()+n;i++){
+            sb.append(s.charAt(i%s.length()));
+        }
+        return sb.toString();
+    }
 }
