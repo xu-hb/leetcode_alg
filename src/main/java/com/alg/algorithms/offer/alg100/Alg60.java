@@ -3,9 +3,7 @@ package com.alg.algorithms.offer.alg100;
 import com.alg.common.ListNode;
 import com.alg.common.TreeNode;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class Alg60 {
     /**
@@ -304,6 +302,46 @@ public class Alg60 {
             else return new int[] { nums[i], nums[j] };
         }
         return new int[0];
+    }
+
+    /**
+     * 57-II.和为s的连续正整数序列
+     * @param target
+     * @return
+     */
+    public int[][] findContinuousSequence(int target){
+        int n = (target+1)/2 +1;
+        List<int[]> list = new ArrayList<>();
+
+        int l=1,r=1;
+        int window=r;
+        while (r<=n){
+            if (window==target){
+                list.add(generateNum(l,r));
+                l++;
+                r=l;
+                window=r;
+            }else if (window<target){
+                r++;
+                window+=r;
+            }else {
+                window-=l;
+                l++;
+            }
+        }
+        int[][] ret = new int[list.size()][];
+        for (int i=0;i<list.size();i++){
+            ret[i] = list.get(i);
+        }
+        return ret;
+    }
+
+    private int[] generateNum(int l,int r){
+        int[] arr = new int[r-l+1];
+        for (int i=0;i<arr.length;i++){
+            arr[i] = l+i;
+        }
+        return arr;
     }
 
     /**
