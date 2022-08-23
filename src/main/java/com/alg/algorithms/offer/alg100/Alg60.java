@@ -239,6 +239,34 @@ public class Alg60 {
     }
 
     /**
+     * 56-I.数组中数字出现的次数
+     * @param nums
+     * @return
+     */
+    public int[] singleNumbers(int[] nums) {
+        int r = 0;
+        for (int n : nums){
+            //异或：相同的两个值异或结果为0
+            r = r^n;
+        }
+        //根据异或特性：不同的位异或=1，将数组分为两组
+        //任意一个1均可，这里找最后一个1
+        //n&n-1为去掉最后一个1，相减结果则为最后一个1
+        int base = r - (r&(r-1));
+
+        int a=0,b=0;
+        for (int n: nums){
+            //分组分别异或
+            if ((n&base)==0){
+                a^=n;
+            }else {
+                b^=n;
+            }
+        }
+        return new int[]{a,b};
+    }
+
+    /**
      * 57.和为s的两个数字
      * 时间复杂度：O(N)
      * 空间复杂度：O(1)
