@@ -358,4 +358,33 @@ public class Alg60 {
         }
         return res.toString().trim(); // 转化为字符串，删除尾部空格，并返回
     }
+
+    /**
+     * 58-II.左旋转字符串
+     * 原数组操作
+     * @param s
+     * @param n
+     * @return
+     */
+    public String reverseLeftWords(String s, int n) {
+        char[] arr = s.toCharArray();
+        int low=0,fast=arr.length-1;
+        //全部翻转
+        recur(arr,low,fast);
+        int r = arr.length -n;
+        //前半部分翻转
+        recur(arr,0,r-1);
+        //后半部分翻转
+        recur(arr,r,arr.length-1);
+       return String.valueOf(arr);
+    }
+    private void recur(char[] arr , int low , int fast){
+        while (low<fast){
+            char temp = arr[low];
+            arr[low] = arr[fast];
+            arr[fast] = temp;
+            low++;
+            fast--;
+        }
+    }
 }
