@@ -83,9 +83,10 @@ public class Alg70 {
         return sumNums(base,n)>>1;
     }
     private int sumNums(int num , int cnt){
-        if (cnt==0)
-            return 0;
-        return num + sumNums(num,cnt-1);
+        int sum=0;
+        //利用短路特性，实现if效果
+        boolean flag = cnt>0 && (sum+=num+sumNums(num,cnt-1))>0;
+        return sum;
     }
 
     /**
