@@ -71,6 +71,24 @@ public class Alg70 {
     }
 
     /**
+     * 64.求1+2+3+...+n
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(N)
+     * @param n
+     * @return
+     */
+    public int sumNums(int n) {
+        //等差求和：sn=(a1+an)*n/2
+        int base = 1+n;
+        return sumNums(base,n)>>1;
+    }
+    private int sumNums(int num , int cnt){
+        if (cnt==0)
+            return 0;
+        return num + sumNums(num,cnt-1);
+    }
+
+    /**
      * 68-I.二叉搜索树的最近公共祖先
      * @param root
      * @param p
