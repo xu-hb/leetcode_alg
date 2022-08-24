@@ -35,4 +35,24 @@ public class Alg1460 {
             r--;
         }
     }
+
+    /**
+     * 1460.翻转子数组使两个数组相等 2.0
+     * 计数，直接对比数组是否一致
+     * @param target
+     * @param arr
+     * @return
+     */
+    public boolean canBeEqual_2(int[] target, int[] arr){
+        int[] cnt = new int[1001];
+        for (int i=0;i<arr.length;i++){
+            cnt[arr[i]]++;
+            cnt[target[i]]--;
+        }
+        for (int n : cnt){
+            if (n!=0)
+                return false;
+        }
+        return true;
+    }
 }
