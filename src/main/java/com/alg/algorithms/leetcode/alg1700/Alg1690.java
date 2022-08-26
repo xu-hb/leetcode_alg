@@ -3,7 +3,7 @@ package com.alg.algorithms.leetcode.alg1700;
 public class Alg1690 {
     /**
      * 1688.比赛中的配对次数
-     * 时间复杂度：O(N)
+     * 时间复杂度：O(logN)
      * 空间复杂度：O(1)
      * @param n
      * @return
