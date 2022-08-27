@@ -2,10 +2,7 @@ package com.alg.algorithms.leetcode.alg700;
 
 import com.alg.common.TreeNode;
 
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class Alg670 {
     /**
@@ -42,6 +39,30 @@ public class Alg670 {
             this.node=node;
             this.idx=idx;
         }
+    }
+
+    /**
+     * 662.二叉树最大宽度
+     * DFS
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(N)
+     * @param root
+     * @return
+     */
+    public int widthOfBinaryTree_2(TreeNode root){
+        map = new HashMap<>();
+        dfs(root,1,0);
+        return ret;
+    }
+    int ret;
+    Map<Integer,Integer> map;
+    private void dfs(TreeNode node,int n,int depth){
+        if (node==null) return;
+        if (! map.containsKey(depth)) map.put(depth,n);
+        ret = Math.max(ret,n-map.get(depth) +1);
+
+        dfs(node.left,n<<1 , depth+1);
+        dfs(node.right, n<<1|1 , depth+1);
     }
 
     /**
