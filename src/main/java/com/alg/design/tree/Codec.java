@@ -59,7 +59,7 @@ public class Codec {
             }
             cur+=1;
             //右子树
-            if (values[cur].equals("#")){
+            if (cur>= values.length || values[cur].equals("#")){
                 node.right=null;
             }else {
                 node.right = new TreeNode(Integer.parseInt(values[cur]));
