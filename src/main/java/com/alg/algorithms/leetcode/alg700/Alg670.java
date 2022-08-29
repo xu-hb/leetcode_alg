@@ -1,8 +1,70 @@
 package com.alg.algorithms.leetcode.alg700;
 
-import java.util.Arrays;
+import com.alg.common.TreeNode;
+
+import java.util.*;
 
 public class Alg670 {
+    /**
+     * 662.二叉树最大宽度
+     * BFS
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(logN)
+     * @param root
+     * @return
+     */
+    public int widthOfBinaryTree(TreeNode root) {
+        Deque<BiNode> deque = new LinkedList<>();
+        deque.addLast(new BiNode(root,1));
+        int max = 1;
+        while (! deque.isEmpty()){
+            int size = deque.size();
+            if (size>1){
+                max = Math.max(max , deque.getLast().idx - deque.getFirst().idx +1);
+            }
+            while (size-- >0){
+                BiNode node = deque.pollFirst();
+                if (node.node.left !=null) deque.addLast(new BiNode(node.node.left,2*node.idx));
+                if (node.node.right !=null) deque.addLast(new BiNode(node.node.right,2*node.idx +1));
+            }
+        }
+        return max;
+    }
+
+    class BiNode{
+        TreeNode node;
+        int idx;
+
+        public BiNode(TreeNode node,int idx){
+            this.node=node;
+            this.idx=idx;
+        }
+    }
+
+    /**
+     * 662.二叉树最大宽度
+     * DFS
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(N)
+     * @param root
+     * @return
+     */
+    public int widthOfBinaryTree_2(TreeNode root){
+        map = new HashMap<>();
+        dfs(root,1,0);
+        return ret;
+    }
+    int ret;
+    Map<Integer,Integer> map;
+    private void dfs(TreeNode node,int n,int depth){
+        if (node==null) return;
+        if (! map.containsKey(depth)) map.put(depth,n);
+        ret = Math.max(ret,n-map.get(depth) +1);
+
+        dfs(node.left,n<<1 , depth+1);
+        dfs(node.right, n<<1|1 , depth+1);
+    }
+
     /**
      * 670.最大交换
      * @param num
