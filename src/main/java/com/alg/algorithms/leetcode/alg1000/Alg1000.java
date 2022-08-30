@@ -6,7 +6,7 @@ public class Alg1000 {
     /**
      * 998.最大二叉树II
      * 时间复杂度：O(N)
-     * 空间复杂度：O(1)
+     * 空间复杂度：O(N)
      * @param root
      * @param val
      * @return
@@ -32,5 +32,36 @@ public class Alg1000 {
             root.right=node;
             insertFlag=true;
         }
+    }
+
+    /**
+     * 998.最大二叉树II 2.0
+     * BFS
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
+     * @param root
+     * @param val
+     * @return
+     */
+    public TreeNode insertIntoMaxTree_2(TreeNode root, int val){
+        if (root==null) return null;
+        //虚拟节点
+        int dummyVal = Math.max(root.val, val)+1;
+        TreeNode dummyNode = new TreeNode(dummyVal);
+        dummyNode.right=root;
+
+        TreeNode cur = dummyNode;
+        while (cur!=null){
+            //最大树
+            if (cur.right ==null || cur.right.val<val){
+                TreeNode node = new TreeNode(val);
+                node.left = cur.right;
+                cur.right=node;
+                break;
+            }
+            //只需遍历右子树
+            cur = cur.right;
+        }
+        return dummyNode.right;
     }
 }
