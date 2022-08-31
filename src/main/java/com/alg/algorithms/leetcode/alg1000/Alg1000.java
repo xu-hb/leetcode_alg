@@ -1,57 +1,67 @@
 package com.alg.algorithms.leetcode.alg1000;
 
-import java.util.Arrays;
-import java.util.stream.IntStream;
+import com.alg.common.TreeNode;
 
 public class Alg1000 {
     /**
-     * 1005.k次取反后最大化的数组和
-     * 贪心算法
-     * @param nums
-     * @param k
+     * 998.最大二叉树II
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(N)
+     * @param root
+     * @param val
      * @return
      */
-    public int largestSumAfterKNegations(int[] nums, int k) {
-        Arrays.sort(nums);
-        int absMin = Math.abs(nums[0]);
-        int minCursor = 0;
-        for (int i=0; i<nums.length; i++){
-            if (absMin>Math.abs(nums[i])){
-                minCursor=i;
-                absMin=Math.abs(nums[i]);
-            }
-            //贪心：排序后的有序数组，局部值最大(负值取反)，则整体和最大
-            if (nums[i]<0 && k>0){
-                nums[i]=-nums[i];
-                k--;
-            }
+    public TreeNode insertIntoMaxTree(TreeNode root, int val) {
+        if (root==null) return null;
+        //虚拟节点
+        int dummyVal = Math.max(root.val, val)+1;
+        TreeNode dummyNode = new TreeNode(dummyVal);
+        dummyNode.right=root;
+        dfs(dummyNode,val);
+        return dummyNode.right;
+    }
+    boolean insertFlag=false;
+    private void dfs(TreeNode root,int val){
+        if (root==null || root.val<val) return;
+        //新增的val位于数组最后一个，所以位于右子树上
+        dfs(root.right,val);
+        //节点新增
+        if (! insertFlag){
+            TreeNode node = new TreeNode(val);
+            node.left = root.right;
+            root.right=node;
+            insertFlag=true;
         }
-        if (k%2==1) nums[minCursor]=-nums[minCursor];
-        return Arrays.stream(nums).sum();
     }
 
     /**
-     * 1005.k次取反后最大化的数组和 2
-     * @param nums
-     * @param k
+     * 998.最大二叉树II 2.0
+     * BFS
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
+     * @param root
+     * @param val
      * @return
      */
-    public int largestSumAfterKNegations2(int[] nums, int k) {
-        //按绝对值最大到最小排序
-        nums = IntStream.of(nums)
-                .boxed()
-                .sorted((o1,o2)->Math.abs(o2)-Math.abs(o1))
-                .mapToInt(Integer::intValue).toArray();
+    public TreeNode insertIntoMaxTree_2(TreeNode root, int val){
+        if (root==null) return null;
+        //虚拟节点
+        int dummyVal = Math.max(root.val, val)+1;
+        TreeNode dummyNode = new TreeNode(dummyVal);
+        dummyNode.right=root;
 
-        for (int i=0; i<nums.length; i++){
-            //贪心：排序后的有序数组，局部值最大(负值取反)，则整体和最大
-            if (nums[i]<0 && k>0){
-                nums[i]=-nums[i];
-                k--;
+        TreeNode cur = dummyNode;
+        while (cur!=null){
+            //最大树
+            if (cur.right ==null || cur.right.val<val){
+                TreeNode node = new TreeNode(val);
+                node.left = cur.right;
+                cur.right=node;
+                break;
             }
+            //只需遍历右子树
+            cur = cur.right;
         }
-        int len = nums.length;
-        if (k%2==1) nums[len-1]=-nums[len-1];
-        return Arrays.stream(nums).sum();
+        return dummyNode.right;
     }
 }
