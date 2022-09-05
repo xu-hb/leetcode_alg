@@ -155,4 +155,31 @@ public class Alg70 {
             return root;
         }
     }
+
+    /**
+     * 68-II.二叉树的最近公共祖先
+     * @param root
+     * @param p
+     * @param q
+     * @return
+     */
+    public TreeNode lowestCommonAncestor_2(TreeNode root, TreeNode p, TreeNode q) {
+        location(root,p.val,q.val);
+        return ret;
+    }
+    TreeNode ret;
+    private boolean location(TreeNode root , int pVal , int qVal){
+        if (root==null) return false;
+        //左子树
+        boolean lFlag = location(root.left,pVal,qVal);
+        //右子树
+        boolean rFlag = location(root.right,pVal,qVal);
+        //根节点
+        boolean rootFlag = root.val==pVal || root.val==qVal;
+
+        if (lFlag&&rFlag || rootFlag && (lFlag || rFlag)){
+            ret = root;
+        }
+        return lFlag || rFlag || rootFlag;
+    }
 }
