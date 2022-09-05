@@ -135,4 +135,24 @@ public class Alg70 {
         }
         return null;
     }
+
+    /**
+     * 68-I.二叉搜索树的最近公共祖先
+     * @param root
+     * @param p
+     * @param q
+     * @return
+     */
+    public TreeNode lowestCommonAncestor_3(TreeNode root, TreeNode p, TreeNode q){
+        if (root==null) return null;
+
+        if (root.val<p.val && root.val<q.val){
+            return lowestCommonAncestor_3(root.right,p,q);
+        }else if (root.val>p.val && root.val>q.val){
+            return lowestCommonAncestor_3(root.left,p,q);
+        }else {
+            //p,q在两侧，当前节点则为祖先节点
+            return root;
+        }
+    }
 }
