@@ -90,6 +90,24 @@ public class Alg70 {
     }
 
     /**
+     * 65.不用加减乘除做加法
+     * @param a
+     * @param b
+     * @return
+     */
+    public int add(int a, int b) {
+        while (b!=0){
+            //进位
+            int c = a & b;
+            //非进位
+            a ^= b;
+            //进位左移一位
+            b = c<<1;
+        }
+        return a;
+    }
+
+    /**
      * 68-I.二叉搜索树的最近公共祖先
      * @param root
      * @param p
