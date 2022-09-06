@@ -1,5 +1,6 @@
 package com.alg.algorithms.leetcode.alg100;
 
+import com.alg.Main;
 import com.alg.common.ListNode;
 
 import java.util.*;
@@ -43,6 +44,35 @@ public class Alg20 {
                 tail--;
             }else {
                 head++;
+            }
+        }
+        return maxArea;
+    }
+
+    /**
+     * 11.盛最多水的容器 3.0
+     * 双指针+剪枝
+     * 时间复杂度O(N)
+     * 空间复杂度O(1)
+     * @param height
+     * @return
+     */
+    public int maxArea_3(int[] height) {
+        int maxArea=0;
+        //左右指针
+        int l=0,r=height.length-1;
+        while (l<r){
+            maxArea = Math.max(maxArea , Math.min(height[r],height[l])*(r-l));
+            //短的指针移动
+            if (height[l]<height[r]){
+                int cur = l+1;
+                //剪枝：只有比当前端点的高度更高，面积才可能更大
+                while (cur<r && height[cur]<=height[l]) cur++;
+                l=cur;
+            }else {
+                int cur = r-1;
+                while (cur>l && height[cur]<=height[r]) cur--;
+                r=cur;
             }
         }
         return maxArea;
