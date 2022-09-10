@@ -1,6 +1,24 @@
 package com.alg.algorithms.leetcode.alg1500;
 
 public class Alg1460 {
+
+    /**
+     * 1455.检查单词是否为句中其他单词的前缀
+     * 时间复杂度：O(n*m)
+     * @param sentence
+     * @param searchWord
+     * @return
+     */
+    public int isPrefixOfWord(String sentence, String searchWord) {
+        String[] arr = sentence.split(" ");
+        for (int i=0;i<arr.length;i++){
+            if (arr[i].startsWith(searchWord)){
+                return i+1;
+            }
+        }
+        return -1;
+    }
+
     /**
      * 1460.翻转子数组使两个数组相等
      * @param target
