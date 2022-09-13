@@ -29,24 +29,20 @@ public class Alg650 {
      * @return
      */
     public double findMaxAverage(int[] nums, int k) {
-        double window = 0;
+        int window = 0;
         for (int i=0;i<k;i++){
             window+=nums[i];
         }
-        double maxAvg = window/k;
-
+        int max = window;
         //滑动窗口
         for (int i=k;i< nums.length;i++){
+            window += nums[i]-nums[i-k];
             //比当前值小直接忽略
-            int temp = nums[i]-nums[i-k];
-            window+=temp;
-            if (temp<=0) {
-                continue;
-            }else {
-                maxAvg = Math.max(maxAvg,window/k);
-            }
+            if (nums[i]<=nums[i-k]) continue;
+
+            max = Math.max(max,window);
         }
-        return maxAvg;
+        return max*1.0/k;
     }
 
     /**
