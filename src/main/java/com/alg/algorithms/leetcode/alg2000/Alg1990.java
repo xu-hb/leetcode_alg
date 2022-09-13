@@ -6,7 +6,7 @@ public class Alg1990 {
     /**
      * 1984.学生分数的最小差值
      * 滑动窗口
-     * 时间复杂度:O(logN)
+     * 时间复杂度:O(NlogN)
      * 空间复杂度:O(logN)
      * @param nums
      * @param k
