@@ -108,6 +108,33 @@ public class Alg10 {
     }
 
     /**
+     * 3.无重复字符的最长子串 2.0
+     * 使用数组记录
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring_2(String s){
+        int[] loc = new int[128];
+        Arrays.fill(loc,-1);
+        int max = 0;
+        int l=0;
+        for (int i=0;i<s.length();i++){
+            int t = s.charAt(i);
+            if (loc[t]!=-1){
+                //重复值，直接从重复值开始向后继续遍历
+                i=loc[t];
+                l=i+1;
+                Arrays.fill(loc,-1);
+            }else {
+                //记录位置
+                loc[t]=i;
+                max = Math.max(max,i-l+1);
+            }
+        }
+        return max;
+    }
+
+    /**
      * 5.最长回文子串
      * @param s
      * @return
