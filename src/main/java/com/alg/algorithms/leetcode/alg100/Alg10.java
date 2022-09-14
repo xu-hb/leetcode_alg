@@ -135,6 +135,33 @@ public class Alg10 {
     }
 
     /**
+     * 3.无重复字符的最长子串 3.0
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(C)
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring_3(String s) {
+        // 记录字符上一次出现的位置
+        int[] last = new int[128];
+        Arrays.fill(last,-1);
+        int n = s.length();
+
+        int res = 0;
+        int start = 0; // 窗口开始位置
+        for(int i = 0; i < n; i++) {
+            int index = s.charAt(i);
+            //重复值最大处
+            start = Math.max(start, last[index] + 1);
+            res   = Math.max(res, i - start + 1);
+            //最后出现的位置
+            last[index] = i;
+        }
+
+        return res;
+    }
+
+    /**
      * 5.最长回文子串
      * @param s
      * @return
