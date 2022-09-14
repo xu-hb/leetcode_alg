@@ -20,6 +20,32 @@ public class Alg650 {
     }
 
     /**
+     * 643.子数组最大平均数I
+     * 滑动窗口
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
+     * @param nums
+     * @param k
+     * @return
+     */
+    public double findMaxAverage(int[] nums, int k) {
+        int window = 0;
+        for (int i=0;i<k;i++){
+            window+=nums[i];
+        }
+        int max = window;
+        //滑动窗口
+        for (int i=k;i< nums.length;i++){
+            window += nums[i]-nums[i-k];
+            //比当前值小直接忽略
+            if (nums[i]<=nums[i-k]) continue;
+
+            max = Math.max(max,window);
+        }
+        return max*1.0/k;
+    }
+
+    /**
      * 646.最长数对链
      * 时间复杂度：O(NlogN)
      * 空间复杂度：O(logN)

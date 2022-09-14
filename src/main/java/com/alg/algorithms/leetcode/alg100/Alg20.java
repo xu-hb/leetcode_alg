@@ -347,6 +347,37 @@ public class Alg20 {
     }
 
     /**
+     * 19.删除链表的倒数第N个结点 2.0
+     * 双指针、代码优化
+     * @param head
+     * @param n
+     * @return
+     */
+    public ListNode removeNthFromEnd_2(ListNode head, int n){
+        //虚拟头节点
+        ListNode dummyHead = new ListNode();
+        dummyHead.next=head;
+        ListNode cur = dummyHead;
+
+        //前移n个节点
+        for (int i=1;i<=n;i++){
+            cur = cur.next;
+        }
+
+        //前驱节点
+        ListNode pre = dummyHead;
+
+        //继续遍历，直到链表尾部
+        while (cur.next !=null){
+            cur = cur.next;
+            pre = pre.next;
+        }
+        //移除
+        pre.next = pre.next.next;
+        return dummyHead.next;
+    }
+
+    /**
      * 20.有效的括号
      * @param s
      * @return
