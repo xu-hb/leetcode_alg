@@ -31,4 +31,32 @@ public class Alg1640 {
         }
         return ret;
     }
+
+    /**
+     * 1640.能否连接形成数组
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(N)
+     * @param arr
+     * @param pieces
+     * @return
+     */
+    public boolean canFormArray(int[] arr, int[][] pieces) {
+        Map<Integer,Integer> map = new HashMap<>(pieces.length);
+        for (int i=0;i<pieces.length;i++){
+            map.put(pieces[i][0],i);
+        }
+        int idx=0;
+        while (idx<arr.length){
+            if (! map.containsKey(arr[idx])){
+                return false;
+            }
+            int pIdx = map.get(arr[idx]);
+            for (int i=0;i<pieces[pIdx].length;i++){
+                if (pieces[pIdx][i] != arr[idx])
+                    return false;
+                idx++;
+            }
+        }
+        return true;
+    }
 }
