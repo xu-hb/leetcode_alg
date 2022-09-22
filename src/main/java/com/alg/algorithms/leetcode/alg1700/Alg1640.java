@@ -34,8 +34,8 @@ public class Alg1640 {
 
     /**
      * 1640.能否连接形成数组
-     * 时间复杂度：O(N)
-     * 空间复杂度：O(N)
+     * 时间复杂度：O(n+m)
+     * 空间复杂度：O(n)
      * @param arr
      * @param pieces
      * @return
@@ -55,6 +55,33 @@ public class Alg1640 {
                 if (pieces[pIdx][i] != arr[idx])
                     return false;
                 idx++;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 1640.能否连接形成数组 2.0
+     * 使用数组替换hashMap
+     * 时间复杂度：O(n+m)
+     * 空间复杂度：O(C)
+     * @param arr
+     * @param pieces
+     * @return
+     */
+    public boolean canFormArray_2(int[] arr, int[][] pieces){
+        //使用数组替代hashMap
+        int[] loc = new int[101];
+        for (int i=0;i<pieces.length;i++){
+            loc[pieces[i][0]]=i;
+        }
+        int idx=0;
+        while (idx<arr.length){
+            int[] cur = pieces[loc[arr[idx]]];
+            int c = 0;
+            while (c<cur.length){
+                if (cur[c++] != arr[idx++])
+                    return false;
             }
         }
         return true;
