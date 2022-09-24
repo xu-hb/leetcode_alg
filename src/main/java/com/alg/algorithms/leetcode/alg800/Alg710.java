@@ -1,5 +1,7 @@
 package com.alg.algorithms.leetcode.alg800;
 
+import com.alg.design.list.MyLinkedList;
+
 public class Alg710 {
     /**
      * 704.二分查找
@@ -29,46 +31,10 @@ public class Alg710 {
 
     /**
      * 707.设计链表
+     * @see MyLinkedList
+     * @return
      */
-    static class MyLinkedList {
-        Node head;
-        int size;
-        public MyLinkedList() {
-            size=0;
-            head=new Node(0);
-        }
-
-        public int get(int index) {
-            if (index<0 || index>=size){
-                return -1;
-            }
-            Node cursor = head;
-            for (int i=0;i<index+1;i++) cursor=cursor.next;
-            return cursor.val;
-        }
-
-        public void addAtHead(int val) {
-
-        }
-
-        public void addAtTail(int val) {
-
-        }
-
-        public void addAtIndex(int index, int val) {
-
-        }
-
-        public void deleteAtIndex(int index) {
-
-        }
-    }
-
-    static class Node{
-        int val;
-        Node next;
-        public Node(int val){
-            this.val=val;
-        }
+    public MyLinkedList linkedList(){
+        return new MyLinkedList();
     }
 }
