@@ -53,4 +53,29 @@ public class Chapter17 {
         return -1;
     }
 
+    /**
+     * 17.09 第k个数 3.0
+     * 丑数
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(N)
+     * @param k
+     * @return
+     */
+    public int getKthMagicNumber_3(int k){
+        int[] dp = new int[k];
+        dp[0] = 1;
+        int idx3=0,idx5=0,idx7=0;
+        for (int i=1;i<k;i++){
+            int a = dp[idx3]*3,b=dp[idx5]*5,c=dp[idx7]*7;
+            int val = Math.min(a,Math.min(b,c));
+
+            //不能if else,防止重复
+            if (val==a) idx3++;
+            if (val==b) idx5++;
+            if (val==c) idx7++;
+
+            dp[i]=val;
+        }
+        return dp[k-1];
+    }
 }
