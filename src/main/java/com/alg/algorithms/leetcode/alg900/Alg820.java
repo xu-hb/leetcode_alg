@@ -1,6 +1,10 @@
 package com.alg.algorithms.leetcode.alg900;
 
+import com.alg.common.ListNode;
 import com.alg.common.TreeNode;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class Alg820 {
     /**
@@ -38,5 +42,36 @@ public class Alg820 {
             return null;
         }
         return root;
+    }
+
+    /**
+     * 817.链表组件
+     * 时间复杂度：O(M+N)
+     * 空间复杂度：O(M)
+     * @param head
+     * @param nums
+     * @return
+     */
+    public int numComponents(ListNode head, int[] nums) {
+        Set<Integer> set = new HashSet<>(nums.length);
+        for (int n : nums){
+            set.add(n);
+        }
+
+        int cnt=0;
+        boolean flag = false;
+        ListNode cur = head;
+        while (cur !=null){
+            if (set.contains(cur.val)){
+                if (!flag){
+                    cnt++;
+                    flag=true;
+                }
+            }else {
+                flag=false;
+            }
+            cur = cur.next;
+        }
+        return cnt;
     }
 }
