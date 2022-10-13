@@ -42,4 +42,20 @@ public class Alg770 {
         }
         return stack.size();
     }
+
+    /**
+     * 769.最多能完成排序的块
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
+     * @param arr
+     * @return
+     */
+    public int maxChunksToSorted_2(int[] arr) {
+        int ans = 0,max=0;
+        for (int i=0;i< arr.length;i++){
+            max = Math.max(max , arr[i]);
+            if (max==i) ans++;
+        }
+        return ans;
+    }
 }
