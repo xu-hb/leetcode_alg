@@ -58,4 +58,34 @@ public class Alg770 {
         }
         return ans;
     }
+
+    /**
+     * 769.最多能完成排序的块 2.0
+     * 通用一点，去除题目的数据大小和索引位置关系
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(N)
+     * @param arr
+     * @return
+     */
+    public int maxChunksToSorted_3(int[] arr) {
+        //转换：前n个数的最大值<后续所有制的最小值
+        //后n个数的最小值
+        int[] tailMin = new int[arr.length+2];
+        tailMin[tailMin.length-1] = Integer.MAX_VALUE;
+        for (int i=arr.length-1;i>=0;i--){
+            tailMin[i+1] = Math.min(tailMin[i+2],arr[i]);
+        }
+
+        int ans=0,preMax=-1;
+        for (int i=0;i<arr.length;i++){
+            preMax = preMax==-1 ? arr[i] : preMax;
+            if (preMax<tailMin[i+2]){
+                ans++;
+                preMax=-1;
+            }else {
+                preMax = Math.max(preMax,arr[i]);
+            }
+        }
+        return ans==0?1:ans;
+    }
 }
