@@ -3,6 +3,36 @@ package com.alg.algorithms.leetcode.alg1000;
 import java.util.*;
 
 public class Alg910 {
+
+    /**
+     * 901.股票价格跨度
+     */
+     static class StockSpanner {
+        //int[0]:price; int[1]:span-days
+        List<int[]> list;
+        public StockSpanner() {
+            list = new ArrayList<>();
+        }
+
+        public int next(int price) {
+            int cur = list.size()-1;
+            int ret=1;
+            while (cur>=0){
+                int[] arr = list.get(cur);
+                if (arr[0]<=price){
+                    //向前推进arr[1]天
+                    cur -= arr[1];
+                    //累计跨度
+                    ret += arr[1];
+                }else {
+                    break;
+                }
+            }
+            list.add(new int[]{price,ret});
+            return ret;
+        }
+    }
+
     /**
      * 904.水果成篮
      * 滑动窗口
