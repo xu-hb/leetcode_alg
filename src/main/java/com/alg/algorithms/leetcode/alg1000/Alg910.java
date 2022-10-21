@@ -34,6 +34,28 @@ public class Alg910 {
     }
 
     /**
+     * 901.股票价格跨度 2.0
+     * 栈
+     */
+    static class StockSpanner_2{
+         Deque<int[]> stack;
+        public StockSpanner_2() {
+            stack = new ArrayDeque<>();
+            //减少边界判断
+            stack.offer(new int[]{Integer.MAX_VALUE,0});
+        }
+
+        public int next(int price) {
+            int ret=1;
+            while (price>=stack.peek()[0]){
+                ret+=stack.pop()[1];
+            }
+            stack.push(new int[]{price,ret});
+            return ret;
+        }
+    }
+
+    /**
      * 904.水果成篮
      * 滑动窗口
      * 时间复杂度：O(N)
