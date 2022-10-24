@@ -101,7 +101,37 @@ public class Alg920 {
     }
 
     /**
-     * 915.分割数组
+     * 915.分割数组 2.0
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(N)
+     * @param nums
+     * @return
+     */
+    public int partitionDisjoint_3(int[] nums) {
+        //本质：左侧最大值<右侧最小值
+
+        int n = nums.length;
+        int[] min = new int[n];
+        //右侧最小值
+        min[n-1] = nums[n-1];
+        for (int i=n-2;i>0;i--){
+            min[i] = Math.min(min[i+1],nums[i]);
+        }
+
+        int max = Integer.MIN_VALUE;
+        for (int i=0;i<n-1;i++){
+            if (nums[i]>max){
+                max = nums[i];
+            }
+            if (max<=min[i+1]){
+                return i+1;
+            }
+        }
+        return n-1;
+    }
+
+    /**
+     * 915.分割数组 3.0
      * 时间复杂度:O(N)
      * @param nums
      * @return
