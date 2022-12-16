@@ -2,9 +2,7 @@ package com.alg.algorithms.hot100;
 
 import com.alg.common.ListNode;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Hot50 {
     /**
@@ -179,4 +177,39 @@ public class Hot50 {
         return max;
     }
 
+    /**
+     * 15.三数之和
+     * 双指针
+     * 注意和1.两数之和的区别
+     * 时间复杂度：O(N^2)
+     * 空间复杂度：O(logN)
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> threeSum(int[] nums) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        List<List<Integer>> res = new ArrayList<>();
+        for (int i=0;i<n;i++){
+            //排序后，避免重复值
+            if (i!=0 && nums[i]==nums[i-1]){
+                continue;
+            }
+            int l=i+1,r=n-1;
+            while (l<r){
+                int sum = nums[i] + nums[l] + nums[r];
+                if (sum == 0) {
+                    res.add(Arrays.asList(nums[i],nums[l],nums[r]));
+                    l++;
+                    //避免重复值
+                    while (l<r && nums[l]==nums[l-1]) l++;
+                }else if (sum>0){
+                    r--;
+                }else {
+                    l++;
+                }
+            }
+        }
+        return res;
+    }
 }
