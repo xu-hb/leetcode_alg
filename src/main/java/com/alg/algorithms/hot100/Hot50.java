@@ -124,18 +124,21 @@ public class Hot50 {
      */
     public String longestPalindrome_2(String s){
         int n = s.length();
-        if (n==1) return s;
-        //dp:s从i~j的子串是否为回文串
-        boolean dp[][] = new boolean[n][n];
+        if(n==1) return s;
+        int maxLen = 0;
         int l=0,r=0;
+        //dp:i,j：s.charAt(i)~s.charAt(j)是否是回文串
+        //dp[i][j] = (j-i+1==1) || (dp[i+1][j-1] && s.charAt(i)==s.charAt(j))
+        boolean[][] dp = new boolean[n][n];
 
-        for (int i=0;i<n;i++){
-            for (int j=0;j<i;j++){
-                if (s.charAt(j)==s.charAt(i) && (dp[j+1][i-1] || i-j+1<=3)){
-                    dp[j][i]=true;
-                    if (i-j>r-l){
-                        l=j;
-                        r=i;
+        for(int i=n-1;i>=0;i--){
+            for(int j=i;j<n;j++){
+                if(s.charAt(i)==s.charAt(j) && (j-i+1<=2 || dp[i+1][j-1] )){
+                    dp[i][j]=true;
+                    if(j-i+1>maxLen){
+                        maxLen=j-i+1;
+                        l=i;
+                        r=j;
                     }
                 }
             }
@@ -211,5 +214,59 @@ public class Hot50 {
             }
         }
         return res;
+    }
+
+    /**
+     * 49.字母异位词分组
+     * 时间复杂度：O(n*klogk)
+     * 空间复杂度：O(n*k)
+     * @param strs
+     * @return
+     */
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String,List<String>> map = new HashMap<>();
+        for(String str : strs){
+            char[] arr = str.toCharArray();
+            Arrays.sort(arr);
+            String sortedStr = new String(arr);
+            List<String> valueList = map.getOrDefault(sortedStr,new ArrayList<String>());
+            valueList.add(str);
+
+            map.put(sortedStr,valueList);
+        }
+
+        return new ArrayList<>(map.values());
+    }
+
+    /**
+     * 49.字母异位词分组 2.0
+     * 时间复杂度：O(n*(k+26))
+     * 空间复杂度：O(n)
+     * @param strs
+     * @return
+     */
+    public List<List<String>> groupAnagrams2(String[] strs) {
+        Map<String,List<String>> map = new HashMap<>();
+
+        for (String str : strs){
+            int[] arr = new int[26];
+            char[] splitArr = str.toCharArray();
+            for (char c : splitArr){
+                arr[c-'a']+=1;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (int i=0;i<26;i++){
+                if (arr[i]!=0){
+                    sb.append('a'+i);
+                    sb.append(arr[i]);
+                }
+            }
+            List<String> list = map.getOrDefault(sb.toString(),new ArrayList<>());
+            list.add(str);
+            map.put(sb.toString(),list);
+        }
+
+        return new ArrayList<>(map.values());
     }
 }
