@@ -299,4 +299,23 @@ public class Hot50 {
         }
         return max;
     }
+
+    /**
+     * 283.移动零
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
+     * @param nums
+     */
+    public void moveZeroes(int[] nums) {
+        int fast=0,slow=0;
+        while (fast<nums.length){
+            if (nums[fast] !=0){
+                int temp = nums[slow];
+                nums[slow]=nums[fast];
+                nums[fast]=temp;
+                slow++;
+            }
+            fast++;
+        }
+    }
 }
