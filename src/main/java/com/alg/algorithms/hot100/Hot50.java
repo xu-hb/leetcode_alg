@@ -269,4 +269,34 @@ public class Hot50 {
 
         return new ArrayList<>(map.values());
     }
+
+    /**
+     * 128.最长连续序列
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(N)
+     * @param nums
+     * @return
+     */
+    public int longestConsecutive(int[] nums) {
+        Set<Integer> set = new HashSet<>(nums.length);
+        for(int n : nums){
+            set.add(n);
+        }
+
+        int max = 0;
+
+        for(int n : nums){
+            if(set.contains(n-1))
+                continue;
+
+            int currentLength=0;
+            int tempN = n;
+            while(set.contains(tempN)){
+                tempN++;
+                currentLength++;
+            }
+            max = Math.max(max,currentLength);
+        }
+        return max;
+    }
 }
