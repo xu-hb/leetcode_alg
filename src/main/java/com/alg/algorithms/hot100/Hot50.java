@@ -271,6 +271,48 @@ public class Hot50 {
     }
 
     /**
+     * 53.最大子数组和
+     * @param nums
+     * @return
+     */
+    public int maxSubArray(int[] nums) {
+        int max = 0;
+        for (int i=0;i<nums.length;i++){
+            int sum = 0;
+            for (int j=i;j<nums.length;j++){
+                sum += nums[j];
+                max = Math.max(max,sum);
+            }
+        }
+        return max;
+    }
+
+    /**
+     * 53.最大子数组和（good）
+     * dp
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(N)可优化到O(1)
+     * @param nums
+     * @return
+     */
+    public int maxSubArray2(int[] nums) {
+        //dp[i]： 以nums[i]作为最后节点的子数组的最大数组和
+        //dp[i]=dp[i-1]+nums[i];
+        int[] dp = new int[nums.length];
+        dp[0] = nums[0];
+        int max = dp[0];
+        for (int i=1;i<nums.length;i++){
+            if (dp[i-1]>=0){
+                dp[i] = dp[i-1] + nums[i];
+            }else {
+                dp[i] = nums[i];
+            }
+            max = Math.max(max , dp[i]);
+        }
+        return max;
+    }
+
+    /**
      * 128.最长连续序列
      * 时间复杂度：O(N)
      * 空间复杂度：O(N)
