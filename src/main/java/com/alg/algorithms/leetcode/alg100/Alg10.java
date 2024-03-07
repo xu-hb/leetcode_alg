@@ -183,6 +183,65 @@ public class Alg10 {
     }
 
     /**
+     * 5.最长回文子串 2
+     * dp
+     * 空间复杂度：O(N^2)
+     * 时间复杂度：O(N^2)
+     * @param s
+     * @return
+     */
+    public String longestPalindrome2(String s){
+        char[] chars = s.toCharArray();
+        int n = s.length();
+        if (n==1){
+            return s;
+        }
+        //dp[i][j]：i~j字符串是否为回文串
+        //dp[i][j]=dp[i+1][j-1] && char[i]==char[j]
+        boolean[][] dp = new boolean[n][n];
+        for (int i=0;i<n;i++){
+            //单字符一定是回文串
+            dp[i][i] = true;
+        }
+        dp[0][1] = chars[0]==chars[1];
+
+        int maxLen = 0; //最大长度
+        int resL=0,resR=0;
+
+        //遍历子串长度L：dp递推公式需短子串，所以按长度从短到长遍历，而非i~j
+        for (int L=2;L<=n;L++){
+            for (int i=0;i<n;i++){
+                //i左边界，j右边界
+                int j = L+i-1;  //j-i+1=L
+                //越界处理
+                if (j>=n)
+                    break;
+
+                if (chars[i]!=chars[j]){
+                    dp[i][j] = false;
+                }else {
+                    if (i+1>j-1){
+                        //长度小于3
+                        dp[i][j] = true;
+                    }else {
+                        dp[i][j]=dp[i+1][j-1];
+                    }
+                }
+
+                //记录
+                if (dp[i][j] && (j-i+1>maxLen)){
+                    maxLen = j-i+1;
+                    resL = i;
+                    resR = j;
+                }
+            }
+        }
+
+
+        return s.substring(resL,resR+1);
+    }
+
+    /**
      * 6.Z字形变换
      * @param s
      * @param numRows
