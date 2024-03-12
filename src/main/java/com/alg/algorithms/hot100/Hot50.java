@@ -313,6 +313,35 @@ public class Hot50 {
     }
 
     /**
+     * 64.最小路径和
+     * @param grid
+     * @return
+     */
+    public int minPathSum(int[][] grid) {
+        int m = grid.length,n=grid[0].length;
+        //dp[i][j]：路径和最小值
+        int[][] dp = new int[m+1][n+1];
+
+        for (int i=0;i<m+1;i++){
+            dp[i][0] = Integer.MAX_VALUE;
+        }
+        for (int j=0;j<n+1;j++){
+            dp[0][j] = Integer.MAX_VALUE;
+        }
+
+        for (int i=1;i<m+1;i++){
+            for (int j=1;j<n+1;j++){
+                if (i==1 && j==1){
+                    dp[i][j]=grid[0][0];
+                }else {
+                    dp[i][j] = Math.min(dp[i-1][j],dp[i][j-1]) + grid[i-1][j-1];
+                }
+            }
+        }
+        return dp[m][n];
+    }
+
+    /**
      * 128.最长连续序列
      * 时间复杂度：O(N)
      * 空间复杂度：O(N)
