@@ -84,6 +84,35 @@ public class Alg110 {
     }
 
     /**
+     * 104.二叉树的最大深度 BFS
+     * @param root
+     * @return
+     */
+    public int maxDepth_2(TreeNode root) {
+        if (root==null)
+            return 0;
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int depth = 0;
+        while (! queue.isEmpty()){
+            int size = queue.size();
+            while (size>0){
+                TreeNode node = queue.poll();
+                if (node.left != null){
+                    queue.add(node.left);
+                }
+                if (node.right !=null){
+                    queue.add(node.right);
+                }
+                size--;
+            }
+            depth++;
+        }
+        return depth;
+    }
+
+    /**
      * 105.从前序与中序遍历序列构造二叉树
      * @param preorder
      * @param inorder
