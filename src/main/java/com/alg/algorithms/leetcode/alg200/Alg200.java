@@ -93,4 +93,31 @@ public class Alg200 {
         }
         return resList;
     }
+
+    /**
+     * 199.二叉树的右视图 DFS
+     * @param root
+     * @return
+     */
+    public List<Integer> rightSideView_2(TreeNode root) {
+        dfsSideView(root , 0);
+        return viewList;
+    }
+
+    List<Integer> viewList = new ArrayList<>();
+
+    private void dfsSideView(TreeNode root, int depth) {
+        if (root == null)
+            return;
+
+        if (viewList.size()<depth+1){
+            viewList.add(root.val);
+        }else {
+            viewList.set(depth , root.val);
+        }
+
+        dfsSideView(root.left , depth+1);
+        dfsSideView(root.right , depth+1);
+    }
+
 }
