@@ -1,5 +1,7 @@
 package com.alg.algorithms.leetcode.alg500;
 
+import com.alg.common.TreeNode;
+
 import java.util.*;
 
 public class Alg440 {
@@ -51,6 +53,39 @@ public class Alg440 {
         }
         return dp[n-1];
     }
+
+    /**
+     * 437.路径总和III
+     * 时间复杂度：O(N^2)
+     * 空间复杂度：O(N)
+     * @param root
+     * @param targetSum
+     * @return
+     */
+    public int pathSum(TreeNode root, int targetSum) {
+        if (root == null)
+            return 0;
+
+        int ret = defSum(root , targetSum);
+        ret += pathSum(root.left , targetSum);
+        ret += pathSum(root.right , targetSum);
+        return ret;
+    }
+
+    private int defSum(TreeNode root, long targetSum) {
+        int ret = 0;
+        if (root == null)
+            return 0;
+        if (targetSum == root.val){
+            ret++;
+        }
+
+        ret += defSum(root.left , targetSum-root.val);
+        ret += defSum(root.right , targetSum-root.val);
+
+        return ret;
+    }
+
 
     /**
      * 438.找到字符串中所有字母异位词
