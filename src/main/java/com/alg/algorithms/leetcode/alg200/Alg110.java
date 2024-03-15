@@ -286,4 +286,31 @@ public class Alg110 {
         }
         return resList;
     }
+
+    /**
+     * 108.有序数组转换为二叉搜索时
+     * @param nums
+     * @return
+     */
+    public TreeNode sortedArrayToBST(int[] nums) {
+        if (nums.length==0)
+            return null;
+
+        return dfsToBST(nums , 0, nums.length-1);
+    }
+
+    private TreeNode dfsToBST(int[] nums, int start, int end) {
+        if (start > end){
+            return null;
+        }
+        if (start == end){
+            return new TreeNode(nums[start]);
+        }
+
+        int mid = start+(end-start)/2;
+        TreeNode root = new TreeNode(nums[mid]);
+        root.left = dfsToBST(nums , start , mid-1);
+        root.right = dfsToBST(nums , mid+1 , end);
+        return root;
+    }
 }
