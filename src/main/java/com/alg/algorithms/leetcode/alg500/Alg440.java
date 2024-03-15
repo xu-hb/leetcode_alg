@@ -86,6 +86,36 @@ public class Alg440 {
         return ret;
     }
 
+    /**
+     * 437.路径总和III 前缀和
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(N)
+     * @param root
+     * @param targetSum
+     * @return
+     */
+    public int pathSum_2(TreeNode root, int targetSum) {
+        preMap.put(0L,1);
+        return dfsSum(root , 0, targetSum);
+    }
+    Map<Long , Integer> preMap = new HashMap<>();
+
+    private int dfsSum(TreeNode root, long cur , int targetSum) {
+        if (root == null)
+            return 0;
+        int cnt = 0;
+        cur += root.val;
+        cnt += preMap.getOrDefault(cur-targetSum, 0);
+        preMap.put(cur , preMap.getOrDefault(cur , 0) +1);
+
+        cnt += dfsSum(root.left , cur , targetSum);
+        cnt += dfsSum(root.right , cur , targetSum);
+
+        preMap.put(cur , preMap.getOrDefault(cur , 0) -1);
+
+        return cnt;
+    }
+
 
     /**
      * 438.找到字符串中所有字母异位词
